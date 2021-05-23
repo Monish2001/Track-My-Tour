@@ -1,16 +1,16 @@
 package entities;
 
-import java.util.Date;
+//import java.util.Date;
 
 public class RoomEntity {
 	private String roomId;
 	private String resortId;
-	private Date roomFromDate;
-	private Date roomToDate;
+	// private Date roomFromDate;
+	// private Date roomToDate;
 	private String roomType;
 	private Integer costPerDay;
-	private long totalCost;
-	private long noOfNights;
+	private Integer totalCost;
+	private Integer noOfNights;
 	private String roomNo;
 
 	public String getRoomId() {
@@ -29,21 +29,16 @@ public class RoomEntity {
 		this.resortId = resortId;
 	}
 
-	public Date getRoomFromDate() {
-		return roomFromDate;
-	}
-
-	public void setRoomFromDate(Date roomFromDate) {
-		this.roomFromDate = roomFromDate;
-	}
-
-	public Date getRoomToDate() {
-		return roomToDate;
-	}
-
-	public void setRoomToDate(Date roomToDate) {
-		this.roomToDate = roomToDate;
-	}
+	/*
+	 * public Date getRoomFromDate() { return roomFromDate; }
+	 * 
+	 * public void setRoomFromDate(Date roomFromDate) { this.roomFromDate =
+	 * roomFromDate; }
+	 * 
+	 * public Date getRoomToDate() { return roomToDate; }
+	 * 
+	 * public void setRoomToDate(Date roomToDate) { this.roomToDate = roomToDate; }
+	 */
 
 	public String getRoomType() {
 		return roomType;
@@ -61,19 +56,19 @@ public class RoomEntity {
 		this.costPerDay = costPerDay;
 	}
 
-	public long getTotalCost() {
+	public Integer getTotalCost() {
 		return this.totalCost;
 	}
 
-	public void setTotalCost(long totalCost) {
+	public void setTotalCost(Integer totalCost) {
 		this.totalCost = totalCost;
 	}
 
-	public long getNoOfNights() {
+	public Integer getNoOfNights() {
 		return this.noOfNights;
 	}
 
-	public void setNoOfNights(long noOfNights) {
+	public void setNoOfNights(Integer noOfNights) {
 		this.noOfNights = noOfNights;
 	}
 
