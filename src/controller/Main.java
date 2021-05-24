@@ -54,8 +54,91 @@ public class Main {
 					if (tour == null) {
 						tour = new Tour();
 					}
-					tourList.add(tour.tourDetails());
+					TourEntity tourData = new TourEntity();
+
+					tourData = tour.tourDetails();
+
+					List<PersonEntity> personlist = new ArrayList<PersonEntity>();
+					List<ActivityEntity> activitylist = new ArrayList<ActivityEntity>();
+					List<ConnectionEntity> connectionlist = new ArrayList<ConnectionEntity>();
+					List<JourneyDetailsEntity> journeylist = new ArrayList<JourneyDetailsEntity>();
+					List<ResortEntity> resortlist = new ArrayList<ResortEntity>();
+					List<TourEntity> tourlist = new ArrayList<TourEntity>();
+
+					JourneyDetails journeyDetails = new JourneyDetails();
+					Resort resortDetails = new Resort();
+					Activity tourActivity = new Activity();
+					Connection tourConnections = new Connection();
+					Person personDate = new Person();
+
 					System.out.println("\n");
+					System.out.println("****************PLEASE ENTER THE JOURNEY DETAILS****************");
+					System.out.println("How many journey details do you need to add");
+					int totalJourneyCount = Integer.parseInt(sc.nextLine());
+					int journeyAdded = 0;
+					while (journeyAdded < totalJourneyCount) {
+						JourneyDetailsEntity journeyData = journeyDetails.journeyDetails();
+						journeylist.add(journeyData);
+						journeyList.add(journeyData);
+						journeyAdded++;
+					}
+					System.out.println("\n");
+
+					// System.out.println("****************PLEASE ENTER THE RESORT
+					// DETAILS****************");
+					// System.out.println("How many resort entries do you need to add");
+					// int totalResortCount = Integer.parseInt(sc.nextLine());
+					// int resortsAdded = 0;
+					// while (resortsAdded < totalResortCount) {
+					// resortlist.add(resortDetails.resortDetails());
+					// resortsAdded++;
+					// }
+					// System.out.println("\n");
+
+					// System.out.println("****************PLEASE ENTER THE TOUR
+					// ACTIVITIES****************");
+					// System.out.println("How many activity entries do you need to add");
+					// int totalActivitiesCount = Integer.parseInt(sc.nextLine());
+					// int activitiesAdded = 0;
+					// while (activitiesAdded < totalActivitiesCount) {
+					// activitylist.add(tourActivity.activities());
+					// activitiesAdded++;
+					// }
+					// System.out.println("\n");
+
+					// System.out.println("BEFORE ADDING CONNECTIONS PLEASE ENTER THE PERSON DETAILS
+					// TO WHOM YOU HAVE CONNECTED");
+					// System.out.println("How many person details do you need to add");
+					// int totalPersonCount = Integer.parseInt(sc.nextLine());
+					// int personsAdded = 0;
+					// while (personsAdded < totalPersonCount) {
+					// personlist.add(personData.personDetails());
+					// personsAdded++;
+					// }
+					// System.out.println("\n");
+
+					// System.out.println("****************PLEASE ENTER CONNECTIONS MADE IN A
+					// TOUR****************");
+					// System.out.println("How many connections do you need to add");
+					// int totalConnectionsCount = Integer.parseInt(sc.nextLine());
+					// int connectionsAdded = 0;
+					// while (connectionsAdded < totalConnectionsCount) {
+					// connectionlist.add(tourConnections.connections());
+					// connectionsAdded++;
+					// }
+					// System.out.println("\n");
+
+					// tourData.setJourneyDetails(journeylist);
+
+					// tourData.setResort(resortlist);
+					// tourData.setActivities(activitylist);
+					// tourData.setConnections(connectionlist);
+
+					tourData.setJourneyDetails(journeylist);
+					tourList.add(tourData);
+
+					System.out.println("\n");
+
 					System.out.println("If you want to perform any operation again please press no from 0 to 12");
 					break;
 
@@ -153,7 +236,9 @@ public class Main {
 					break;
 
 				case "3":
-					if (resortList.size() != 0 || activityList.size() != 0) {
+					if (resortList.isEmpty() || activityList.isEmpty()) {
+						System.out.println("Entries not found in resort and activities list!!");
+					} else {
 						System.out.println("Total cost of a single trip");
 						System.out.println("\n");
 						System.out.println("Refer the tour id listed here");
@@ -166,7 +251,7 @@ public class Main {
 
 						int totalCost = 0;
 						for (int tourVariable = 0; tourVariable < tourList.size(); tourVariable++) {
-							if (tourList.size() == 0) {
+							if (tourList.isEmpty()) {
 								System.out.println("There is no tour entries yet");
 								break;
 							}
@@ -188,8 +273,6 @@ public class Main {
 							}
 						}
 						System.out.println("Total cost of a single trip: " + totalCost);
-					} else {
-						System.out.println("Entries not found in resort and activities list!!");
 					}
 					System.out.println("\n");
 					System.out.println("If you want to perform any operation again please press no from 0 to 12");
@@ -197,7 +280,9 @@ public class Main {
 					break;
 
 				case "4":
-					if (resortList.size() != 0) {
+					if (resortList.isEmpty()) {
+						System.out.println("No entries is found in resort list");
+					} else {
 						System.out.println("Cost for a single trip stay in hotel");
 						System.out.println("\n");
 						System.out.println("Refer the tour id listed here");
@@ -227,8 +312,6 @@ public class Main {
 							}
 						}
 						System.out.println("Total cost for a trip in hotel is: " + costForTripStay);
-					} else {
-						System.out.println("No entries is found in resort list");
 					}
 					System.out.println("\n");
 					System.out.println("If you want to perform any operation again please press no from 0 to 12");
@@ -267,19 +350,22 @@ public class Main {
 				case "6":
 					System.out.println("List trips based on transport");
 					System.out.println("Please enter the type of transport");
-					String modeOfTransport = sc.nextLine().toLowerCase();
+					String modeOfTransport = "car";
+					// sc.nextLine().toLowerCase();
 					ArrayList<String> tourIdList = new ArrayList<String>();
 					if (journeyDetailsData == null) {
 						journeyDetailsData = new JourneyDetails();
 					}
 					/* GETTING THE TOUR ID FROM THE JOURNEYLIST WITH THE GIVEN MODE OF TRANSPORT */
 					for (int journey = 0; journey < journeyList.size(); journey++) {
+						System.out.println("hello");
 						if (journeyList.size() <= 0) {
 							System.out.println("No journey detail entry is found!!");
 							break;
 						}
 						JourneyDetailsEntity journeyDetailsEntity = journeyList.get(journey);
 						if (modeOfTransport.equals(journeyDetailsEntity.getModeOfTransport())) {
+							System.out.println("inside mod");
 							System.out.println("mot: " + journeyDetailsEntity.getModeOfTransport());
 							tourIdList.add(journeyDetailsEntity.getTourId());
 						}
@@ -311,7 +397,9 @@ public class Main {
 					break;
 
 				case "7":
-					if (connectionList.size() != 0) {
+					if (connectionList.isEmpty()) {
+						System.out.println("Entries not found in connections list");
+					} else {
 						System.out.println("DIRECT FRIEND IN A TRIP");
 						System.out.println("\n");
 						System.out.println("Refer the tour id listed here");
@@ -359,8 +447,6 @@ public class Main {
 								break;
 							}
 						}
-					} else {
-						System.out.println("Entries not found in connections list");
 					}
 					System.out.println("\n");
 					System.out.println("If you want to perform any operation again please press no from 0 to 12");
@@ -368,7 +454,9 @@ public class Main {
 					break;
 
 				case "8":
-					if (connectionList.size() != 0) {
+					if (connectionList.isEmpty()) {
+						System.out.println("Entries not found in connections list");
+					} else {
 						System.out.println("FRIENDS OF FRIENDS IN A TRIP");
 						System.out.println("\n");
 						System.out.println("Refer the tour id listed here");
@@ -415,8 +503,6 @@ public class Main {
 								break;
 							}
 						}
-					} else {
-						System.out.println("Entries not found in connections list");
 					}
 					System.out.println("\n");
 					System.out.println("If you want to perform any operation again please press no from 0 to 12");
