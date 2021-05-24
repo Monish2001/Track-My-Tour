@@ -1,12 +1,9 @@
 package controller;
 
 import java.text.ParseException;
-//import java.util.Date;
 import java.util.Scanner;
 
 import entities.RoomEntity;
-//import utils.DateDifference;
-//import utils.DateFormatter;
 import utils.UUIDGenerator;
 
 public class Room {
