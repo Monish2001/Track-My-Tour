@@ -53,7 +53,6 @@ public class Resort {
 			index++;
 		}
 		resortData.setRoom(roomList);
-		System.out.println("\n");
 		return resortData;
 	}
 

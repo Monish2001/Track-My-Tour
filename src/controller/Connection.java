@@ -31,7 +31,7 @@ public class Connection {
 		System.out.println("Notes:");
 		connection.setNotes(sc.nextLine().toLowerCase());
 
-		System.out.println("Intermediate friends ID");
+		System.out.println("Intermediate friends ID --- Please enter 0 if none");
 		connection.setIntermediateFriends(sc.nextLine());
 
 		return connection;

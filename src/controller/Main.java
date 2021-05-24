@@ -19,10 +19,6 @@ public class Main {
 		System.out.println("*****************************************************************************************");
 
 		List<PersonEntity> personList = new ArrayList<PersonEntity>();
-		List<ActivityEntity> activityList = new ArrayList<ActivityEntity>();
-		List<ConnectionEntity> connectionList = new ArrayList<ConnectionEntity>();
-		List<JourneyDetailsEntity> journeyList = new ArrayList<JourneyDetailsEntity>();
-		List<ResortEntity> resortList = new ArrayList<ResortEntity>();
 		List<TourEntity> tourList = new ArrayList<TourEntity>();
 
 		Scanner sc = new Scanner(System.in);
@@ -31,10 +27,6 @@ public class Main {
 
 		Main mainObj = new Main();
 		Person person = null;
-		JourneyDetails journeyDetailsData = null;
-		Resort resortDetailsData = null;
-		Activity tourActivities = null;
-		Connection connectionsMade = null;
 
 		Tour tour = null;
 
@@ -153,83 +145,78 @@ public class Main {
 					break;
 
 				case "3":
-					if (resortList.size() != 0 || activityList.size() != 0) {
-						System.out.println("Total cost of a single trip");
-						System.out.println("\n");
-						System.out.println("Refer the tour id listed here");
-						mainObj.printTourId(tourList);
-						System.out.println("Please enter the tour id:");
-						String tourId = sc.nextLine();
-						if (tour == null) {
-							tour = new Tour();
-						}
-
-						int totalCost = 0;
-						for (int tourVariable = 0; tourVariable < tourList.size(); tourVariable++) {
-							if (tourList.size() == 0) {
-								System.out.println("There is no tour entries yet");
-								break;
-							}
-
-							TourEntity tourEntity = tourList.get(tourVariable);
-							if (tourId.equals(tourEntity.getTourId())) {
-								for (int resort = 0; resort < tourEntity.getResort().size(); resort++) {
-									ResortEntity resortEntity = tourEntity.getResort().get(resort);
-									for (int room = 0; room < resortEntity.getRoom().size(); room++) {
-										RoomEntity roomEntity = resortEntity.getRoom().get(room);
-										totalCost += roomEntity.getTotalCost();
-									}
-								}
-								for (int activities = 0; activities < tourEntity.getActivities().size(); activities++) {
-									ActivityEntity activityEntity = tourEntity.getActivities().get(activities);
-									totalCost += activityEntity.getCost();
-								}
-								break;
-							}
-						}
-						System.out.println("Total cost of a single trip: " + totalCost);
-					} else {
-						System.out.println("Entries not found in resort and activities list!!");
+					System.out.println("Total cost of a single trip");
+					System.out.println("\n");
+					System.out.println("Refer the tour id listed here");
+					mainObj.printTourId(tourList);
+					System.out.println("Please enter the tour id:");
+					String tourId = sc.nextLine();
+					if (tour == null) {
+						tour = new Tour();
 					}
+
+					int totalCost = 0;
+					for (int tourVariable = 0; tourVariable < tourList.size(); tourVariable++) {
+						if (tourList.size() == 0) {
+							System.out.println("There is no tour entries yet");
+							break;
+						}
+
+						TourEntity tourEntity = tourList.get(tourVariable);
+						if (tourId.equals(tourEntity.getTourId())) {
+							for (int resort = 0; resort < tourEntity.getResort().size(); resort++) {
+								ResortEntity resortEntity = tourEntity.getResort().get(resort);
+								for (int room = 0; room < resortEntity.getRoom().size(); room++) {
+									RoomEntity roomEntity = resortEntity.getRoom().get(room);
+									totalCost += roomEntity.getTotalCost();
+								}
+							}
+							for (int activities = 0; activities < tourEntity.getActivities().size(); activities++) {
+								ActivityEntity activityEntity = tourEntity.getActivities().get(activities);
+								totalCost += activityEntity.getCost();
+							}
+							break;
+						}
+					}
+					System.out.println("Total cost of a single trip: " + totalCost);
+
 					System.out.println("\n");
 					System.out.println("If you want to perform any operation again please press no from 0 to 12");
 					System.out.println("\n");
 					break;
 
 				case "4":
-					if (resortList.size() != 0) {
-						System.out.println("Cost for a single trip stay in hotel");
-						System.out.println("\n");
-						System.out.println("Refer the tour id listed here");
-						mainObj.printTourId(tourList);
-						System.out.println("Please enter the tour id:");
-						String tourIdForTripStay = sc.nextLine();
-						if (tour == null) {
-							tour = new Tour();
-						}
-						int costForTripStay = 0;
-						for (int tourVariable = 0; tourVariable < tourList.size(); tourVariable++) {
-							if (tourList.size() == 0) {
-								System.out.println("There is no tour entries yet");
-								break;
-							}
 
-							TourEntity tourEntity = tourList.get(tourVariable);
-							if (tourIdForTripStay.equals(tourEntity.getTourId())) {
-								for (int resort = 0; resort < tourEntity.getResort().size(); resort++) {
-									ResortEntity resortEntity = tourEntity.getResort().get(resort);
-									for (int room = 0; room < resortEntity.getRoom().size(); room++) {
-										RoomEntity roomEntity = resortEntity.getRoom().get(room);
-										costForTripStay += roomEntity.getTotalCost();
-									}
-								}
-								break;
-							}
-						}
-						System.out.println("Total cost for a trip in hotel is: " + costForTripStay);
-					} else {
-						System.out.println("No entries is found in resort list");
+					System.out.println("Cost for a single trip stay in hotel");
+					System.out.println("\n");
+					System.out.println("Refer the tour id listed here");
+					mainObj.printTourId(tourList);
+					System.out.println("Please enter the tour id:");
+					String tourIdForTripStay = sc.nextLine();
+					if (tour == null) {
+						tour = new Tour();
 					}
+					int costForTripStay = 0;
+					for (int tourVariable = 0; tourVariable < tourList.size(); tourVariable++) {
+						if (tourList.size() == 0) {
+							System.out.println("There is no tour entries yet");
+							break;
+						}
+
+						TourEntity tourEntity = tourList.get(tourVariable);
+						if (tourIdForTripStay.equals(tourEntity.getTourId())) {
+							for (int resort = 0; resort < tourEntity.getResort().size(); resort++) {
+								ResortEntity resortEntity = tourEntity.getResort().get(resort);
+								for (int room = 0; room < resortEntity.getRoom().size(); room++) {
+									RoomEntity roomEntity = resortEntity.getRoom().get(room);
+									costForTripStay += roomEntity.getTotalCost();
+								}
+							}
+							break;
+						}
+					}
+					System.out.println("Total cost for a trip in hotel is: " + costForTripStay);
+
 					System.out.println("\n");
 					System.out.println("If you want to perform any operation again please press no from 0 to 12");
 					System.out.println("\n");
@@ -244,6 +231,7 @@ public class Main {
 					for (int tourVariable = 0; tourVariable < tourList.size(); tourVariable++) {
 						TourEntity tourDetails = tourList.get(tourVariable);
 						if (typeOfLocation.equals(tourDetails.getTypeOfLocation())) {
+							System.out.println("*******************************************");
 							System.out.println("Tour ID: " + tourDetails.getTourId());
 							System.out.println("Person Id: " + tourDetails.getPersonId());
 							System.out.println("Origin: " + tourDetails.getOrigin());
@@ -252,7 +240,8 @@ public class Main {
 							System.out.println("Tour End Date: " + tourDetails.getTourEndDate());
 							System.out.println("Type of location: " + tourDetails.getTypeOfLocation());
 							tourCountOnLocation++;
-							System.out.println("\n\n");
+							System.out.println("*******************************************");
+							System.out.println("\n");
 						}
 					}
 					if (tourCountOnLocation == 0) {
@@ -268,32 +257,12 @@ public class Main {
 					System.out.println("List trips based on transport");
 					System.out.println("Please enter the type of transport");
 					String modeOfTransport = sc.nextLine().toLowerCase();
-					ArrayList<String> tourIdList = new ArrayList<String>();
-					if (journeyDetailsData == null) {
-						journeyDetailsData = new JourneyDetails();
-					}
-					/* GETTING THE TOUR ID FROM THE JOURNEYLIST WITH THE GIVEN MODE OF TRANSPORT */
-					for (int journey = 0; journey < journeyList.size(); journey++) {
-						if (journeyList.size() <= 0) {
-							System.out.println("No journey detail entry is found!!");
-							break;
-						}
-						JourneyDetailsEntity journeyDetailsEntity = journeyList.get(journey);
-						if (modeOfTransport.equals(journeyDetailsEntity.getModeOfTransport())) {
-							System.out.println("mot: " + journeyDetailsEntity.getModeOfTransport());
-							tourIdList.add(journeyDetailsEntity.getTourId());
-						}
-					}
-					System.out.println(tourIdList);
-					/*
-					 * ITERATING THE TOURID LIST AND CHECKING EACH TOURID WITH THE TOURLIST AND
-					 * PRINTING THE DETAILS IF IT MATCHES
-					 */
-					for (int tourid = 0; tourid < tourIdList.size(); tourid++) {
-						String tourIdBasedOnTransport = tourIdList.get(tourid);
-						for (int tourVariable = 0; tourVariable < tourList.size(); tourVariable++) {
-							TourEntity tourDetails = tourList.get(tourVariable);
-							if (tourIdBasedOnTransport.equals(tourDetails.getTourId())) {
+
+					for (int tourVariable = 0; tourVariable < tourList.size(); tourVariable++) {
+						TourEntity tourDetails = tourList.get(tourVariable);
+						for (int journey = 0; journey < tourDetails.getJourneyDetails().size(); journey++) {
+							JourneyDetailsEntity journeyDetails = tourDetails.getJourneyDetails().get(journey);
+							if (modeOfTransport.equals(journeyDetails.getModeOfTransport())) {
 								System.out.println("Tour ID: " + tourDetails.getTourId());
 								System.out.println("Person Id: " + tourDetails.getPersonId());
 								System.out.println("Origin: " + tourDetails.getOrigin());
@@ -305,39 +274,41 @@ public class Main {
 							}
 						}
 					}
+					System.out.println("No journey details found based on the given mode of transport");
 					System.out.println("\n");
 					System.out.println("If you want to perform any operation again please press no from 0 to 12");
 					System.out.println("\n");
 					break;
 
 				case "7":
-					if (connectionList.size() != 0) {
-						System.out.println("DIRECT FRIEND IN A TRIP");
+					if (tourList.size() == 0) {
+						System.out.println(
+								"There is no tour entries yet!!Please add tour entries to find direct connections in a tour ");
 						System.out.println("\n");
-						System.out.println("Refer the tour id listed here");
-						mainObj.printTourId(tourList);
-						System.out.println("Please enter the tour id:");
-						String tourIdForDirectFriends = sc.nextLine();
-						if (tour == null) {
-							tour = new Tour();
-						}
+						System.out.println("If you want to perform any operation again please press no from 0 to 12");
+						System.out.println("\n");
+						break;
+					}
+					System.out.println("DIRECT FRIEND IN A TRIP");
+					System.out.println("\n");
+					System.out.println("Refer the tour id listed here");
+					mainObj.printTourId(tourList);
+					System.out.println("Please enter the tour id:");
+					String tourIdForDirectFriends = sc.nextLine();
+					if (tour == null) {
+						tour = new Tour();
+					}
 
-						for (int tourVariable = 0; tourVariable < tourList.size(); tourVariable++) {
-							if (tourList.size() == 0) {
-								System.out.println("There is no tour entries yet");
-								System.out.println("\n");
-								System.out.println(
-										"If you want to perform any operation again please press no from 0 to 12");
-								System.out.println("\n");
-								break;
-							}
-							TourEntity tourEntity = tourList.get(tourVariable);
+					for (int tourVariable = 0; tourVariable < tourList.size(); tourVariable++) {
+
+						TourEntity tourEntity = tourList.get(tourVariable);
+						if (tourEntity.getConnections().size() != 0) {
 							if (tourIdForDirectFriends.equals(tourEntity.getTourId())) {
 								int friendsCount = 0;
 								System.out.println("DIRECT CONNECTIONS MADE IN A TOUR");
 								String personId = tourEntity.getConnections().get(0).getPersonId();
 								String personName = mainObj.getPersonName(personId, personList);
-								System.out.println(personName + "Made direct connections with: ");
+								System.out.println(personName + " " + "Made direct connections with ");
 								for (int connection = 0; connection < tourEntity.getConnections()
 										.size(); connection++) {
 									ConnectionEntity connectionVar = tourEntity.getConnections().get(connection);
@@ -352,15 +323,9 @@ public class Main {
 								if (friendsCount == 0) {
 									System.out.println("No direct friends in the trip");
 								}
-								System.out.println("\n");
-								System.out.println(
-										"If you want to perform any operation again please press no from 0 to 12");
-								System.out.println("\n");
 								break;
 							}
 						}
-					} else {
-						System.out.println("Entries not found in connections list");
 					}
 					System.out.println("\n");
 					System.out.println("If you want to perform any operation again please press no from 0 to 12");
@@ -368,26 +333,28 @@ public class Main {
 					break;
 
 				case "8":
-					if (connectionList.size() != 0) {
-						System.out.println("FRIENDS OF FRIENDS IN A TRIP");
+
+					System.out.println("FRIENDS OF FRIENDS IN A TOUR");
+					System.out.println("\n");
+					if (tourList.size() == 0) {
+						System.out.println(
+								"There is no tour entries yet!! Please add tour entries to find friends of friends in a tour");
 						System.out.println("\n");
-						System.out.println("Refer the tour id listed here");
-						mainObj.printTourId(tourList);
-						System.out.println("Please enter the tour id:");
-						String tourIdForFriendsOfFriends = sc.nextLine();
-						if (tour == null) {
-							tour = new Tour();
-						}
-						for (int tourVariable = 0; tourVariable < tourList.size(); tourVariable++) {
-							if (tourList.size() == 0) {
-								System.out.println("There is no tour entries yet");
-								System.out.println("\n");
-								System.out.println(
-										"If you want to perform any operation again please press no from 0 to 12");
-								System.out.println("\n");
-								break;
-							}
-							TourEntity tourEntity = tourList.get(tourVariable);
+						System.out.println("If you want to perform any operation again please press no from 0 to 12");
+						System.out.println("\n");
+						break;
+					}
+					System.out.println("Refer the tour id listed here");
+					mainObj.printTourId(tourList);
+					System.out.println("Please enter the tour id:");
+					String tourIdForFriendsOfFriends = sc.nextLine();
+					if (tour == null) {
+						tour = new Tour();
+					}
+					for (int tourVariable = 0; tourVariable < tourList.size(); tourVariable++) {
+
+						TourEntity tourEntity = tourList.get(tourVariable);
+						if (tourEntity.getConnections().size() != 0) {
 							if (tourIdForFriendsOfFriends.equals(tourEntity.getTourId())) {
 								int inDirectFriendsCount = 0;
 								System.out.println("INDIRECT CONNECTIONS MADE IN A TOUR");
@@ -407,17 +374,12 @@ public class Main {
 								}
 								if (inDirectFriendsCount == 0) {
 									System.out.println("No direct friends in the trip");
+									break;
 								}
-								System.out.println("\n");
-								System.out.println(
-										"If you want to perform any operation again please press no from 0 to 12");
-								System.out.println("\n");
-								break;
 							}
 						}
-					} else {
-						System.out.println("Entries not found in connections list");
 					}
+
 					System.out.println("\n");
 					System.out.println("If you want to perform any operation again please press no from 0 to 12");
 					System.out.println("\n");
@@ -448,6 +410,7 @@ public class Main {
 						Date tourStartDate = tourDetails.getTourStartDate();
 						Date tourEndDate = tourDetails.getTourEndDate();
 						if (tourStartDate.compareTo(startDateObj) >= 0 && tourEndDate.compareTo(endDateObj) <= 0) {
+							System.out.println("*******************************************");
 							System.out.println("Tour ID: " + tourDetails.getTourId());
 							System.out.println("Person Id: " + tourDetails.getPersonId());
 							System.out.println("Origin: " + tourDetails.getOrigin());
@@ -455,6 +418,7 @@ public class Main {
 							System.out.println("Tour Start Date: " + tourDetails.getTourStartDate());
 							System.out.println("Tour End Date: " + tourDetails.getTourEndDate());
 							System.out.println("Type of location: " + tourDetails.getTypeOfLocation());
+							System.out.println("*******************************************");
 							System.out.println("\n");
 							tourCount++;
 						}
