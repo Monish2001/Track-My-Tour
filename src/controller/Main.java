@@ -4,7 +4,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
+import controller.inputmodel.*;
 import controller.utils.*;
 import entities.*;
 
@@ -29,6 +29,11 @@ public class Main {
 		BasedOnTransport tourTransport = null;
 		Connections connections = null;
 		ToursOnDateRange toursOnDateRange = null;
+		Activities listActivities = null;
+
+		FunctionalityInputModel inputModel = new FunctionalityInputModel();
+
+		PrintDetails printDetails = new PrintDetails();
 
 		Scanner sc = new Scanner(System.in);
 		String operation;
@@ -66,7 +71,10 @@ public class Main {
 					if (costFinder == null) {
 						costFinder = new CostFinder();
 					}
-					costFinder.costOfSingleTour(tourList);
+
+					String tourId = inputModel.costOfSingleTour(tourList);
+					int totalCostOfTour = costFinder.costOfSingleTour(tourList, tourId);
+					printDetails.printTotalCostOfTour(totalCostOfTour);
 					System.out.println("\n");
 					System.out.println("If you want to perform any operation again please press no from 0 to 12");
 					System.out.println("\n");
@@ -76,7 +84,9 @@ public class Main {
 					if (costFinder == null) {
 						costFinder = new CostFinder();
 					}
-					costFinder.costOfTourStay(tourList);
+					String tourIdForStay = inputModel.costOfSingleTour(tourList);
+					int costForStay = costFinder.costOfTourStay(tourList, tourIdForStay);
+					printDetails.printCostOfTourStay(costForStay);
 					System.out.println("\n");
 					System.out.println("If you want to perform any operation again please press no from 0 to 12");
 					System.out.println("\n");
@@ -86,8 +96,8 @@ public class Main {
 					if (tourLocation == null) {
 						tourLocation = new BasedOnLocation();
 					}
-
-					tourLocation.toursBasedOnLocation(tourList);
+					String location = inputModel.toursBasedOnLocation();
+					tourLocation.toursBasedOnLocation(tourList, location);
 					System.out.println("\n");
 					System.out.println("If you want to perform any operation again please press no from 0 to 12");
 					break;
@@ -96,7 +106,8 @@ public class Main {
 					if (tourTransport == null) {
 						tourTransport = new BasedOnTransport();
 					}
-					tourTransport.tourBasedOnTransport(tourList);
+					String modeOfTransport = inputModel.toursBasedOnTransport();
+					tourTransport.tourBasedOnTransport(tourList, modeOfTransport);
 					System.out.println("\n");
 					System.out.println("If you want to perform any operation again please press no from 0 to 12");
 					break;
@@ -105,7 +116,8 @@ public class Main {
 					if (connections == null) {
 						connections = new Connections();
 					}
-					connections.directConnections(tourList, personList);
+					String tourIdForDirectConnection = inputModel.directConnections(tourList);
+					connections.directConnections(tourList, personList, tourIdForDirectConnection);
 					System.out.println("\n");
 					System.out.println("If you want to perform any operation again please press no from 0 to 12");
 					break;
@@ -114,7 +126,8 @@ public class Main {
 					if (connections == null) {
 						connections = new Connections();
 					}
-					connections.indirectConnections(tourList, personList);
+					String tourIdForIndirectConnections = inputModel.inDirectConnections(tourList);
+					connections.indirectConnections(tourList, personList, tourIdForIndirectConnections);
 					System.out.println("\n");
 					System.out.println("If you want to perform any operation again please press no from 0 to 12");
 					break;
@@ -123,14 +136,32 @@ public class Main {
 					if (toursOnDateRange == null) {
 						toursOnDateRange = new ToursOnDateRange();
 					}
-					toursOnDateRange.toursBasedOnDateRange(tourList);
+					String[] date = inputModel.toursOnDateRange();
+					toursOnDateRange.toursBasedOnDateRange(tourList, date);
 					System.out.println("\n");
 					System.out.println("If you want to perform any operation again please press no from 0 to 12");
 					System.out.println("\n");
 					break;
 
 				case "10":
-					System.out.println("ACTIVITIES AND TOTAL ACTIVITIES COST IN A TOUR");
+					if (listActivities == null) {
+						listActivities = new Activities();
+					}
+					if (costFinder == null) {
+						costFinder = new CostFinder();
+					}
+					String tourIdForActivities = inputModel.activities(tourList);
+					List<String> activities = listActivities.ListOfActivities(tourList, tourIdForActivities);
+					printDetails.printActivities(activities);
+					int totalActivityCost = costFinder.costOfActivities(tourList, tourIdForActivities);
+					printDetails.costOfActivities(totalActivityCost);
+					break;
+
+				case "11":
+					String personID = sc.nextLine();
+					PersonNameFinder obj = new PersonNameFinder();
+					String personName = obj.getPersonName(personID, personList);
+					System.out.println(personName);
 					break;
 
 				case "exit":
@@ -142,6 +173,7 @@ public class Main {
 					break;
 			}
 		}
+		sc.close();
 	}
 
 }

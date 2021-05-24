@@ -51,8 +51,12 @@ public class JourneyDetails {
 		System.out.println("Weather:");
 		journeyDetailsData.setWeather(validateString.inputStringValidation(sc.nextLine()));
 
-		System.out.println("Duration:");
-		journeyDetailsData.setDuration(Integer.parseInt(validateString.trimString(sc.nextLine())));
+		System.out.println("Duration: -- Please enter in HH:mm format");
+		String dateStr = validateString.inputStringValidation(sc.nextLine());
+		String[] splittedDate = dateStr.split(":", 2);
+		ConvertHoursToMins convertHoursToMins = new ConvertHoursToMins();
+		Integer mins = convertHoursToMins.convertToMins(splittedDate);
+		journeyDetailsData.setDuration(mins);
 
 		System.out.println("Journey Type: -- Please enter as onward or backward");
 		Boolean inputValue = false;

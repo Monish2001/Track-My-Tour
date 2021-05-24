@@ -16,10 +16,11 @@ public class Resort {
 	public ResortEntity resortDetails() throws ParseException {
 		ResortEntity resortData = new ResortEntity();
 		Room room = new Room();
+		InputValidation validateString = new InputValidation();
 		List<RoomEntity> roomList = new ArrayList<RoomEntity>();
 
 		System.out.println("Please Enter the tour id");
-		resortData.setTourid(sc.nextLine());
+		resortData.setTourid(validateString.trimString(sc.nextLine()));
 
 		UUIDGenerator id = new UUIDGenerator();
 		String resortId = id.uuid();
@@ -27,18 +28,18 @@ public class Resort {
 
 		System.out.println("Resort fromDate in \"yyyy-MM-dd HH:mm:ss format:");
 		DateFormatter dateObj = new DateFormatter();
-		Date resortFromDate = dateObj.dateFormatter(sc.nextLine());
+		Date resortFromDate = dateObj.dateFormatter(validateString.trimString(sc.nextLine()));
 		resortData.setFromDate(resortFromDate);
 
 		System.out.println("Resort toDate in \"yyyy-MM-dd HH:mm:ss format:");
-		Date resortToDate = dateObj.dateFormatter(sc.nextLine());
+		Date resortToDate = dateObj.dateFormatter(validateString.trimString(sc.nextLine()));
 		resortData.setToDate(resortToDate);
 
 		System.out.println("Resort Name:");
-		resortData.setResortName(sc.nextLine().toLowerCase());
+		resortData.setResortName(validateString.inputStringValidation(sc.nextLine()));
 
 		System.out.println("Location:");
-		resortData.setResortLocation(sc.nextLine().toLowerCase());
+		resortData.setResortLocation(validateString.inputStringValidation(sc.nextLine()));
 
 		System.out.println("\n");
 		System.out.println("Your resort id is: " + resortData.getResortId());
@@ -46,7 +47,7 @@ public class Resort {
 
 		System.out.println("*****************PLEASE ENTER ROOM DETAILS***************");
 		System.out.println("How many rooms do you need to add");
-		int count = Integer.parseInt(sc.nextLine());
+		int count = Integer.parseInt(validateString.trimString(sc.nextLine()));
 		int index = 0;
 		while (index < count) {
 			roomList.add(room.roomDetails());
