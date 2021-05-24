@@ -33,14 +33,17 @@ public class JourneyDetails {
 		journeyDetailsData.setReachedTime(journeyReachedTime);
 
 		System.out.println("Mode of transport: -- Please enter as car or bike");
-		String modeOfTransport = validateString.validation(sc.nextLine());
-		boolean containsModeOfTransport = inputValueCheck.containsMot(modeOfTransport);
-		if (containsModeOfTransport == true) {
-			journeyDetailsData.setModeOfTransport(modeOfTransport);
-		} else {
-			System.out.println("Please enter mode of transport as car or bike");
+		Boolean valueEntered = false;
+		while (valueEntered.equals(false)) {
+			String modeOfTransport = validateString.validation(sc.nextLine());
+			boolean containsModeOfTransport = inputValueCheck.containsMot(modeOfTransport);
+			if (containsModeOfTransport == true) {
+				journeyDetailsData.setModeOfTransport(modeOfTransport);
+				valueEntered = true;
+			} else {
+				System.out.println("Please enter mode of transport as car or bike");
+			}
 		}
-
 		System.out.println("Drive Mode:");
 		journeyDetailsData.setDriveMode(validateString.validation(sc.nextLine()));
 
@@ -51,14 +54,17 @@ public class JourneyDetails {
 		journeyDetailsData.setDuration(Integer.parseInt(validateString.trimValidation(sc.nextLine())));
 
 		System.out.println("Journey Type: -- Please enter as onward or backward");
-		String typeOfJourney = validateString.validation(sc.nextLine());
-		boolean containsTypeOfJourney = inputValueCheck.containsToj(typeOfJourney);
-		if (containsTypeOfJourney == true) {
-			journeyDetailsData.setJourneyType(typeOfJourney);
-		} else {
-			System.out.println("Please enter journey type as onward or backward");
+		Boolean inputValue = false;
+		while (inputValue.equals(false)) {
+			String typeOfJourney = validateString.validation(sc.nextLine());
+			boolean containsTypeOfJourney = inputValueCheck.containsToj(typeOfJourney);
+			if (containsTypeOfJourney == true) {
+				journeyDetailsData.setJourneyType(typeOfJourney);
+				inputValue = true;
+			} else {
+				System.out.println("Please enter journey type as onward or backward");
+			}
 		}
-
 		return journeyDetailsData;
 	}
 }

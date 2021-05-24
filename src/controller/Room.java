@@ -34,6 +34,9 @@ public class Room {
 		System.out.println("Room No:");
 		roomData.setRoomNo(sc.nextLine().toLowerCase());
 
+		Integer totalCost = roomData.getCostPerDay() * roomData.getNoOfNights();
+		roomData.setTotalCost(totalCost);
+
 		return roomData;
 	}
 
