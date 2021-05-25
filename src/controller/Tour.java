@@ -14,11 +14,10 @@ import utils.UUIDGenerator;
 public class Tour {
 	Scanner sc = new Scanner(System.in);
 
-	public TourEntity tourDetails() throws ParseException {
+	public TourEntity tourDetails(List<PersonEntity> personList) throws ParseException {
 		TourEntity tourData = new TourEntity();
 		InputValidation validateString = new InputValidation();
 
-		List<PersonEntity> personList = new ArrayList<PersonEntity>();
 		List<JourneyDetailsEntity> journeyList = new ArrayList<JourneyDetailsEntity>();
 		List<ResortEntity> resortList = new ArrayList<ResortEntity>();
 		List<ActivityEntity> activityList = new ArrayList<ActivityEntity>();

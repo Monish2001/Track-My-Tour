@@ -12,7 +12,7 @@ public class Main {
 	public static void main(String[] args) throws ParseException {
 		System.out.println("****************************OPERATIONS PERFORMED*****************************************");
 		System.out.println(
-				"1.Add a trip entry\n 2.List the trip entries\n 3.Total cost of single trip\n 4.Cost for trip stay in hotel\n 5.List trips based on type of location\n 6.List trips based on transport\n 7.List direct friend in a trip\n 8.List friends of friends in a trip\n 9.List the trip with given date range\n 10.List the activities and total activities cost in a trip");
+				"0.Add Person details \n 1.Add a trip entry\n 2.List the trip entries\n 3.Total cost of single trip\n 4.Cost for trip stay in hotel\n 5.List trips based on type of location\n 6.List trips based on transport\n 7.List direct friend in a trip\n 8.List friends of friends in a trip\n 9.List the trip with given date range\n 10.List the activities and total activities cost in a trip");
 		System.out.println("If you want to close the please type as 'exit'");
 		System.out.println("Before adding tour details please enter the person details to know your ID");
 		System.out.println("*****************************************************************************************");
@@ -54,7 +54,7 @@ public class Main {
 					if (tour == null) {
 						tour = new Tour();
 					}
-					tourList.add(tour.tourDetails());
+					tourList.add(tour.tourDetails(personList));
 					System.out.println("\n");
 					System.out.println("If you want to perform any operation again please press no from 0 to 12");
 					break;
@@ -176,13 +176,6 @@ public class Main {
 					System.out.println("\n");
 					System.out.println("If you want to perform any operation again please press no from 0 to 12");
 					System.out.println("\n");
-					break;
-
-				case "11":
-					String personID = sc.nextLine();
-					PersonNameFinder obj = new PersonNameFinder();
-					String personName = obj.getPersonName(personID, personList);
-					System.out.println(personName);
 					break;
 
 				case "exit":
