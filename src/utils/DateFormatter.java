@@ -10,7 +10,7 @@ public class DateFormatter {
 			java.util.Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(dateVal);
 			return date;
 		} catch (ParseException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 		}
 		return null;
 	}

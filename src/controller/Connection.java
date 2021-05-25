@@ -9,11 +9,11 @@ import utils.*;
 
 public class Connection {
 	Scanner sc = new Scanner(System.in);
-	InputValidation validateString = new InputValidation();
-	InputValueCheck valueCheck = new InputValueCheck();
 
 	public ConnectionEntity connections(String tourId, String personId) throws ParseException {
 		ConnectionEntity connection = new ConnectionEntity();
+		InputValidation validateString = new InputValidation();
+		InputValueCheck valueCheck = new InputValueCheck();
 
 		// System.out.println("Please Enter the tour id");
 		connection.setTourId(tourId);
@@ -35,10 +35,11 @@ public class Connection {
 		connection.setNotes(validateString.inputStringValidation(sc.nextLine()));
 
 		System.out.println(
-				"Intermediate friends ID --- Please enter 0 if none else enter comma separated id for more than 1 intermediate friends");
+				"Intermediate friends ID --- Please press enter if none ,else enter comma separated id for more than 1 intermediate friends");
 
 		connection.setIntermediateFriends(valueCheck.intermediateUuidCheck());
 
+		System.out.println("**********************************************");
 		return connection;
 
 	}

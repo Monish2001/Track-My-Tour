@@ -11,6 +11,7 @@ public class FunctionalityInputModel {
     Scanner sc = new Scanner(System.in);
     PrintDetails printDetails = new PrintDetails();
     InputValidation validateString = new InputValidation();
+    InputValueCheck valueCheck = new InputValueCheck();
 
     public String activities(List<TourEntity> tourList) {
         System.out.println("List of activities in a tour");
@@ -19,7 +20,7 @@ public class FunctionalityInputModel {
 
         printDetails.printTourId(tourList);
         System.out.println("Please enter the tour id:");
-        String tourId = validateString.trimString(sc.nextLine());
+        String tourId = valueCheck.uuidCheck();
         return tourId;
     }
 
@@ -30,7 +31,7 @@ public class FunctionalityInputModel {
 
         printDetails.printTourId(tourList);
         System.out.println("Please enter the tour id:");
-        String tourId = validateString.trimString(sc.nextLine());
+        String tourId = valueCheck.uuidCheck();
         return tourId;
     }
 
@@ -40,7 +41,7 @@ public class FunctionalityInputModel {
         System.out.println("Refer the tour id listed here");
         printDetails.printTourId(tourList);
         System.out.println("Please enter the tour id:");
-        String tourId = validateString.trimString(sc.nextLine());
+        String tourId = valueCheck.uuidCheck();
         return tourId;
     }
 
@@ -64,7 +65,7 @@ public class FunctionalityInputModel {
         System.out.println("Refer the tour id listed here");
         printDetails.printTourId(tourList);
         System.out.println("Please enter the tour id:");
-        String tourIdForDirectFriends = validateString.trimString(sc.nextLine());
+        String tourIdForDirectFriends = valueCheck.uuidCheck();
         return tourIdForDirectFriends;
     }
 
@@ -74,7 +75,7 @@ public class FunctionalityInputModel {
         System.out.println("Refer the tour id listed here");
         printDetails.printTourId(tourList);
         System.out.println("Please enter the tour id:");
-        String tourIdForIndirectConnections = validateString.trimString(sc.nextLine());
+        String tourIdForIndirectConnections = valueCheck.uuidCheck();
         return tourIdForIndirectConnections;
     }
 

@@ -11,11 +11,11 @@ import utils.*;
 
 public class JourneyDetails {
 	Scanner sc = new Scanner(System.in);
-	InputValidation validateString = new InputValidation();
-	InputValueCheck valueCheck = new InputValueCheck();
-	ConstantValueCheck inputValueCheck = new ConstantValueCheck();
 
 	public JourneyDetailsEntity journeyDetails(String tourId) throws ParseException {
+		InputValidation validateString = new InputValidation();
+		InputValueCheck valueCheck = new InputValueCheck();
+		ConstantValueCheck inputValueCheck = new ConstantValueCheck();
 
 		JourneyDetailsEntity journeyDetailsData = new JourneyDetailsEntity();
 
@@ -26,11 +26,11 @@ public class JourneyDetails {
 		String journeyDetailsId = id.uuid();
 		journeyDetailsData.setJourneyDetailsId(journeyDetailsId);
 
-		System.out.println("Journey starting time in \"yyyy-MM-dd HH:mm:ss.SSSSSS format:");
+		System.out.println("Journey starting time in \"yyyy-MM-dd HH:mm:ss format:");
 		Date journeyStartTime = valueCheck.dateCheck();
 		journeyDetailsData.setStartTime(journeyStartTime);
 
-		System.out.println("Journey reached time in \"yyyy-MM-dd HH:mm:ss.SSSSSS format:");
+		System.out.println("Journey reached time in \"yyyy-MM-dd HH:mm:ss format:");
 		Date journeyReachedTime = valueCheck.dateCheck();
 		;
 		journeyDetailsData.setReachedTime(journeyReachedTime);

@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
+import controller.utils.InputValueCheck;
 import entities.*;
 import utils.*;
 
@@ -14,9 +15,11 @@ public class Resort {
 	Scanner sc = new Scanner(System.in);
 
 	public ResortEntity resortDetails(String tourId) throws ParseException {
+		InputValidation validateString = new InputValidation();
+		InputValueCheck valueCheck = new InputValueCheck();
+
 		ResortEntity resortData = new ResortEntity();
 		Room room = new Room();
-		InputValidation validateString = new InputValidation();
 		List<RoomEntity> roomList = new ArrayList<RoomEntity>();
 
 		// System.out.println("Please Enter the tour id");
@@ -27,12 +30,11 @@ public class Resort {
 		resortData.setResortId(resortId);
 
 		System.out.println("Resort fromDate in \"yyyy-MM-dd HH:mm:ss format:");
-		DateFormatter dateObj = new DateFormatter();
-		Date resortFromDate = dateObj.dateFormatter(validateString.trimString(sc.nextLine()));
+		Date resortFromDate = valueCheck.dateCheck();
 		resortData.setFromDate(resortFromDate);
 
 		System.out.println("Resort toDate in \"yyyy-MM-dd HH:mm:ss format:");
-		Date resortToDate = dateObj.dateFormatter(validateString.trimString(sc.nextLine()));
+		Date resortToDate = valueCheck.dateCheck();
 		resortData.setToDate(resortToDate);
 
 		System.out.println("Resort Name:");
@@ -47,7 +49,7 @@ public class Resort {
 
 		System.out.println("*****************PLEASE ENTER ROOM DETAILS***************");
 		System.out.println("How many rooms do you need to add");
-		int count = Integer.parseInt(validateString.trimString(sc.nextLine()));
+		int count = Integer.parseInt(validateString.trimString(valueCheck.intCheck()));
 		int index = 0;
 		while (index < count) {
 			roomList.add(room.roomDetails(resortId));

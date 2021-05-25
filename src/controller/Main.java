@@ -46,7 +46,7 @@ public class Main {
 		while (condition == 1) {
 			operation = sc.nextLine();
 			switch (operation) {
-				case "0":
+				case "1":
 					if (person == null) {
 						person = new Person();
 					}
@@ -54,7 +54,7 @@ public class Main {
 					System.out.println("If you want to perform any operation again please press no from 1 to 11");
 					System.out.println("\n");
 					break;
-				case "1":
+				case "2":
 					if (tour == null) {
 						tour = new Tour();
 					}
@@ -63,7 +63,7 @@ public class Main {
 					System.out.println("If you want to perform any operation again please press no from 1 to 11");
 					break;
 
-				case "2":
+				case "3":
 					if (printEntries == null) {
 						printEntries = new PrintEntries();
 					}
@@ -71,7 +71,7 @@ public class Main {
 					System.out.println("If you want to perform any operation again please press no from 1 to 11");
 					break;
 
-				case "3":
+				case "4":
 					if (costFinder == null) {
 						costFinder = new CostFinder();
 					}
@@ -84,11 +84,11 @@ public class Main {
 					System.out.println("\n");
 					break;
 
-				case "4":
+				case "5":
 					if (costFinder == null) {
 						costFinder = new CostFinder();
 					}
-					String tourIdForStay = inputModel.costOfSingleTour(tourList);
+					String tourIdForStay = inputModel.costOfTourStay(tourList);
 					int costForStay = costFinder.costOfTourStay(tourList, tourIdForStay);
 					printDetails.printCostOfTourStay(costForStay);
 					System.out.println("\n");
@@ -96,7 +96,7 @@ public class Main {
 					System.out.println("\n");
 					break;
 
-				case "5":
+				case "6":
 					if (tourLocation == null) {
 						tourLocation = new BasedOnLocation();
 					}
@@ -111,7 +111,7 @@ public class Main {
 					System.out.println("If you want to perform any operation again please press no from 1 to 11");
 					break;
 
-				case "6":
+				case "7":
 					if (tourTransport == null) {
 						tourTransport = new BasedOnTransport();
 					}
@@ -127,7 +127,7 @@ public class Main {
 					System.out.println("If you want to perform any operation again please press no from 1 to 11");
 					break;
 
-				case "7":
+				case "8":
 					if (connections == null) {
 						connections = new Connections();
 					}
@@ -137,7 +137,7 @@ public class Main {
 					System.out.println("If you want to perform any operation again please press no from 1 to 11");
 					break;
 
-				case "8":
+				case "9":
 					if (connections == null) {
 						connections = new Connections();
 					}
@@ -147,7 +147,7 @@ public class Main {
 					System.out.println("If you want to perform any operation again please press no from 1 to 11");
 					break;
 
-				case "9":
+				case "10":
 					if (toursOnDateRange == null) {
 						toursOnDateRange = new ToursOnDateRange();
 					}
@@ -163,7 +163,7 @@ public class Main {
 					System.out.println("\n");
 					break;
 
-				case "10":
+				case "11":
 					if (listActivities == null) {
 						listActivities = new Activities();
 					}

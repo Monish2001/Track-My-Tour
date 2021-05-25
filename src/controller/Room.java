@@ -3,6 +3,7 @@ package controller;
 import java.text.ParseException;
 import java.util.Scanner;
 
+import controller.utils.InputValueCheck;
 import entities.RoomEntity;
 import utils.InputValidation;
 import utils.UUIDGenerator;
@@ -13,6 +14,7 @@ public class Room {
 	public RoomEntity roomDetails(String resortId) throws ParseException {
 		RoomEntity roomData = new RoomEntity();
 		InputValidation validateString = new InputValidation();
+		InputValueCheck valueCheck = new InputValueCheck();
 
 		// System.out.println("Please Enter the resort id");
 		roomData.setResortId(resortId);
@@ -25,10 +27,10 @@ public class Room {
 		roomData.setRoomType(validateString.inputStringValidation(sc.nextLine()));
 
 		System.out.println("Cost Per Day:");
-		roomData.setCostPerDay(Integer.parseInt(validateString.trimString(sc.nextLine())));
+		roomData.setCostPerDay(Integer.parseInt(valueCheck.intCheck()));
 
 		System.out.println("No of Nights");
-		roomData.setNoOfNights(Integer.parseInt(validateString.trimString(sc.nextLine())));
+		roomData.setNoOfNights(Integer.parseInt(valueCheck.intCheck()));
 
 		System.out.println("Room No:");
 		roomData.setRoomNo(validateString.inputStringValidation(sc.nextLine()));

@@ -10,10 +10,11 @@ import utils.*;
 
 public class Activity {
 	Scanner sc = new Scanner(System.in);
-	InputValidation validateString = new InputValidation();
-	InputValueCheck valueCheck = new InputValueCheck();
 
 	public ActivityEntity activities(String tourId) throws ParseException {
+		InputValidation validateString = new InputValidation();
+		InputValueCheck valueCheck = new InputValueCheck();
+
 		ActivityEntity activity = new ActivityEntity();
 
 		activity.setTourid(tourId);

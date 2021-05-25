@@ -15,14 +15,13 @@ public class InputValueCheck {
 
     public Date dateCheck() throws ParseException {
 
-        String dateCheckStr = validateString.trimString(sc.nextLine());
-        Date finalDateVariable;
-        if (dateCheckStr.equals("Null")) {
-            return null;
-        }
         boolean isDateOk = true;
         while (isDateOk == true) {
-
+            String dateCheckStr = validateString.trimString(sc.nextLine());
+            Date finalDateVariable;
+            if (dateCheckStr.equals("Null")) {
+                return null;
+            }
             finalDateVariable = dateObj.dateFormatter(dateCheckStr);
             if (finalDateVariable == null) {
                 isDateOk = true;
@@ -37,12 +36,13 @@ public class InputValueCheck {
     }
 
     public String intCheck() {
-        String returnStr = validateString.intValidator(sc.nextLine());
-        if (returnStr.equals("0")) {
-            return "0";
-        }
+
         boolean isIntCheckOk = true;
         while (isIntCheckOk == true) {
+            String returnStr = validateString.intValidator(sc.nextLine());
+            if (returnStr.equals("0")) {
+                return "0";
+            }
             if (returnStr.equals("invalid input")) {
                 isIntCheckOk = true;
                 System.out.println("Invalid input !! Please enter input in numbers");
@@ -52,16 +52,17 @@ public class InputValueCheck {
                 return returnStr;
             }
         }
-        return returnStr;
+        return null;
     }
 
     public String uuidCheck() {
-        String returnStr = validateString.uuidValidator(sc.nextLine());
-        if (returnStr.equals("Null")) {
-            return "Null";
-        }
+
         boolean isUuidOk = true;
         while (isUuidOk == true) {
+            String returnStr = validateString.uuidValidator(sc.nextLine());
+            if (returnStr.equals("Null")) {
+                return "Null";
+            }
             if (returnStr.equals("invalid input")) {
                 isUuidOk = true;
                 System.out.println("Invalid input!! Please enter the correct uuid");
@@ -70,7 +71,8 @@ public class InputValueCheck {
                 return returnStr;
             }
         }
-        return returnStr;
+        // return returnStr;
+        return null;
     }
 
     public String intermediateUuidCheck() {
@@ -98,8 +100,6 @@ public class InputValueCheck {
             }
             if (correctUuidCount == lengthOfArrUuid) {
                 return inputVal;
-            } else {
-                return "0";
             }
         }
         return "0";
