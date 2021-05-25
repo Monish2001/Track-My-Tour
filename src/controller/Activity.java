@@ -10,12 +10,12 @@ import utils.*;
 public class Activity {
 	Scanner sc = new Scanner(System.in);
 
-	public ActivityEntity activities() throws ParseException {
+	public ActivityEntity activities(String tourId) throws ParseException {
 		InputValidation validateString = new InputValidation();
 
 		ActivityEntity activity = new ActivityEntity();
-		System.out.println("Please Enter the tour id");
-		activity.setTourid(validateString.trimString(sc.nextLine()));
+		// System.out.println("Please Enter the tour id");
+		activity.setTourid(tourId);
 
 		UUIDGenerator id = new UUIDGenerator();
 		String activityId = id.uuid();

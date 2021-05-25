@@ -10,14 +10,14 @@ import utils.*;
 public class JourneyDetails {
 	Scanner sc = new Scanner(System.in);
 
-	public JourneyDetailsEntity journeyDetails() throws ParseException {
+	public JourneyDetailsEntity journeyDetails(String tourId) throws ParseException {
 
 		JourneyDetailsEntity journeyDetailsData = new JourneyDetailsEntity();
 		InputValidation validateString = new InputValidation();
 		InputValueCheck inputValueCheck = new InputValueCheck();
 
-		System.out.println("Please Enter the tour id");
-		journeyDetailsData.setTourId(validateString.trimString(sc.nextLine()));
+		// System.out.println("Please Enter the tour id");
+		journeyDetailsData.setTourId(tourId);
 
 		UUIDGenerator id = new UUIDGenerator();
 		String journeyDetailsId = id.uuid();

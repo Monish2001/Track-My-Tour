@@ -10,18 +10,18 @@ public class Connection {
 	Scanner sc = new Scanner(System.in);
 	InputValidation validateString = new InputValidation();
 
-	public ConnectionEntity connections() throws ParseException {
+	public ConnectionEntity connections(String tourId, String personId) throws ParseException {
 		ConnectionEntity connection = new ConnectionEntity();
 
-		System.out.println("Please Enter the tour id");
-		connection.setTourId(validateString.trimString(sc.nextLine()));
+		// System.out.println("Please Enter the tour id");
+		connection.setTourId(tourId);
 
 		UUIDGenerator id = new UUIDGenerator();
 		String connectionId = id.uuid();
 		connection.setConnectionId(connectionId);
 
-		System.out.println("Person id:");
-		connection.setPersonId(validateString.trimString(sc.nextLine()));
+		// System.out.println("Person id:");
+		connection.setPersonId(personId);
 
 		System.out.println("Connected to person id:");
 		connection.setConnectedToPersonId(validateString.trimString(sc.nextLine()));

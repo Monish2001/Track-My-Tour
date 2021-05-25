@@ -33,7 +33,8 @@ public class Tour {
 		System.out.println("****************PLEASE ENTER THE TOUR DETAILS****************");
 
 		System.out.println("Please Enter the person id");
-		tourData.setPersonId(validateString.trimString(sc.nextLine()));
+		String personId = validateString.trimString(sc.nextLine());
+		tourData.setPersonId(personId);
 
 		UUIDGenerator id = new UUIDGenerator();
 		String tourId = id.uuid();
@@ -64,30 +65,30 @@ public class Tour {
 		int totalJourneyCount = Integer.parseInt(validateString.trimString(sc.nextLine()));
 		int journeyAdded = 0;
 		while (journeyAdded < totalJourneyCount) {
-			journeyList.add(journeyDetailsData.journeyDetails());
+			journeyList.add(journeyDetailsData.journeyDetails(tourId));
 			journeyAdded++;
 		}
-		System.out.println("\n");
+		System.out.println("*****************************************************************");
 
 		System.out.println("****************PLEASE ENTER THE RESORT DETAILS****************");
 		System.out.println("How many resort entries do you need to add");
 		int totalResortCount = Integer.parseInt(validateString.trimString(sc.nextLine()));
 		int resortsAdded = 0;
 		while (resortsAdded < totalResortCount) {
-			resortList.add(resortDetailsData.resortDetails());
+			resortList.add(resortDetailsData.resortDetails(tourId));
 			resortsAdded++;
 		}
-		System.out.println("\n");
+		System.out.println("*****************************************************************");
 
 		System.out.println("****************PLEASE ENTER THE TOUR ACTIVITIES****************");
 		System.out.println("How many activity entries do you need to add");
 		int totalActivitiesCount = Integer.parseInt(validateString.trimString(sc.nextLine()));
 		int activitiesAdded = 0;
 		while (activitiesAdded < totalActivitiesCount) {
-			activityList.add(tourActivities.activities());
+			activityList.add(tourActivities.activities(tourId));
 			activitiesAdded++;
 		}
-		System.out.println("\n");
+		System.out.println("*****************************************************************");
 
 		System.out.println("BEFORE ADDING CONNECTIONS PLEASE ENTER THE PERSON DETAILS TO WHOM YOU HAVE CONNECTED");
 		System.out.println("How many person details do you need to add");
@@ -97,17 +98,17 @@ public class Tour {
 			personList.add(person.personDetails());
 			personsAdded++;
 		}
-		System.out.println("\n");
+		System.out.println("*****************************************************************");
 
 		System.out.println("****************PLEASE ENTER CONNECTIONS MADE IN A TOUR****************");
 		System.out.println("How many connections do you need to add");
 		int totalConnectionsCount = Integer.parseInt(validateString.trimString(sc.nextLine()));
 		int connectionsAdded = 0;
 		while (connectionsAdded < totalConnectionsCount) {
-			connectionList.add(connectionsMade.connections());
+			connectionList.add(connectionsMade.connections(tourId, personId));
 			connectionsAdded++;
 		}
-		System.out.println("\n");
+		System.out.println("*****************************************************************");
 
 		tourData.setJourneyDetails(journeyList);
 		tourData.setResort(resortList);

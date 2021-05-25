@@ -13,14 +13,14 @@ import utils.*;
 public class Resort {
 	Scanner sc = new Scanner(System.in);
 
-	public ResortEntity resortDetails() throws ParseException {
+	public ResortEntity resortDetails(String tourId) throws ParseException {
 		ResortEntity resortData = new ResortEntity();
 		Room room = new Room();
 		InputValidation validateString = new InputValidation();
 		List<RoomEntity> roomList = new ArrayList<RoomEntity>();
 
-		System.out.println("Please Enter the tour id");
-		resortData.setTourid(validateString.trimString(sc.nextLine()));
+		// System.out.println("Please Enter the tour id");
+		resortData.setTourid(tourId);
 
 		UUIDGenerator id = new UUIDGenerator();
 		String resortId = id.uuid();
@@ -50,7 +50,7 @@ public class Resort {
 		int count = Integer.parseInt(validateString.trimString(sc.nextLine()));
 		int index = 0;
 		while (index < count) {
-			roomList.add(room.roomDetails());
+			roomList.add(room.roomDetails(resortId));
 			index++;
 		}
 		resortData.setRoom(roomList);

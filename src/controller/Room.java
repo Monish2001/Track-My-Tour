@@ -10,12 +10,12 @@ import utils.UUIDGenerator;
 public class Room {
 	Scanner sc = new Scanner(System.in);
 
-	public RoomEntity roomDetails() throws ParseException {
+	public RoomEntity roomDetails(String resortId) throws ParseException {
 		RoomEntity roomData = new RoomEntity();
 		InputValidation validateString = new InputValidation();
 
-		System.out.println("Please Enter the resort id");
-		roomData.setResortId(validateString.trimString(sc.nextLine()));
+		// System.out.println("Please Enter the resort id");
+		roomData.setResortId(resortId);
 
 		UUIDGenerator id = new UUIDGenerator();
 		String roomId = id.uuid();
@@ -36,7 +36,7 @@ public class Room {
 		Integer totalCost = roomData.getCostPerDay() * roomData.getNoOfNights();
 		roomData.setTotalCost(totalCost);
 
-		System.out.println("*******************************************");
+		System.out.println("*****************************************************************");
 
 		return roomData;
 	}
