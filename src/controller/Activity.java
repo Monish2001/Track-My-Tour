@@ -41,7 +41,7 @@ public class Activity {
 		activity.setDuration(mins);
 
 		System.out.println("Cost:");
-		activity.setCost(Integer.parseInt(validateString.trimString(sc.nextLine()));
+		activity.setCost(Integer.parseInt(validateString.trimString(sc.nextLine())));
 
 		System.out.println("Location:");
 		activity.setLocation(validateString.inputStringValidation(sc.nextLine()));

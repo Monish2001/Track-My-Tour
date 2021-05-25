@@ -48,6 +48,8 @@ public class Connections {
                     }
                     break;
                 }
+            } else {
+                System.out.println("No connections made in this tour!!");
             }
         }
     }
@@ -74,7 +76,7 @@ public class Connections {
                     System.out.println("INDIRECT CONNECTIONS MADE IN A TOUR");
                     String personId = tourEntity.getConnections().get(0).getPersonId();
                     String personName = personNameFinder.getPersonName(personId, personList);
-                    System.out.println(personName + "Made indirect connections with: ");
+                    System.out.println(personName + " " + "Made indirect connections with: ");
 
                     for (int connection = 0; connection < tourEntity.getConnections().size(); connection++) {
                         ConnectionEntity connectionVar = tourEntity.getConnections().get(connection);
@@ -94,6 +96,8 @@ public class Connections {
                         break;
                     }
                 }
+            } else {
+                System.out.println("No connections made in this tour!!");
             }
         }
     }

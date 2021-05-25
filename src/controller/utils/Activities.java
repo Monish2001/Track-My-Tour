@@ -16,12 +16,16 @@ public class Activities {
             }
 
             TourEntity tourDetails = tourList.get(tourVariable);
-            if (tourId.equals(tourDetails.getTourId())) {
-                for (int actitvity = 0; actitvity < tourDetails.getActivities().size(); actitvity++) {
-                    ActivityEntity activities = tourDetails.getActivities().get(actitvity);
-                    tourActivities.add(activities.getActivityName());
+            if (tourDetails.getActivities().size() != 0) {
+                if (tourId.equals(tourDetails.getTourId())) {
+                    for (int actitvity = 0; actitvity < tourDetails.getActivities().size(); actitvity++) {
+                        ActivityEntity activities = tourDetails.getActivities().get(actitvity);
+                        tourActivities.add(activities.getActivityName());
+                    }
+                    break;
                 }
-                break;
+            } else {
+                System.out.println("No activities is made in this tour");
             }
         }
         return tourActivities;

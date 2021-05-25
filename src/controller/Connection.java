@@ -8,10 +8,10 @@ import utils.*;
 
 public class Connection {
 	Scanner sc = new Scanner(System.in);
+	InputValidation validateString = new InputValidation();
 
 	public ConnectionEntity connections() throws ParseException {
 		ConnectionEntity connection = new ConnectionEntity();
-		InputValidation validateString = new InputValidation();
 
 		System.out.println("Please Enter the tour id");
 		connection.setTourId(validateString.trimString(sc.nextLine()));
@@ -32,7 +32,8 @@ public class Connection {
 		System.out.println("Notes:");
 		connection.setNotes(validateString.inputStringValidation(sc.nextLine()));
 
-		System.out.println("Intermediate friends ID --- Please enter 0 if none else enter comma separated id");
+		System.out.println(
+				"Intermediate friends ID --- Please enter 0 if none else enter comma separated id for more than 1 intermediate friends");
 		connection.setIntermediateFriends(validateString.trimString(sc.nextLine()));
 
 		return connection;

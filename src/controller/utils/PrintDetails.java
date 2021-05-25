@@ -82,6 +82,7 @@ public class PrintDetails {
         System.out.println("Resort ID: " + roomEntity.getResortId());
         System.out.println("Room Type: " + roomEntity.getRoomType());
         System.out.println("Room Cost Per Day: " + roomEntity.getCostPerDay());
+        System.out.println("No Of Nights: " + roomEntity.getNoOfNights());
         System.out.println("Room No: " + roomEntity.getRoomNo());
         System.out.println("\n");
     }

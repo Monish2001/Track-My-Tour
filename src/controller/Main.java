@@ -97,7 +97,12 @@ public class Main {
 						tourLocation = new BasedOnLocation();
 					}
 					String location = inputModel.toursBasedOnLocation();
-					tourLocation.toursBasedOnLocation(tourList, location);
+					List<TourEntity> tourBasedOnLocationList = tourLocation.toursBasedOnLocation(tourList, location);
+					if (tourBasedOnLocationList.size() != 0) {
+						for (TourEntity tourEntity : tourBasedOnLocationList) {
+							printDetails.printTourDetails(tourEntity);
+						}
+					}
 					System.out.println("\n");
 					System.out.println("If you want to perform any operation again please press no from 0 to 12");
 					break;
@@ -107,7 +112,13 @@ public class Main {
 						tourTransport = new BasedOnTransport();
 					}
 					String modeOfTransport = inputModel.toursBasedOnTransport();
-					tourTransport.tourBasedOnTransport(tourList, modeOfTransport);
+					List<TourEntity> tourBasedOnTransportList = tourTransport.tourBasedOnTransport(tourList,
+							modeOfTransport);
+					if (tourBasedOnTransportList.size() != 0) {
+						for (TourEntity tourEntity : tourBasedOnTransportList) {
+							printDetails.printTourDetails(tourEntity);
+						}
+					}
 					System.out.println("\n");
 					System.out.println("If you want to perform any operation again please press no from 0 to 12");
 					break;
@@ -137,7 +148,12 @@ public class Main {
 						toursOnDateRange = new ToursOnDateRange();
 					}
 					String[] date = inputModel.toursOnDateRange();
-					toursOnDateRange.toursBasedOnDateRange(tourList, date);
+					List<TourEntity> toursOnDateRangeList = toursOnDateRange.toursBasedOnDateRange(tourList, date);
+					if (toursOnDateRangeList.size() != 0) {
+						for (TourEntity tourEntity : toursOnDateRangeList) {
+							printDetails.printTourDetails(tourEntity);
+						}
+					}
 					System.out.println("\n");
 					System.out.println("If you want to perform any operation again please press no from 0 to 12");
 					System.out.println("\n");
@@ -152,9 +168,14 @@ public class Main {
 					}
 					String tourIdForActivities = inputModel.activities(tourList);
 					List<String> activities = listActivities.ListOfActivities(tourList, tourIdForActivities);
-					printDetails.printActivities(activities);
-					int totalActivityCost = costFinder.costOfActivities(tourList, tourIdForActivities);
-					printDetails.costOfActivities(totalActivityCost);
+					if (activities.size() != 0) {
+						printDetails.printActivities(activities);
+						int totalActivityCost = costFinder.costOfActivities(tourList, tourIdForActivities);
+						printDetails.costOfActivities(totalActivityCost);
+					}
+					System.out.println("\n");
+					System.out.println("If you want to perform any operation again please press no from 0 to 12");
+					System.out.println("\n");
 					break;
 
 				case "11":
