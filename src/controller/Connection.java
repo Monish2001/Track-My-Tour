@@ -3,12 +3,14 @@ package controller;
 import java.text.ParseException;
 import java.util.Scanner;
 
+import controller.utils.InputValueCheck;
 import entities.*;
 import utils.*;
 
 public class Connection {
 	Scanner sc = new Scanner(System.in);
 	InputValidation validateString = new InputValidation();
+	InputValueCheck valueCheck = new InputValueCheck();
 
 	public ConnectionEntity connections(String tourId, String personId) throws ParseException {
 		ConnectionEntity connection = new ConnectionEntity();
@@ -24,7 +26,7 @@ public class Connection {
 		connection.setPersonId(personId);
 
 		System.out.println("Connected to person id:");
-		connection.setConnectedToPersonId(validateString.trimString(sc.nextLine()));
+		connection.setConnectedToPersonId(valueCheck.uuidCheck());
 
 		System.out.println("Behaviour:");
 		connection.setBehaviour(validateString.inputStringValidation(sc.nextLine()));
@@ -34,7 +36,8 @@ public class Connection {
 
 		System.out.println(
 				"Intermediate friends ID --- Please enter 0 if none else enter comma separated id for more than 1 intermediate friends");
-		connection.setIntermediateFriends(validateString.trimString(sc.nextLine()));
+
+		connection.setIntermediateFriends(valueCheck.intermediateUuidCheck());
 
 		return connection;
 

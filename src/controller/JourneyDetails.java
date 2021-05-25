@@ -4,17 +4,20 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.Scanner;
 
+import controller.utils.InputValueCheck;
+import controller.utils.ConstantValueCheck;
 import entities.*;
 import utils.*;
 
 public class JourneyDetails {
 	Scanner sc = new Scanner(System.in);
+	InputValidation validateString = new InputValidation();
+	InputValueCheck valueCheck = new InputValueCheck();
+	ConstantValueCheck inputValueCheck = new ConstantValueCheck();
 
 	public JourneyDetailsEntity journeyDetails(String tourId) throws ParseException {
 
 		JourneyDetailsEntity journeyDetailsData = new JourneyDetailsEntity();
-		InputValidation validateString = new InputValidation();
-		InputValueCheck inputValueCheck = new InputValueCheck();
 
 		// System.out.println("Please Enter the tour id");
 		journeyDetailsData.setTourId(tourId);
@@ -24,12 +27,12 @@ public class JourneyDetails {
 		journeyDetailsData.setJourneyDetailsId(journeyDetailsId);
 
 		System.out.println("Journey starting time in \"yyyy-MM-dd HH:mm:ss.SSSSSS format:");
-		DateFormatter dateObj = new DateFormatter();
-		Date journeyStartTime = dateObj.dateFormatter(validateString.trimString(sc.nextLine()));
+		Date journeyStartTime = valueCheck.dateCheck();
 		journeyDetailsData.setStartTime(journeyStartTime);
 
 		System.out.println("Journey reached time in \"yyyy-MM-dd HH:mm:ss.SSSSSS format:");
-		Date journeyReachedTime = dateObj.dateFormatter(validateString.trimString(sc.nextLine()));
+		Date journeyReachedTime = valueCheck.dateCheck();
+		;
 		journeyDetailsData.setReachedTime(journeyReachedTime);
 
 		System.out.println("Mode of transport: -- Please enter as car or bike");
@@ -51,12 +54,13 @@ public class JourneyDetails {
 		System.out.println("Weather:");
 		journeyDetailsData.setWeather(validateString.inputStringValidation(sc.nextLine()));
 
-		System.out.println("Duration: -- Please enter in HH:mm format");
-		String dateStr = validateString.inputStringValidation(sc.nextLine());
-		String[] splittedDate = dateStr.split(":", 2);
-		ConvertHoursToMins convertHoursToMins = new ConvertHoursToMins();
-		Integer mins = convertHoursToMins.convertToMins(splittedDate);
-		journeyDetailsData.setDuration(mins);
+		System.out.println("Duration:-- Please enter how many hours and minutes");
+		System.out.println("Hours: ");
+		Integer hours = Integer.parseInt(valueCheck.intCheck());
+		System.out.println("Minutes: ");
+		Integer minutes = Integer.parseInt(valueCheck.intCheck());
+		Integer totalMinutes = (hours * 60) + minutes;
+		journeyDetailsData.setDuration(totalMinutes);
 
 		System.out.println("Journey Type: -- Please enter as onward or backward");
 		Boolean inputValue = false;

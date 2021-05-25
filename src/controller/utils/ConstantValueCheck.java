@@ -1,6 +1,6 @@
-package utils;
+package controller.utils;
 
-public class InputValueCheck {
+public class ConstantValueCheck {
     enum ModeOfTransport {
         car, bike
     };
@@ -30,5 +30,4 @@ public class InputValueCheck {
 
         return false;
     }
-
 }

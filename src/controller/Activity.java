@@ -4,17 +4,18 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.Scanner;
 
+import controller.utils.InputValueCheck;
 import entities.*;
 import utils.*;
 
 public class Activity {
 	Scanner sc = new Scanner(System.in);
+	InputValidation validateString = new InputValidation();
+	InputValueCheck valueCheck = new InputValueCheck();
 
 	public ActivityEntity activities(String tourId) throws ParseException {
-		InputValidation validateString = new InputValidation();
-
 		ActivityEntity activity = new ActivityEntity();
-		// System.out.println("Please Enter the tour id");
+
 		activity.setTourid(tourId);
 
 		UUIDGenerator id = new UUIDGenerator();
@@ -22,26 +23,27 @@ public class Activity {
 		activity.setActivityId(activityId);
 
 		System.out.println("Activity Name:");
-		activity.setActivityName(validateString.inputStringValidation(sc.nextLine()));
+		String validatedString = validateString.inputStringValidation(sc.nextLine());
+		activity.setActivityName(validatedString);
 
 		System.out.println("Activity start time in \"yyyy-MM-dd HH:mm:ss format:");
-		DateFormatter dateObj = new DateFormatter();
-		Date activityStartTime = dateObj.dateFormatter(validateString.trimString(sc.nextLine()));
+		Date activityStartTime = valueCheck.dateCheck();
 		activity.setStartTime(activityStartTime);
 
 		System.out.println("Activity end time in \"yyyy-MM-dd HH:mm:ss format:");
-		Date resortEndTime = dateObj.dateFormatter(validateString.trimString(sc.nextLine()));
-		activity.setEndTime(resortEndTime);
+		Date activityEndTime = valueCheck.dateCheck();
+		activity.setEndTime(activityEndTime);
 
-		System.out.println("Duration:-- Please enter in HH:mm format");
-		String dateStr = validateString.inputStringValidation(sc.nextLine());
-		String[] splittedDate = dateStr.split(":", 2);
-		ConvertHoursToMins convertHoursToMins = new ConvertHoursToMins();
-		Integer mins = convertHoursToMins.convertToMins(splittedDate);
-		activity.setDuration(mins);
+		System.out.println("Duration:-- Please enter how many hours and minutes");
+		System.out.println("Hours: ");
+		Integer hours = Integer.parseInt(valueCheck.intCheck());
+		System.out.println("Minutes: ");
+		Integer minutes = Integer.parseInt(valueCheck.intCheck());
+		Integer totalMinutes = (hours * 60) + minutes;
+		activity.setDuration(totalMinutes);
 
 		System.out.println("Cost:");
-		activity.setCost(Integer.parseInt(validateString.trimString(sc.nextLine())));
+		activity.setCost(Integer.parseInt(valueCheck.intCheck()));
 
 		System.out.println("Location:");
 		activity.setLocation(validateString.inputStringValidation(sc.nextLine()));

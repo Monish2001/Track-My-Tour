@@ -10,10 +10,14 @@ import entities.*;
 
 public class Main {
 	public static void main(String[] args) throws ParseException {
+		System.out
+				.println("*********************************WELCOME**************************************************");
+		System.out
+				.println("******************************TRACK MY TOUR***********************************************");
 		System.out.println("****************************OPERATIONS PERFORMED*****************************************");
 		System.out.println(
-				"0.Add Person details \n 1.Add a trip entry\n 2.List the trip entries\n 3.Total cost of single trip\n 4.Cost for trip stay in hotel\n 5.List trips based on type of location\n 6.List trips based on transport\n 7.List direct friend in a trip\n 8.List friends of friends in a trip\n 9.List the trip with given date range\n 10.List the activities and total activities cost in a trip");
-		System.out.println("If you want to close the please type as 'exit'");
+				"1.Add Person details \n 2.Add a trip entry\n 3.List the trip entries\n 4.Total cost of single trip\n 5.Cost for trip stay in hotel\n 6.List trips based on type of location\n 7.List trips based on transport\n 8.List direct friend in a trip\n 9.List friends of friends in a trip\n 10.List the trip with given date range\n 11.List the activities and total activities cost in a trip");
+		System.out.println("If you want to close then please type as 'exit'");
 		System.out.println("Before adding tour details please enter the person details to know your ID");
 		System.out.println("*****************************************************************************************");
 
@@ -47,7 +51,7 @@ public class Main {
 						person = new Person();
 					}
 					personList.add(person.personDetails());
-					System.out.println("If you want to perform any operation again please press no from 0 to 12");
+					System.out.println("If you want to perform any operation again please press no from 1 to 11");
 					System.out.println("\n");
 					break;
 				case "1":
@@ -56,7 +60,7 @@ public class Main {
 					}
 					tourList.add(tour.tourDetails(personList));
 					System.out.println("\n");
-					System.out.println("If you want to perform any operation again please press no from 0 to 12");
+					System.out.println("If you want to perform any operation again please press no from 1 to 11");
 					break;
 
 				case "2":
@@ -64,7 +68,7 @@ public class Main {
 						printEntries = new PrintEntries();
 					}
 					printEntries.printTourEntries(tourList);
-					System.out.println("If you want to perform any operation again please press no from 0 to 12");
+					System.out.println("If you want to perform any operation again please press no from 1 to 11");
 					break;
 
 				case "3":
@@ -76,7 +80,7 @@ public class Main {
 					int totalCostOfTour = costFinder.costOfSingleTour(tourList, tourId);
 					printDetails.printTotalCostOfTour(totalCostOfTour);
 					System.out.println("\n");
-					System.out.println("If you want to perform any operation again please press no from 0 to 12");
+					System.out.println("If you want to perform any operation again please press no from 1 to 11");
 					System.out.println("\n");
 					break;
 
@@ -88,7 +92,7 @@ public class Main {
 					int costForStay = costFinder.costOfTourStay(tourList, tourIdForStay);
 					printDetails.printCostOfTourStay(costForStay);
 					System.out.println("\n");
-					System.out.println("If you want to perform any operation again please press no from 0 to 12");
+					System.out.println("If you want to perform any operation again please press no from 1 to 11");
 					System.out.println("\n");
 					break;
 
@@ -104,7 +108,7 @@ public class Main {
 						}
 					}
 					System.out.println("\n");
-					System.out.println("If you want to perform any operation again please press no from 0 to 12");
+					System.out.println("If you want to perform any operation again please press no from 1 to 11");
 					break;
 
 				case "6":
@@ -120,7 +124,7 @@ public class Main {
 						}
 					}
 					System.out.println("\n");
-					System.out.println("If you want to perform any operation again please press no from 0 to 12");
+					System.out.println("If you want to perform any operation again please press no from 1 to 11");
 					break;
 
 				case "7":
@@ -130,7 +134,7 @@ public class Main {
 					String tourIdForDirectConnection = inputModel.directConnections(tourList);
 					connections.directConnections(tourList, personList, tourIdForDirectConnection);
 					System.out.println("\n");
-					System.out.println("If you want to perform any operation again please press no from 0 to 12");
+					System.out.println("If you want to perform any operation again please press no from 1 to 11");
 					break;
 
 				case "8":
@@ -140,7 +144,7 @@ public class Main {
 					String tourIdForIndirectConnections = inputModel.inDirectConnections(tourList);
 					connections.indirectConnections(tourList, personList, tourIdForIndirectConnections);
 					System.out.println("\n");
-					System.out.println("If you want to perform any operation again please press no from 0 to 12");
+					System.out.println("If you want to perform any operation again please press no from 1 to 11");
 					break;
 
 				case "9":
@@ -155,7 +159,7 @@ public class Main {
 						}
 					}
 					System.out.println("\n");
-					System.out.println("If you want to perform any operation again please press no from 0 to 12");
+					System.out.println("If you want to perform any operation again please press no from 1 to 11");
 					System.out.println("\n");
 					break;
 
@@ -174,8 +178,7 @@ public class Main {
 						printDetails.costOfActivities(totalActivityCost);
 					}
 					System.out.println("\n");
-					System.out.println("If you want to perform any operation again please press no from 0 to 12");
-					System.out.println("\n");
+					System.out.println("If you want to perform any operation again please press no from 1 to 11");
 					break;
 
 				case "exit":
@@ -183,11 +186,12 @@ public class Main {
 					break;
 
 				default:
-					System.out.println("Please enter a valid input from 0 to 12");
+					System.out.println("Please enter a valid input from 0 to 11");
 					break;
 			}
 		}
 		sc.close();
+		System.out.println("***********************THANK YOU FOR USING MY APPLICATION*************************");
 	}
 
 }
