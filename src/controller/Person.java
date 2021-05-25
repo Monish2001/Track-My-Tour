@@ -26,7 +26,7 @@ public class Person {
 		personData.setName(validateString.inputStringValidation(sc.nextLine()));
 
 		System.out.println("Age:");
-		personData.setAge(Integer.parseInt(validateString.trimString(sc.nextLine())));
+		personData.setAge(Integer.parseInt(validateString.intInputValidation(sc.nextLine())));
 
 		System.out.println("Passion:");
 		personData.setPassion(validateString.inputStringValidation(sc.nextLine()));
@@ -35,7 +35,7 @@ public class Person {
 		personData.setOccupation(validateString.inputStringValidation(sc.nextLine()));
 
 		System.out.println("How many phone numbers do you want to add");
-		int totalPhoneNoCount = Integer.parseInt(validateString.trimString(sc.nextLine()));
+		int totalPhoneNoCount = Integer.parseInt(validateString.intInputValidation(sc.nextLine()));
 		int addedPhoneNoCount = 0;
 
 		while (addedPhoneNoCount < totalPhoneNoCount) {

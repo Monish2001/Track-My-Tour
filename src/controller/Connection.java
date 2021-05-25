@@ -34,7 +34,7 @@ public class Connection {
 
 		System.out.println(
 				"Intermediate friends ID --- Please enter 0 if none else enter comma separated id for more than 1 intermediate friends");
-		connection.setIntermediateFriends(validateString.trimString(sc.nextLine()));
+		connection.setIntermediateFriends(validateString.intInputValidation(sc.nextLine()));
 
 		return connection;
 

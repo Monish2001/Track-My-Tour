@@ -25,10 +25,10 @@ public class Room {
 		roomData.setRoomType(validateString.inputStringValidation(sc.nextLine()));
 
 		System.out.println("Cost Per Day:");
-		roomData.setCostPerDay(Integer.parseInt(validateString.trimString(sc.nextLine())));
+		roomData.setCostPerDay(Integer.parseInt(validateString.intInputValidation(sc.nextLine())));
 
 		System.out.println("No of Nights");
-		roomData.setNoOfNights(Integer.parseInt(validateString.trimString(sc.nextLine())));
+		roomData.setNoOfNights(Integer.parseInt(validateString.intInputValidation(sc.nextLine())));
 
 		System.out.println("Room No:");
 		roomData.setRoomNo(validateString.inputStringValidation(sc.nextLine()));

@@ -29,19 +29,21 @@ public class Activity {
 		Date activityStartTime = dateObj.dateFormatter(validateString.trimString(sc.nextLine()));
 		activity.setStartTime(activityStartTime);
 
-		System.out.println("Activity end time in \"yyyy-MM-dd HH:mm:ss format:");
-		Date resortEndTime = dateObj.dateFormatter(validateString.trimString(sc.nextLine()));
-		activity.setEndTime(resortEndTime);
+		// System.out.println("Activity end time in \"yyyy-MM-dd HH:mm:ss format:");
+		// Date resortEndTime =
+		// dateObj.dateFormatter(validateString.trimString(sc.nextLine()));
+		// activity.setEndTime(resortEndTime);
 
-		System.out.println("Duration:-- Please enter in HH:mm format");
-		String dateStr = validateString.inputStringValidation(sc.nextLine());
-		String[] splittedDate = dateStr.split(":", 2);
-		ConvertHoursToMins convertHoursToMins = new ConvertHoursToMins();
-		Integer mins = convertHoursToMins.convertToMins(splittedDate);
-		activity.setDuration(mins);
+		System.out.println("Duration:-- Please enter how many hours and minutes");
+		System.out.println("Hours: ");
+		Integer hours = Integer.parseInt(validateString.intInputValidation(sc.nextLine()));
+		System.out.println("Minutes: ");
+		Integer minutes = Integer.parseInt(validateString.intInputValidation(sc.nextLine()));
+		Integer totalMinutes = (hours * 60) + minutes;
+		activity.setDuration(totalMinutes);
 
 		System.out.println("Cost:");
-		activity.setCost(Integer.parseInt(validateString.trimString(sc.nextLine())));
+		activity.setCost(Integer.parseInt(validateString.intInputValidation(sc.nextLine())));
 
 		System.out.println("Location:");
 		activity.setLocation(validateString.inputStringValidation(sc.nextLine()));

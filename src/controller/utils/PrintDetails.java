@@ -44,8 +44,8 @@ public class PrintDetails {
         System.out.println(CommonStrings.PERSON_ID + " " + tourEntity.getPersonId());
         System.out.println(CommonStrings.TOUR_ORIGIN + " " + tourEntity.getOrigin());
         System.out.println(CommonStrings.TOUR_DESTINATION + " " + tourEntity.getDestination());
-        System.out.println(CommonStrings.TOUR_START_DATE + " " + tourEntity.getTourStartDate());
-        System.out.println(CommonStrings.TOUR_END_DATE + " " + tourEntity.getTourEndDate());
+        System.out.println(CommonStrings.TOUR_START_DATE + " " + tourEntity.getTourStartDate().toString());
+        System.out.println(CommonStrings.TOUR_END_DATE + " " + tourEntity.getTourEndDate().toString());
         System.out.println(CommonStrings.TYPE_OF_LOCATION + " " + tourEntity.getTypeOfLocation());
         System.out.println("**********************************************************");
         System.out.println("\n");

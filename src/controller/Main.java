@@ -10,10 +10,11 @@ import entities.*;
 
 public class Main {
 	public static void main(String[] args) throws ParseException {
+		System.out.println("****************************WELCOME TO TRACK MY TOUR*************************************");
 		System.out.println("****************************OPERATIONS PERFORMED*****************************************");
 		System.out.println(
-				"1.Add a trip entry\n 2.List the trip entries\n 3.Total cost of single trip\n 4.Cost for trip stay in hotel\n 5.List trips based on type of location\n 6.List trips based on transport\n 7.List direct friend in a trip\n 8.List friends of friends in a trip\n 9.List the trip with given date range\n 10.List the activities and total activities cost in a trip");
-		System.out.println("If you want to close the please type as 'exit'");
+				"1.Add person Details\n 2.Add a trip entry\n 3.List the trip entries\n 4.Total cost of single trip\n 5.Cost for trip stay in hotel\n 6.List trips based on type of location\n 7.List trips based on transport\n 8.List direct friend in a trip\n 9.List friends of friends in a trip\n 10.List the trip with given date range\n 11.List the activities and total activities cost in a trip.\n ");
+		System.out.println("If you want to close then please type as 'exit'");
 		System.out.println("Before adding tour details please enter the person details to know your ID");
 		System.out.println("*****************************************************************************************");
 
@@ -42,7 +43,7 @@ public class Main {
 		while (condition == 1) {
 			operation = sc.nextLine();
 			switch (operation) {
-				case "0":
+				case "1":
 					if (person == null) {
 						person = new Person();
 					}
@@ -50,16 +51,16 @@ public class Main {
 					System.out.println("If you want to perform any operation again please press no from 0 to 12");
 					System.out.println("\n");
 					break;
-				case "1":
+				case "2":
 					if (tour == null) {
 						tour = new Tour();
 					}
-					tourList.add(tour.tourDetails());
+					tourList.add(tour.tourDetails(personList));
 					System.out.println("\n");
 					System.out.println("If you want to perform any operation again please press no from 0 to 12");
 					break;
 
-				case "2":
+				case "3":
 					if (printEntries == null) {
 						printEntries = new PrintEntries();
 					}
@@ -67,7 +68,7 @@ public class Main {
 					System.out.println("If you want to perform any operation again please press no from 0 to 12");
 					break;
 
-				case "3":
+				case "4":
 					if (costFinder == null) {
 						costFinder = new CostFinder();
 					}
@@ -80,7 +81,7 @@ public class Main {
 					System.out.println("\n");
 					break;
 
-				case "4":
+				case "5":
 					if (costFinder == null) {
 						costFinder = new CostFinder();
 					}
@@ -92,7 +93,7 @@ public class Main {
 					System.out.println("\n");
 					break;
 
-				case "5":
+				case "6":
 					if (tourLocation == null) {
 						tourLocation = new BasedOnLocation();
 					}
@@ -107,7 +108,7 @@ public class Main {
 					System.out.println("If you want to perform any operation again please press no from 0 to 12");
 					break;
 
-				case "6":
+				case "7":
 					if (tourTransport == null) {
 						tourTransport = new BasedOnTransport();
 					}
@@ -123,7 +124,7 @@ public class Main {
 					System.out.println("If you want to perform any operation again please press no from 0 to 12");
 					break;
 
-				case "7":
+				case "8":
 					if (connections == null) {
 						connections = new Connections();
 					}
@@ -133,7 +134,7 @@ public class Main {
 					System.out.println("If you want to perform any operation again please press no from 0 to 12");
 					break;
 
-				case "8":
+				case "9":
 					if (connections == null) {
 						connections = new Connections();
 					}
@@ -143,7 +144,7 @@ public class Main {
 					System.out.println("If you want to perform any operation again please press no from 0 to 12");
 					break;
 
-				case "9":
+				case "10":
 					if (toursOnDateRange == null) {
 						toursOnDateRange = new ToursOnDateRange();
 					}
@@ -159,7 +160,7 @@ public class Main {
 					System.out.println("\n");
 					break;
 
-				case "10":
+				case "11":
 					if (listActivities == null) {
 						listActivities = new Activities();
 					}
@@ -178,7 +179,7 @@ public class Main {
 					System.out.println("\n");
 					break;
 
-				case "11":
+				case "12":
 					String personID = sc.nextLine();
 					PersonNameFinder obj = new PersonNameFinder();
 					String personName = obj.getPersonName(personID, personList);
@@ -195,6 +196,7 @@ public class Main {
 			}
 		}
 		sc.close();
+		System.out.println("********************THANK YOU FOR USING MY APPLICATION********************");
 	}
 
 }
