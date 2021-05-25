@@ -1,12 +1,8 @@
 package entities;
 
-//import java.util.Date;
-
 public class RoomEntity {
 	private String roomId;
 	private String resortId;
-	// private Date roomFromDate;
-	// private Date roomToDate;
 	private String roomType;
 	private Integer costPerDay;
 	private Integer totalCost;
@@ -28,17 +24,6 @@ public class RoomEntity {
 	public void setResortId(String resortId) {
 		this.resortId = resortId;
 	}
-
-	/*
-	 * public Date getRoomFromDate() { return roomFromDate; }
-	 * 
-	 * public void setRoomFromDate(Date roomFromDate) { this.roomFromDate =
-	 * roomFromDate; }
-	 * 
-	 * public Date getRoomToDate() { return roomToDate; }
-	 * 
-	 * public void setRoomToDate(Date roomToDate) { this.roomToDate = roomToDate; }
-	 */
 
 	public String getRoomType() {
 		return roomType;

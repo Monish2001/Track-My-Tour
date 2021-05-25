@@ -1,13 +1,15 @@
 package utils;
 
 public class InputValidation {
-    public String validation(String inpuString) {
-        String validatedString = inpuString.toLowerCase().trim();
+    public String inputStringValidation(String inputString) {
+        String validatedString = inputString.toLowerCase().trim();
         return validatedString;
+
     }
 
-    public String trimValidation(String inpuString) {
-        String validatedString = inpuString.trim();
+    public String trimString(String inputString) {
+        String validatedString = inputString.trim();
         return validatedString;
+
     }
 }

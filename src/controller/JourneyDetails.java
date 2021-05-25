@@ -10,14 +10,14 @@ import utils.*;
 public class JourneyDetails {
 	Scanner sc = new Scanner(System.in);
 
-	public JourneyDetailsEntity journeyDetails() throws ParseException {
+	public JourneyDetailsEntity journeyDetails(String tourId) throws ParseException {
 
 		JourneyDetailsEntity journeyDetailsData = new JourneyDetailsEntity();
 		InputValidation validateString = new InputValidation();
 		InputValueCheck inputValueCheck = new InputValueCheck();
 
-		System.out.println("Please Enter the tour id");
-		journeyDetailsData.setTourId(validateString.trimValidation(sc.nextLine()));
+		// System.out.println("Please Enter the tour id");
+		journeyDetailsData.setTourId(tourId);
 
 		UUIDGenerator id = new UUIDGenerator();
 		String journeyDetailsId = id.uuid();
@@ -25,17 +25,17 @@ public class JourneyDetails {
 
 		System.out.println("Journey starting time in \"yyyy-MM-dd HH:mm:ss.SSSSSS format:");
 		DateFormatter dateObj = new DateFormatter();
-		Date journeyStartTime = dateObj.dateFormatter(validateString.trimValidation(sc.nextLine()));
+		Date journeyStartTime = dateObj.dateFormatter(validateString.trimString(sc.nextLine()));
 		journeyDetailsData.setStartTime(journeyStartTime);
 
 		System.out.println("Journey reached time in \"yyyy-MM-dd HH:mm:ss.SSSSSS format:");
-		Date journeyReachedTime = dateObj.dateFormatter(validateString.trimValidation(sc.nextLine()));
+		Date journeyReachedTime = dateObj.dateFormatter(validateString.trimString(sc.nextLine()));
 		journeyDetailsData.setReachedTime(journeyReachedTime);
 
 		System.out.println("Mode of transport: -- Please enter as car or bike");
 		Boolean valueEntered = false;
 		while (valueEntered.equals(false)) {
-			String modeOfTransport = validateString.validation(sc.nextLine());
+			String modeOfTransport = validateString.inputStringValidation(sc.nextLine());
 			boolean containsModeOfTransport = inputValueCheck.containsMot(modeOfTransport);
 			if (containsModeOfTransport == true) {
 				journeyDetailsData.setModeOfTransport(modeOfTransport);
@@ -44,19 +44,24 @@ public class JourneyDetails {
 				System.out.println("Please enter mode of transport as car or bike");
 			}
 		}
+
 		System.out.println("Drive Mode:");
-		journeyDetailsData.setDriveMode(validateString.validation(sc.nextLine()));
+		journeyDetailsData.setDriveMode(validateString.inputStringValidation(sc.nextLine()));
 
 		System.out.println("Weather:");
-		journeyDetailsData.setWeather(validateString.validation(sc.nextLine()));
+		journeyDetailsData.setWeather(validateString.inputStringValidation(sc.nextLine()));
 
-		System.out.println("Duration:");
-		journeyDetailsData.setDuration(Integer.parseInt(validateString.trimValidation(sc.nextLine())));
+		System.out.println("Duration: -- Please enter in HH:mm format");
+		String dateStr = validateString.inputStringValidation(sc.nextLine());
+		String[] splittedDate = dateStr.split(":", 2);
+		ConvertHoursToMins convertHoursToMins = new ConvertHoursToMins();
+		Integer mins = convertHoursToMins.convertToMins(splittedDate);
+		journeyDetailsData.setDuration(mins);
 
 		System.out.println("Journey Type: -- Please enter as onward or backward");
 		Boolean inputValue = false;
 		while (inputValue.equals(false)) {
-			String typeOfJourney = validateString.validation(sc.nextLine());
+			String typeOfJourney = validateString.inputStringValidation(sc.nextLine());
 			boolean containsTypeOfJourney = inputValueCheck.containsToj(typeOfJourney);
 			if (containsTypeOfJourney == true) {
 				journeyDetailsData.setJourneyType(typeOfJourney);
@@ -65,6 +70,7 @@ public class JourneyDetails {
 				System.out.println("Please enter journey type as onward or backward");
 			}
 		}
+
 		return journeyDetailsData;
 	}
 }
