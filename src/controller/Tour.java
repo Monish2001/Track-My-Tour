@@ -31,8 +31,10 @@ public class Tour {
 		Person person = new Person();
 
 		System.out.println("****************PLEASE ENTER THE TOUR DETAILS****************");
+
 		System.out.println("Please Enter the person id");
-		String personId = valueCheck.uuidCheck();
+		// String personId = valueCheck.uuidCheck();
+		String personId = valueCheck.doesPersonExists(personList);
 		tourData.setPersonId(personId);
 
 		UUIDGenerator id = new UUIDGenerator();

@@ -2,8 +2,10 @@ package controller.utils;
 
 import java.text.ParseException;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
+import entities.PersonEntity;
 import utils.DateFormatter;
 import utils.InputValidation;
 
@@ -11,8 +13,7 @@ public class InputValueCheck {
     InputValidation validateString = new InputValidation();
     Scanner sc = new Scanner(System.in);
     DateFormatter dateObj = new DateFormatter();
-    ConstantValueCheck inputValueCheck = new ConstantValueCheck();
-    // InputValueCheck valueCheck = new InputValueCheck();
+    ConstantValueCheck constantValCheck = new ConstantValueCheck();
 
     public Date dateCheck() throws ParseException {
 
@@ -126,7 +127,7 @@ public class InputValueCheck {
             if (typeOfJourney.equals("Null")) {
                 return "Null";
             }
-            boolean containsTypeOfJourney = inputValueCheck.containsToj(typeOfJourney);
+            boolean containsTypeOfJourney = constantValCheck.containsToj(typeOfJourney);
             if (containsTypeOfJourney == true) {
                 inputValue = true;
                 return typeOfJourney;
@@ -144,13 +145,31 @@ public class InputValueCheck {
             if (modeOfTransport.equals("Null")) {
                 return "Null";
             }
-            boolean containsModeOfTransport = inputValueCheck.containsMot(modeOfTransport);
+            boolean containsModeOfTransport = constantValCheck.containsMot(modeOfTransport);
             if (containsModeOfTransport == true) {
                 valueEntered = true;
                 return modeOfTransport;
             } else {
                 System.out.println("Please enter mode of transport as car or bike");
             }
+        }
+        return null;
+    }
+
+    public String doesPersonExists(List<PersonEntity> personList) {
+        InputValueCheck obj = new InputValueCheck();
+        Boolean inputValue = false;
+        while (inputValue.equals(false)) {
+
+            String personId = obj.uuidCheck();
+            for (int person = 0; person < personList.size(); person++) {
+                PersonEntity personEntity = personList.get(person);
+                if (personEntity.getPersonId().equals(personId)) {
+                    return personId;
+                }
+            }
+            System.out.println("Please enter correct person id");
+            inputValue = false;
         }
         return null;
     }
