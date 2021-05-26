@@ -49,7 +49,7 @@ public class Resort {
 
 		System.out.println("*****************PLEASE ENTER ROOM DETAILS***************");
 		System.out.println("How many rooms do you need to add");
-		int count = Integer.parseInt(validateString.trimString(valueCheck.intCheck()));
+		int count = Integer.parseInt(valueCheck.intCheck());
 		int index = 0;
 		while (index < count) {
 			roomList.add(room.roomDetails(resortId));

@@ -11,6 +11,7 @@ public class InputValueCheck {
     InputValidation validateString = new InputValidation();
     Scanner sc = new Scanner(System.in);
     DateFormatter dateObj = new DateFormatter();
+    ConstantValueCheck inputValueCheck = new ConstantValueCheck();
     // InputValueCheck valueCheck = new InputValueCheck();
 
     public Date dateCheck() throws ParseException {
@@ -77,7 +78,7 @@ public class InputValueCheck {
         boolean isIntermediateUuidOk = true;
         while (isIntermediateUuidOk == true) {
             String inputVal = sc.nextLine();
-            if (inputVal.isEmpty()) {
+            if (inputVal.isEmpty() || inputVal.equals("0")) {
                 return "0";
             }
             String[] arrOfuuidStr = inputVal.split(",", 0);
@@ -116,5 +117,41 @@ public class InputValueCheck {
             }
         }
         return inputString;
+    }
+
+    public String journeyChecker() {
+        Boolean inputValue = false;
+        while (inputValue.equals(false)) {
+            String typeOfJourney = validateString.inputStringValidation(sc.nextLine());
+            if (typeOfJourney.equals("Null")) {
+                return "Null";
+            }
+            boolean containsTypeOfJourney = inputValueCheck.containsToj(typeOfJourney);
+            if (containsTypeOfJourney == true) {
+                inputValue = true;
+                return typeOfJourney;
+            } else {
+                System.out.println("Please enter journey type as onward or backward");
+            }
+        }
+        return null;
+    }
+
+    public String modeOfTransportChecker() {
+        Boolean valueEntered = false;
+        while (valueEntered.equals(false)) {
+            String modeOfTransport = validateString.inputStringValidation(sc.nextLine());
+            if (modeOfTransport.equals("Null")) {
+                return "Null";
+            }
+            boolean containsModeOfTransport = inputValueCheck.containsMot(modeOfTransport);
+            if (containsModeOfTransport == true) {
+                valueEntered = true;
+                return modeOfTransport;
+            } else {
+                System.out.println("Please enter mode of transport as car or bike");
+            }
+        }
+        return null;
     }
 }

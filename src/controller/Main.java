@@ -49,6 +49,7 @@ public class Main {
 			operation = sc.nextLine();
 			switch (operation) {
 				case "1": {
+					// ADD PERSON DETAILS
 					if (person == null) {
 						person = new Person();
 					}
@@ -58,6 +59,7 @@ public class Main {
 					break;
 				}
 				case "2": {
+					// ADD TOUR ENTRIES
 					if (tour == null) {
 						tour = new Tour();
 					}
@@ -77,6 +79,7 @@ public class Main {
 					break;
 				}
 				case "3": {
+					// PRINT ADDED TOUR ENTRIES
 					if (printEntries == null) {
 						printEntries = new PrintEntries();
 					}
@@ -92,6 +95,7 @@ public class Main {
 					break;
 				}
 				case "4": {
+					// GET TOTAL COST OF A SINGLE TOUR
 					if (costFinder == null) {
 						costFinder = new CostFinder();
 					}
@@ -111,6 +115,7 @@ public class Main {
 					break;
 				}
 				case "5": {
+					// GET COST OF YOUR SINGLE TOUR STAY
 					if (costFinder == null) {
 						costFinder = new CostFinder();
 					}
@@ -131,6 +136,7 @@ public class Main {
 					break;
 				}
 				case "6": {
+					// GET TOURS BASED ON YOUR LOCATION
 					if (tourLocation == null) {
 						tourLocation = new BasedOnLocation();
 					}
@@ -152,6 +158,7 @@ public class Main {
 					break;
 				}
 				case "7": {
+					// GET TOURS BASED ON THE TRANSPORT
 					if (tourTransport == null) {
 						tourTransport = new BasedOnTransport();
 					}
@@ -176,6 +183,7 @@ public class Main {
 					break;
 				}
 				case "8": {
+					// GET DIRECT CONNECTIONS MADE IN THE TOUR
 					if (connections == null) {
 						connections = new Connections();
 					}
@@ -198,6 +206,7 @@ public class Main {
 					break;
 				}
 				case "9": {
+					// GET INDIRECT CONNECTIONS MADE IN A TOUR
 					if (connections == null) {
 						connections = new Connections();
 					}
@@ -220,6 +229,7 @@ public class Main {
 					break;
 				}
 				case "10": {
+					// GET TOUR LIST BASED ON THE GIVEN DATE INPUT RANGE
 					if (toursOnDateRange == null) {
 						toursOnDateRange = new ToursOnDateRange();
 					}
@@ -249,6 +259,7 @@ public class Main {
 					break;
 				}
 				case "11": {
+					// GET LIST OF ACTIVITIES AND TOTAL COST OF THEIR ACTIVITIES IN A TOUR
 					if (listActivities == null) {
 						listActivities = new Activities();
 					}
