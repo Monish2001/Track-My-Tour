@@ -33,7 +33,8 @@ public class Tour {
 		System.out.println("****************PLEASE ENTER THE TOUR DETAILS****************");
 
 		System.out.println("Please Enter the person id");
-		String personId = valueCheck.uuidCheck();
+		// String personId = valueCheck.uuidCheck();
+		String personId = valueCheck.doesPersonExists(personList);
 		tourData.setPersonId(personId);
 
 		UUIDGenerator id = new UUIDGenerator();
@@ -105,7 +106,7 @@ public class Tour {
 		int totalConnectionsCount = Integer.parseInt(valueCheck.intCheck());
 		int connectionsAdded = 0;
 		while (connectionsAdded < totalConnectionsCount) {
-			connectionList.add(connectionsMade.connections(tourId, personId));
+			connectionList.add(connectionsMade.connections(tourId, personId, personList));
 			connectionsAdded++;
 		}
 		System.out.println("*****************************************************************");

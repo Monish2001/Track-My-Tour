@@ -2,8 +2,10 @@ package controller.utils;
 
 import java.text.ParseException;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
+import entities.PersonEntity;
 import utils.DateFormatter;
 import utils.InputValidation;
 
@@ -11,7 +13,7 @@ public class InputValueCheck {
     InputValidation validateString = new InputValidation();
     Scanner sc = new Scanner(System.in);
     DateFormatter dateObj = new DateFormatter();
-    // InputValueCheck valueCheck = new InputValueCheck();
+    ConstantValueCheck constantValCheck = new ConstantValueCheck();
 
     public Date dateCheck() throws ParseException {
 
@@ -77,7 +79,7 @@ public class InputValueCheck {
         boolean isIntermediateUuidOk = true;
         while (isIntermediateUuidOk == true) {
             String inputVal = sc.nextLine();
-            if (inputVal.isEmpty()) {
+            if (inputVal.isEmpty() || inputVal.equals("0")) {
                 return "0";
             }
             String[] arrOfuuidStr = inputVal.split(",", 0);
@@ -116,5 +118,73 @@ public class InputValueCheck {
             }
         }
         return inputString;
+    }
+
+    public String journeyChecker() {
+        Boolean inputValue = false;
+        while (inputValue.equals(false)) {
+            String typeOfJourney = validateString.inputStringValidation(sc.nextLine());
+            if (typeOfJourney.equals("Null")) {
+                return "Null";
+            }
+            boolean containsTypeOfJourney = constantValCheck.containsToj(typeOfJourney);
+            if (containsTypeOfJourney == true) {
+                inputValue = true;
+                return typeOfJourney;
+            } else {
+                System.out.println("Please enter journey type as onward or backward");
+            }
+        }
+        return null;
+    }
+
+    public String modeOfTransportChecker() {
+        Boolean valueEntered = false;
+        while (valueEntered.equals(false)) {
+            String modeOfTransport = validateString.inputStringValidation(sc.nextLine());
+            if (modeOfTransport.equals("Null")) {
+                return "Null";
+            }
+            boolean containsModeOfTransport = constantValCheck.containsMot(modeOfTransport);
+            if (containsModeOfTransport == true) {
+                valueEntered = true;
+                return modeOfTransport;
+            } else {
+                System.out.println("Please enter mode of transport as car or bike");
+            }
+        }
+        return null;
+    }
+
+    public String doesPersonExists(List<PersonEntity> personList) {
+        InputValueCheck presentClassobj = new InputValueCheck();
+        Boolean inputValue = false;
+        while (inputValue.equals(false)) {
+
+            String personId = presentClassobj.uuidCheck();
+            for (int person = 0; person < personList.size(); person++) {
+                PersonEntity personEntity = personList.get(person);
+                if (personEntity.getPersonId().equals(personId)) {
+                    return personId;
+                }
+            }
+            System.out.println("Person does not exists!! Please enter correct person id");
+            inputValue = false;
+        }
+        return null;
+    }
+
+    public String isConnectionOk(String ownerId, List<PersonEntity> personList) {
+        Boolean inputValue = false;
+        InputValueCheck currentClassObj = new InputValueCheck();
+        while (inputValue.equals(false)) {
+            String connectedPersonId = currentClassObj.doesPersonExists(personList);
+            if (!connectedPersonId.equals(ownerId)) {
+                return connectedPersonId;
+            }
+            System.out.println("Cannot connect to yourself");
+            inputValue = false;
+        }
+        return null;
     }
 }
