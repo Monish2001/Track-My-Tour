@@ -2,6 +2,7 @@ package controller;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 import controller.inputmodel.*;
@@ -36,6 +37,7 @@ public class Main {
 		Activities listActivities = null;
 
 		FunctionalityInputModel inputModel = new FunctionalityInputModel();
+		CheckIsListEmpty isListEmpty = new CheckIsListEmpty();
 
 		PrintDetails printDetails = new PrintDetails();
 
@@ -46,59 +48,96 @@ public class Main {
 		while (condition == 1) {
 			operation = sc.nextLine();
 			switch (operation) {
-				case "1":
+				case "1": {
 					if (person == null) {
 						person = new Person();
 					}
 					personList.add(person.personDetails());
-					System.out.println("If you want to perform any operation again please press no from 1 to 11");
 					System.out.println("\n");
+					System.out.println("If you want to perform any operation again please press no from 1 to 11");
 					break;
-				case "2":
+				}
+				case "2": {
 					if (tour == null) {
 						tour = new Tour();
 					}
+
+					boolean isPersonListEmpty = isListEmpty.checkIsPersonListEmpty(personList);
+					if (isPersonListEmpty == true) {
+						System.out.println(
+								"Please enter the person details first to get the respective person id and enter the tour details!!");
+						System.out.println("\n");
+						System.out.println("If you want to perform any operation again please press no from 1 to 11");
+						break;
+					}
+
 					tourList.add(tour.tourDetails(personList));
 					System.out.println("\n");
 					System.out.println("If you want to perform any operation again please press no from 1 to 11");
 					break;
-
-				case "3":
+				}
+				case "3": {
 					if (printEntries == null) {
 						printEntries = new PrintEntries();
 					}
+
+					boolean isTourListEmpty = isListEmpty.checkIsTourListEmpty(tourList);
+					if (isTourListEmpty == true) {
+						printDetails.printCommonTourListSOP();
+						break;
+					}
+
 					printEntries.printTourEntries(tourList);
 					System.out.println("If you want to perform any operation again please press no from 1 to 11");
 					break;
-
-				case "4":
+				}
+				case "4": {
 					if (costFinder == null) {
 						costFinder = new CostFinder();
+					}
+
+					boolean isTourListEmpty = isListEmpty.checkIsTourListEmpty(tourList);
+					if (isTourListEmpty == true) {
+						printDetails.printCommonTourListSOP();
+						break;
 					}
 
 					String tourId = inputModel.costOfSingleTour(tourList);
 					int totalCostOfTour = costFinder.costOfSingleTour(tourList, tourId);
 					printDetails.printTotalCostOfTour(totalCostOfTour);
-					System.out.println("\n");
+
 					System.out.println("If you want to perform any operation again please press no from 1 to 11");
 					System.out.println("\n");
 					break;
-
-				case "5":
+				}
+				case "5": {
 					if (costFinder == null) {
 						costFinder = new CostFinder();
 					}
+
+					boolean isTourListEmpty = isListEmpty.checkIsTourListEmpty(tourList);
+					if (isTourListEmpty == true) {
+						printDetails.printCommonTourListSOP();
+						break;
+					}
+
 					String tourIdForStay = inputModel.costOfTourStay(tourList);
 					int costForStay = costFinder.costOfTourStay(tourList, tourIdForStay);
 					printDetails.printCostOfTourStay(costForStay);
+
 					System.out.println("\n");
 					System.out.println("If you want to perform any operation again please press no from 1 to 11");
 					System.out.println("\n");
 					break;
-
-				case "6":
+				}
+				case "6": {
 					if (tourLocation == null) {
 						tourLocation = new BasedOnLocation();
+					}
+					boolean isTourListEmpty = isListEmpty.checkIsTourListEmpty(tourList);
+					if (isTourListEmpty == true) {
+						printDetails.printCommonTourListSOP();
+						break;
 					}
 					String location = inputModel.toursBasedOnLocation();
 					List<TourEntity> tourBasedOnLocationList = tourLocation.toursBasedOnLocation(tourList, location);
@@ -107,14 +146,22 @@ public class Main {
 							printDetails.printTourDetails(tourEntity);
 						}
 					}
+
 					System.out.println("\n");
 					System.out.println("If you want to perform any operation again please press no from 1 to 11");
 					break;
-
-				case "7":
+				}
+				case "7": {
 					if (tourTransport == null) {
 						tourTransport = new BasedOnTransport();
 					}
+
+					boolean isTourListEmpty = isListEmpty.checkIsTourListEmpty(tourList);
+					if (isTourListEmpty == true) {
+						printDetails.printCommonTourListSOP();
+						break;
+					}
+
 					String modeOfTransport = inputModel.toursBasedOnTransport();
 					List<TourEntity> tourBasedOnTransportList = tourTransport.tourBasedOnTransport(tourList,
 							modeOfTransport);
@@ -123,53 +170,98 @@ public class Main {
 							printDetails.printTourDetails(tourEntity);
 						}
 					}
+
 					System.out.println("\n");
 					System.out.println("If you want to perform any operation again please press no from 1 to 11");
 					break;
-
-				case "8":
+				}
+				case "8": {
 					if (connections == null) {
 						connections = new Connections();
 					}
+
+					boolean isTourListEmpty = isListEmpty.checkIsTourListEmpty(tourList);
+					if (isTourListEmpty == true) {
+						printDetails.printCommonTourListSOP();
+						break;
+					}
+
 					String tourIdForDirectConnection = inputModel.directConnections(tourList);
-					connections.directConnections(tourList, personList, tourIdForDirectConnection);
+					List<String> directConnectionNameList = connections.directConnections(tourList, personList,
+							tourIdForDirectConnection);
+					if (directConnectionNameList.size() != 0) {
+						printDetails.printDirectConnections(directConnectionNameList);
+					}
+
 					System.out.println("\n");
 					System.out.println("If you want to perform any operation again please press no from 1 to 11");
 					break;
-
-				case "9":
+				}
+				case "9": {
 					if (connections == null) {
 						connections = new Connections();
 					}
+
+					boolean isTourListEmpty = isListEmpty.checkIsTourListEmpty(tourList);
+					if (isTourListEmpty == true) {
+						printDetails.printCommonTourListSOP();
+						break;
+					}
+
 					String tourIdForIndirectConnections = inputModel.inDirectConnections(tourList);
-					connections.indirectConnections(tourList, personList, tourIdForIndirectConnections);
+					List<String> indirectConnectionNameList = connections.indirectConnections(tourList, personList,
+							tourIdForIndirectConnections);
+					if (indirectConnectionNameList.size() != 0) {
+						printDetails.printIndirectConnections(indirectConnectionNameList);
+					}
+
 					System.out.println("\n");
 					System.out.println("If you want to perform any operation again please press no from 1 to 11");
 					break;
-
-				case "10":
+				}
+				case "10": {
 					if (toursOnDateRange == null) {
 						toursOnDateRange = new ToursOnDateRange();
 					}
-					String[] date = inputModel.toursOnDateRange();
+
+					boolean isTourListEmpty = isListEmpty.checkIsTourListEmpty(tourList);
+					if (isTourListEmpty == true) {
+						printDetails.printCommonTourListSOP();
+						break;
+					}
+
+					Date[] date = inputModel.toursOnDateRange();
+					if (date[0] == null || date[1] == null) {
+						System.out.println("Invalid input!!");
+						System.out.println("If you want to perform any operation again please press no from 1 to 11");
+						System.out.println("\n");
+						break;
+					}
 					List<TourEntity> toursOnDateRangeList = toursOnDateRange.toursBasedOnDateRange(tourList, date);
 					if (toursOnDateRangeList.size() != 0) {
 						for (TourEntity tourEntity : toursOnDateRangeList) {
 							printDetails.printTourDetails(tourEntity);
 						}
 					}
-					System.out.println("\n");
+
 					System.out.println("If you want to perform any operation again please press no from 1 to 11");
 					System.out.println("\n");
 					break;
-
-				case "11":
+				}
+				case "11": {
 					if (listActivities == null) {
 						listActivities = new Activities();
 					}
 					if (costFinder == null) {
 						costFinder = new CostFinder();
 					}
+
+					boolean isTourListEmpty = isListEmpty.checkIsTourListEmpty(tourList);
+					if (isTourListEmpty == true) {
+						printDetails.printCommonTourListSOP();
+						break;
+					}
+
 					String tourIdForActivities = inputModel.activities(tourList);
 					List<String> activities = listActivities.ListOfActivities(tourList, tourIdForActivities);
 					if (activities.size() != 0) {
@@ -180,7 +272,7 @@ public class Main {
 					System.out.println("\n");
 					System.out.println("If you want to perform any operation again please press no from 1 to 11");
 					break;
-
+				}
 				case "exit":
 					condition = 0;
 					break;

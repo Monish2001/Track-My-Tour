@@ -60,10 +60,7 @@ public class InputValueCheck {
         boolean isUuidOk = true;
         while (isUuidOk == true) {
             String returnStr = validateString.uuidValidator(sc.nextLine());
-            if (returnStr.equals("Null")) {
-                return "Null";
-            }
-            if (returnStr.equals("invalid input")) {
+            if (returnStr.equals("invalid input") || returnStr.equals("Null")) {
                 isUuidOk = true;
                 System.out.println("Invalid input!! Please enter the correct uuid");
             } else {
@@ -88,7 +85,6 @@ public class InputValueCheck {
             int correctUuidCount = 0;
 
             for (String uuid : arrOfuuidStr) {
-                // String returnStr = validateString.uuidValidator(sc.nextLine());
                 String trimmedUuid = uuid.trim();
                 String returnValue = validateString.uuidValidator(trimmedUuid);
                 if (!trimmedUuid.equals(returnValue)) {

@@ -25,7 +25,7 @@ public class InputValidation {
 
     public String uuidValidator(String inputString) {
         InputValidation validatorObj = new InputValidation();
-        String validatedString = validatorObj.inputStringValidation(inputString);
+        String validatedString = validatorObj.trimString(inputString);
         if (validatedString.isEmpty() || validatedString.equals("Null")) {
             return "Null";
         } else if (validatedString.length() == 36) {

@@ -48,6 +48,7 @@ public class Activity {
 
 		System.out.println("Location:");
 		activity.setLocation(validateString.inputStringValidation(sc.nextLine()));
+		System.out.println("****************************************************");
 		return activity;
 	}
 }

@@ -3,6 +3,8 @@ package controller.inputmodel;
 import entities.*;
 import utils.InputValidation;
 
+import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 import controller.utils.*;
@@ -28,7 +30,6 @@ public class FunctionalityInputModel {
         System.out.println("Total cost of a single trip");
         System.out.println("\n");
         System.out.println("Refer the tour id listed here");
-
         printDetails.printTourId(tourList);
         System.out.println("Please enter the tour id:");
         String tourId = valueCheck.uuidCheck();
@@ -79,14 +80,14 @@ public class FunctionalityInputModel {
         return tourIdForIndirectConnections;
     }
 
-    public String[] toursOnDateRange() {
+    public Date[] toursOnDateRange() throws ParseException {
         System.out.println("TRIPS WITH THE GIVEN DATE RANGE");
         System.out.println("Please enter the date range");
         System.out.println("Start Date---Please enter in this pattern yyyy-MM-dd HH:mm:ss format:");
-        String startDate = validateString.trimString(sc.nextLine());
+        Date startDate = valueCheck.dateCheck();
         System.out.println("End date---Please enter in this pattern yyyy-MM-dd HH:mm:ss format:");
-        String endDate = validateString.trimString(sc.nextLine());
-        String[] date = { startDate, endDate };
+        Date endDate = valueCheck.dateCheck();
+        Date[] date = { startDate, endDate };
         return date;
     }
 }

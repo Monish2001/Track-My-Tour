@@ -19,8 +19,8 @@ public class BasedOnTransport {
                 JourneyDetailsEntity journeyDetails = tourEntity.getJourneyDetails().get(journey);
 
                 if (modeOfTransport.equals(journeyDetails.getModeOfTransport())) {
-                    tourBasedOnTransportCount++;
                     tourBasedOnTransportList.add(tourEntity);
+                    tourBasedOnTransportCount++;
                 }
             }
         }

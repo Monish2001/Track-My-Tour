@@ -25,14 +25,46 @@ public class PrintDetails {
         }
     }
 
+    public void printCommonTourListSOP() {
+        System.out.println("There is no tour entries. Please add some tour entry!!");
+        System.out.println("\n");
+        System.out.println("If you want to perform any operation again please press no from 1 to 11");
+    }
+
+    public void printDirectConnections(List<String> directConnectionNameList) {
+        if (directConnectionNameList.size() == 1) {
+            System.out.println("No direct connections made in this trip!!");
+            return;
+        }
+        System.out.println("DIRECT CONNECTIONS MADE IN A TOUR");
+        String selfPersonName = directConnectionNameList.get(0);
+        System.out.println(selfPersonName + " " + "made direct connections with ");
+        for (int connection = 1; connection < directConnectionNameList.size(); connection++) {
+            System.out.println(directConnectionNameList.get(connection));
+        }
+    }
+
+    public void printIndirectConnections(List<String> indirectConnectionNameList) {
+        if (indirectConnectionNameList.size() == 0) {
+            System.out.println("No indirect connections made in this trip!!");
+            return;
+        }
+        System.out.println("INDIRECT CONNECTIONS MADE IN A TOUR");
+        String selfPersonName = indirectConnectionNameList.get(0);
+        System.out.println(selfPersonName + " " + "made indirect connections with: ");
+        for (int connection = 1; connection < indirectConnectionNameList.size(); connection++) {
+            System.out.println(indirectConnectionNameList.get(connection));
+        }
+    }
+
     public void printTourId(List<TourEntity> tourList) {
         for (int tourVariable = 0; tourVariable < tourList.size(); tourVariable++) {
 
             TourEntity tourEntity = tourList.get(tourVariable);
             System.out.println("**********************PLEASE REFER FOR TOUR ID*************************");
-            System.out.println(CommonStrings.TOUR_ID + " " + tourEntity.getTourId());
-            System.out.println(CommonStrings.TOUR_ORIGIN + " " + tourEntity.getOrigin());
-            System.out.println(CommonStrings.TOUR_DESTINATION + " " + tourEntity.getDestination());
+            System.out.println(CommonStrings.TOUR_ID + ": " + tourEntity.getTourId());
+            System.out.println(CommonStrings.TOUR_ORIGIN + ": " + tourEntity.getOrigin());
+            System.out.println(CommonStrings.TOUR_DESTINATION + ": " + tourEntity.getDestination());
             System.out.println("**********************************************************");
             System.out.println("\n");
         }
@@ -40,13 +72,13 @@ public class PrintDetails {
 
     public void printTourDetails(TourEntity tourEntity) {
         System.out.println("**********************TOUR DETAILS*************************");
-        System.out.println(CommonStrings.TOUR_ID + " " + tourEntity.getTourId());
-        System.out.println(CommonStrings.PERSON_ID + " " + tourEntity.getPersonId());
-        System.out.println(CommonStrings.TOUR_ORIGIN + " " + tourEntity.getOrigin());
-        System.out.println(CommonStrings.TOUR_DESTINATION + " " + tourEntity.getDestination());
-        System.out.println(CommonStrings.TOUR_START_DATE + " " + tourEntity.getTourStartDate());
-        System.out.println(CommonStrings.TOUR_END_DATE + " " + tourEntity.getTourEndDate());
-        System.out.println(CommonStrings.TYPE_OF_LOCATION + " " + tourEntity.getTypeOfLocation());
+        System.out.println(CommonStrings.TOUR_ID + ": " + tourEntity.getTourId());
+        System.out.println(CommonStrings.PERSON_ID + ": " + tourEntity.getPersonId());
+        System.out.println(CommonStrings.TOUR_ORIGIN + ": " + tourEntity.getOrigin());
+        System.out.println(CommonStrings.TOUR_DESTINATION + ": " + tourEntity.getDestination());
+        System.out.println(CommonStrings.TOUR_START_DATE + ": " + tourEntity.getTourStartDate());
+        System.out.println(CommonStrings.TOUR_END_DATE + ": " + tourEntity.getTourEndDate());
+        System.out.println(CommonStrings.TYPE_OF_LOCATION + ": " + tourEntity.getTypeOfLocation());
         System.out.println("**********************************************************");
         System.out.println("\n");
     }
@@ -69,7 +101,7 @@ public class PrintDetails {
     public void printResortDetails(ResortEntity resortEntity) {
         System.out.println("**********************RESORT DETAILS*************************");
         System.out.println("Resort ID: " + resortEntity.getResortId());
-        System.out.println(CommonStrings.TOUR_ID + " " + resortEntity.getTourid());
+        System.out.println(CommonStrings.TOUR_ID + ": " + resortEntity.getTourid());
         System.out.println("Resort From Date: " + resortEntity.getFromDate());
         System.out.println("Resort To Date: " + resortEntity.getToDate());
         System.out.println("Resort Name: " + resortEntity.getResortName());
@@ -90,7 +122,7 @@ public class PrintDetails {
     public void printActivity(ActivityEntity activityEntity) {
         System.out.println("**********************ACTIVITIES*************************");
         System.out.println("Activity ID: " + activityEntity.getActivityId());
-        System.out.println(CommonStrings.TOUR_ID + " " + activityEntity.getTourid());
+        System.out.println(CommonStrings.TOUR_ID + ": " + activityEntity.getTourid());
         System.out.println("Activity Name: " + activityEntity.getActivityName());
         System.out.println("Activity Start Time: " + activityEntity.getStartTime());
         System.out.println("Activity End Time: " + activityEntity.getEndTime());
@@ -103,9 +135,9 @@ public class PrintDetails {
     public void printConnectionDetails(ConnectionEntity connectionEntity) {
         System.out.println("**********************CONNECTIONS*************************");
         System.out.println("Connection ID: " + connectionEntity.getConnectionId());
-        System.out.println(CommonStrings.PERSON_ID + " " + connectionEntity.getPersonId());
+        System.out.println(CommonStrings.PERSON_ID + ": " + connectionEntity.getPersonId());
         System.out.println("Connected to Person ID: " + connectionEntity.getConnectedToPersonId());
-        System.out.println(CommonStrings.TOUR_ID + " " + connectionEntity.getTourId());
+        System.out.println(CommonStrings.TOUR_ID + ": " + connectionEntity.getTourId());
         System.out.println("Behaviour: " + connectionEntity.getBehaviour());
         System.out.println("Intermediate Friends ID: " + connectionEntity.getIntermediateFriends());
         System.out.println("Notes: " + connectionEntity.getNotes());

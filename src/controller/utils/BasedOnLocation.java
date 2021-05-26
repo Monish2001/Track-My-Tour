@@ -16,8 +16,8 @@ public class BasedOnLocation {
             TourEntity tourEntity = tourList.get(tourVariable);
 
             if (typeOfLocation.equals(tourEntity.getTypeOfLocation())) {
-                tourCountOnLocation++;
                 tourBasedOnLocationList.add(tourEntity);
+                tourCountOnLocation++;
             }
         }
         if (tourCountOnLocation == 0) {
