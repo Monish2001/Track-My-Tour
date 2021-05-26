@@ -157,18 +157,32 @@ public class InputValueCheck {
     }
 
     public String doesPersonExists(List<PersonEntity> personList) {
-        InputValueCheck obj = new InputValueCheck();
+        InputValueCheck presentClassobj = new InputValueCheck();
         Boolean inputValue = false;
         while (inputValue.equals(false)) {
 
-            String personId = obj.uuidCheck();
+            String personId = presentClassobj.uuidCheck();
             for (int person = 0; person < personList.size(); person++) {
                 PersonEntity personEntity = personList.get(person);
                 if (personEntity.getPersonId().equals(personId)) {
                     return personId;
                 }
             }
-            System.out.println("Please enter correct person id");
+            System.out.println("Person does not exists!! Please enter correct person id");
+            inputValue = false;
+        }
+        return null;
+    }
+
+    public String isConnectionOk(String ownerId, List<PersonEntity> personList) {
+        Boolean inputValue = false;
+        InputValueCheck currentClassObj = new InputValueCheck();
+        while (inputValue.equals(false)) {
+            String connectedPersonId = currentClassObj.doesPersonExists(personList);
+            if (!connectedPersonId.equals(ownerId)) {
+                return connectedPersonId;
+            }
+            System.out.println("Cannot connect to yourself");
             inputValue = false;
         }
         return null;

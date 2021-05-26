@@ -1,6 +1,7 @@
 package controller;
 
 import java.text.ParseException;
+import java.util.List;
 import java.util.Scanner;
 
 import controller.utils.InputValueCheck;
@@ -10,7 +11,8 @@ import utils.*;
 public class Connection {
 	Scanner sc = new Scanner(System.in);
 
-	public ConnectionEntity connections(String tourId, String personId) throws ParseException {
+	public ConnectionEntity connections(String tourId, String personId, List<PersonEntity> personList)
+			throws ParseException {
 		ConnectionEntity connection = new ConnectionEntity();
 		InputValidation validateString = new InputValidation();
 		InputValueCheck valueCheck = new InputValueCheck();
@@ -26,7 +28,8 @@ public class Connection {
 		connection.setPersonId(personId);
 
 		System.out.println("Connected to person id:");
-		connection.setConnectedToPersonId(valueCheck.uuidCheck());
+		// connection.setConnectedToPersonId(valueCheck.uuidCheck());
+		connection.setConnectedToPersonId(valueCheck.isConnectionOk(personId, personList));
 
 		System.out.println("Behaviour:");
 		connection.setBehaviour(validateString.inputStringValidation(sc.nextLine()));

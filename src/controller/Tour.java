@@ -106,7 +106,7 @@ public class Tour {
 		int totalConnectionsCount = Integer.parseInt(valueCheck.intCheck());
 		int connectionsAdded = 0;
 		while (connectionsAdded < totalConnectionsCount) {
-			connectionList.add(connectionsMade.connections(tourId, personId));
+			connectionList.add(connectionsMade.connections(tourId, personId, personList));
 			connectionsAdded++;
 		}
 		System.out.println("*****************************************************************");
