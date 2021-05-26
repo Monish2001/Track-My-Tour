@@ -6,17 +6,19 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
+import controller.utils.InputValueCheck;
 import entities.*;
-import utils.DateFormatter;
+import utils.InputValidation;
 import utils.UUIDGenerator;
 
 public class Tour {
 	Scanner sc = new Scanner(System.in);
 
-	public TourEntity tourDetails() throws ParseException {
+	public TourEntity tourDetails(List<PersonEntity> personList) throws ParseException {
 		TourEntity tourData = new TourEntity();
+		InputValidation validateString = new InputValidation();
+		InputValueCheck valueCheck = new InputValueCheck();
 
-		List<PersonEntity> personList = new ArrayList<PersonEntity>();
 		List<JourneyDetailsEntity> journeyList = new ArrayList<JourneyDetailsEntity>();
 		List<ResortEntity> resortList = new ArrayList<ResortEntity>();
 		List<ActivityEntity> activityList = new ArrayList<ActivityEntity>();
@@ -31,81 +33,82 @@ public class Tour {
 		System.out.println("****************PLEASE ENTER THE TOUR DETAILS****************");
 
 		System.out.println("Please Enter the person id");
-		tourData.setPersonId(sc.nextLine());
+		String personId = valueCheck.uuidCheck();
+		tourData.setPersonId(personId);
 
 		UUIDGenerator id = new UUIDGenerator();
 		String tourId = id.uuid();
 		tourData.setTourId(tourId);
 
 		System.out.println("Tour Start Date in \"yyyy-MM-dd HH:mm:ss format:");
-		DateFormatter dateObj = new DateFormatter();
-		Date tourStartDate = dateObj.dateFormatter(sc.nextLine());
+
+		Date tourStartDate = valueCheck.dateCheck();
 		tourData.setTourStartDate(tourStartDate);
 
 		System.out.println("Tour End Date in \"yyyy-MM-dd HH:mm:ss format:");
-		Date tourEndDate = dateObj.dateFormatter(sc.nextLine());
+		Date tourEndDate = valueCheck.dateCheck();
 		tourData.setTourEndDate(tourEndDate);
 
 		System.out.println("Origin:");
-		tourData.setOrigin(sc.nextLine().toLowerCase());
+		tourData.setOrigin(validateString.inputStringValidation(sc.nextLine()));
 
 		System.out.println("Destination:");
-		tourData.setDestination(sc.nextLine().toLowerCase());
+		tourData.setDestination(validateString.inputStringValidation(sc.nextLine()));
 
 		System.out.println("Type of location: ");
-		tourData.setTypeOfLocation(sc.nextLine().toLowerCase());
+		tourData.setTypeOfLocation(validateString.inputStringValidation(sc.nextLine()));
 
 		System.out.println("For your information TOUR ID is: " + tourId);
 
 		System.out.println("****************PLEASE ENTER THE JOURNEY DETAILS****************");
 		System.out.println("How many journey details do you need to add");
-		int totalJourneyCount = Integer.parseInt(sc.nextLine());
+		int totalJourneyCount = Integer.parseInt(validateString.intValidator(sc.nextLine()));
 		int journeyAdded = 0;
 		while (journeyAdded < totalJourneyCount) {
-			journeyList.add(journeyDetailsData.journeyDetails());
+			journeyList.add(journeyDetailsData.journeyDetails(tourId));
 			journeyAdded++;
 		}
-		System.out.println("\n");
+		System.out.println("*****************************************************************");
 
 		System.out.println("****************PLEASE ENTER THE RESORT DETAILS****************");
 		System.out.println("How many resort entries do you need to add");
-		int totalResortCount = Integer.parseInt(sc.nextLine());
+		int totalResortCount = Integer.parseInt(valueCheck.intCheck());
 		int resortsAdded = 0;
 		while (resortsAdded < totalResortCount) {
-			resortList.add(resortDetailsData.resortDetails());
+			resortList.add(resortDetailsData.resortDetails(tourId));
 			resortsAdded++;
 		}
-		System.out.println("\n");
+		System.out.println("*****************************************************************");
 
 		System.out.println("****************PLEASE ENTER THE TOUR ACTIVITIES****************");
 		System.out.println("How many activity entries do you need to add");
-		int totalActivitiesCount = Integer.parseInt(sc.nextLine());
+		int totalActivitiesCount = Integer.parseInt(valueCheck.intCheck());
 		int activitiesAdded = 0;
 		while (activitiesAdded < totalActivitiesCount) {
-			activityList.add(tourActivities.activities());
+			activityList.add(tourActivities.activities(tourId));
 			activitiesAdded++;
 		}
-		System.out.println("\n");
+		System.out.println("*****************************************************************");
 
 		System.out.println("BEFORE ADDING CONNECTIONS PLEASE ENTER THE PERSON DETAILS TO WHOM YOU HAVE CONNECTED");
 		System.out.println("How many person details do you need to add");
-		int totalPersonCount = Integer.parseInt(sc.nextLine());
+		int totalPersonCount = Integer.parseInt(valueCheck.intCheck());
 		int personsAdded = 0;
 		while (personsAdded < totalPersonCount) {
 			personList.add(person.personDetails());
 			personsAdded++;
 		}
-		System.out.println("\n");
+		System.out.println("*****************************************************************");
 
 		System.out.println("****************PLEASE ENTER CONNECTIONS MADE IN A TOUR****************");
 		System.out.println("How many connections do you need to add");
-		int totalConnectionsCount = Integer.parseInt(sc.nextLine());
+		int totalConnectionsCount = Integer.parseInt(valueCheck.intCheck());
 		int connectionsAdded = 0;
 		while (connectionsAdded < totalConnectionsCount) {
-			connectionList.add(connectionsMade.connections());
+			connectionList.add(connectionsMade.connections(tourId, personId));
 			connectionsAdded++;
 		}
-		System.out.println("\n");
+		System.out.println("*****************************************************************");
 
 		tourData.setJourneyDetails(journeyList);
 		tourData.setResort(resortList);

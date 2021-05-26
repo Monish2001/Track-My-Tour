@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import controller.utils.InputValueCheck;
 import entities.*;
 import utils.*;
 
@@ -11,6 +12,9 @@ public class Person {
 	Scanner sc = new Scanner(System.in);
 
 	public PersonEntity personDetails() {
+		InputValidation validateString = new InputValidation();
+		InputValueCheck valueCheck = new InputValueCheck();
+
 		PersonEntity personData = new PersonEntity();
 		List<String> phoneNumber = new ArrayList<String>();
 
@@ -21,23 +25,23 @@ public class Person {
 		personData.setPersonId(personId);
 
 		System.out.println("Name:");
-		personData.setName(sc.nextLine().toLowerCase());
+		personData.setName(validateString.inputStringValidation(sc.nextLine()));
 
 		System.out.println("Age:");
-		personData.setAge(Integer.parseInt(sc.nextLine()));
+		personData.setAge(Integer.parseInt(valueCheck.intCheck()));
 
 		System.out.println("Passion:");
-		personData.setPassion(sc.nextLine().toLowerCase());
+		personData.setPassion(validateString.inputStringValidation(sc.nextLine()));
 
 		System.out.println("Occupation:");
-		personData.setOccupation(sc.nextLine().toLowerCase());
+		personData.setOccupation(validateString.inputStringValidation(sc.nextLine()));
 
 		System.out.println("How many phone numbers do you want to add");
-		int totalPhoneNoCount = Integer.parseInt(sc.nextLine());
+		int totalPhoneNoCount = Integer.parseInt(valueCheck.intCheck());
 		int addedPhoneNoCount = 0;
 
 		while (addedPhoneNoCount < totalPhoneNoCount) {
-			phoneNumber.add(sc.nextLine());
+			phoneNumber.add(valueCheck.intCheck());
 			addedPhoneNoCount++;
 		}
 

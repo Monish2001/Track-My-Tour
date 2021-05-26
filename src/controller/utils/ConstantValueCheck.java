@@ -1,6 +1,6 @@
-package utils;
+package controller.utils;
 
-public class InputValueCheck {
+public class ConstantValueCheck {
     enum ModeOfTransport {
         car, bike
     };
@@ -30,19 +30,4 @@ public class InputValueCheck {
 
         return false;
     }
-
-}
-
-class TypeOfJourneyInputCheck {
-
-    /*
-     * public static void main(String[] args) {
-     * 
-     * InputCheck obj = new InputCheck(); boolean val = obj.contains("ca");
-     * System.out.println(val);
-     * 
-     * TypeOfJourneyInputCheck obj1 = new TypeOfJourneyInputCheck(); boolean val1 =
-     * obj1.containsEnum("onward"); System.out.println(val1); }
-     */
-
 }

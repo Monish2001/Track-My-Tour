@@ -4,41 +4,51 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.Scanner;
 
+import controller.utils.InputValueCheck;
 import entities.*;
 import utils.*;
 
 public class Activity {
 	Scanner sc = new Scanner(System.in);
 
-	public ActivityEntity activities() throws ParseException {
+	public ActivityEntity activities(String tourId) throws ParseException {
+		InputValidation validateString = new InputValidation();
+		InputValueCheck valueCheck = new InputValueCheck();
+
 		ActivityEntity activity = new ActivityEntity();
-		System.out.println("Please Enter the tour id");
-		activity.setTourid(sc.nextLine());
+
+		activity.setTourid(tourId);
 
 		UUIDGenerator id = new UUIDGenerator();
 		String activityId = id.uuid();
 		activity.setActivityId(activityId);
 
 		System.out.println("Activity Name:");
-		activity.setActivityName(sc.nextLine().toLowerCase());
+		String validatedString = validateString.inputStringValidation(sc.nextLine());
+		activity.setActivityName(validatedString);
 
 		System.out.println("Activity start time in \"yyyy-MM-dd HH:mm:ss format:");
-		DateFormatter dateObj = new DateFormatter();
-		Date activityStartTime = dateObj.dateFormatter(sc.nextLine());
+		Date activityStartTime = valueCheck.dateCheck();
 		activity.setStartTime(activityStartTime);
 
 		System.out.println("Activity end time in \"yyyy-MM-dd HH:mm:ss format:");
-		Date resortEndTime = dateObj.dateFormatter(sc.nextLine());
-		activity.setEndTime(resortEndTime);
+		Date activityEndTime = valueCheck.dateCheck();
+		activity.setEndTime(activityEndTime);
 
-		System.out.println("Duration:");
-		activity.setDuration(Integer.parseInt(sc.nextLine()));
+		System.out.println("Duration:-- Please enter how many hours and minutes");
+		System.out.println("Hours: ");
+		Integer hours = Integer.parseInt(valueCheck.intCheck());
+		System.out.println("Minutes: ");
+		Integer minutes = Integer.parseInt(valueCheck.intCheck());
+		Integer totalMinutes = (hours * 60) + minutes;
+		activity.setDuration(totalMinutes);
 
 		System.out.println("Cost:");
-		activity.setCost(Integer.parseInt(sc.nextLine()));
+		activity.setCost(Integer.parseInt(valueCheck.intCheck()));
 
 		System.out.println("Location:");
-		activity.setLocation(sc.nextLine().toLowerCase());
+		activity.setLocation(validateString.inputStringValidation(sc.nextLine()));
+		System.out.println("****************************************************");
 		return activity;
 	}
 }

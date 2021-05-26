@@ -1,41 +1,44 @@
 package controller;
 
 import java.text.ParseException;
-//import java.util.Date;
 import java.util.Scanner;
 
+import controller.utils.InputValueCheck;
 import entities.RoomEntity;
-//import utils.DateDifference;
-//import utils.DateFormatter;
+import utils.InputValidation;
 import utils.UUIDGenerator;
 
 public class Room {
 	Scanner sc = new Scanner(System.in);
 
-	public RoomEntity roomDetails() throws ParseException {
+	public RoomEntity roomDetails(String resortId) throws ParseException {
 		RoomEntity roomData = new RoomEntity();
+		InputValidation validateString = new InputValidation();
+		InputValueCheck valueCheck = new InputValueCheck();
 
-		System.out.println("Please Enter the resort id");
-		roomData.setResortId(sc.nextLine());
+		// System.out.println("Please Enter the resort id");
+		roomData.setResortId(resortId);
 
 		UUIDGenerator id = new UUIDGenerator();
 		String roomId = id.uuid();
 		roomData.setRoomId(roomId);
 
 		System.out.println("Room Type:");
-		roomData.setRoomType(sc.nextLine().toLowerCase());
+		roomData.setRoomType(validateString.inputStringValidation(sc.nextLine()));
 
 		System.out.println("Cost Per Day:");
-		roomData.setCostPerDay(Integer.parseInt(sc.nextLine()));
+		roomData.setCostPerDay(Integer.parseInt(valueCheck.intCheck()));
 
 		System.out.println("No of Nights");
-		roomData.setNoOfNights(Integer.parseInt(sc.nextLine()));
+		roomData.setNoOfNights(Integer.parseInt(valueCheck.intCheck()));
 
 		System.out.println("Room No:");
-		roomData.setRoomNo(sc.nextLine().toLowerCase());
+		roomData.setRoomNo(validateString.inputStringValidation(sc.nextLine()));
 
 		Integer totalCost = roomData.getCostPerDay() * roomData.getNoOfNights();
 		roomData.setTotalCost(totalCost);
+
+		System.out.println("*****************************************************************");
 
 		return roomData;
 	}
