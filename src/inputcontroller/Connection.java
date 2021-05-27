@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import classes.Person;
-import inputcontroller.utils.InputValueCheck;
+import controller.InputValueCheck;
 import utils.*;
 
 public class Connection {

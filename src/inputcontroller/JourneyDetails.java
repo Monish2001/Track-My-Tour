@@ -4,7 +4,7 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.Scanner;
 
-import inputcontroller.utils.InputValueCheck;
+import controller.InputValueCheck;
 import utils.*;
 
 public class JourneyDetails {
