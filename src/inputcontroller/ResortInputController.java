@@ -10,7 +10,7 @@ import java.util.Scanner;
 import controller.InputValueCheck;
 import utils.*;
 
-public class Resort {
+public class ResortInputController {
 	Scanner sc = new Scanner(System.in);
 
 	public classes.Resort resortDetails(String tourId) throws ParseException {
@@ -18,7 +18,7 @@ public class Resort {
 		InputValueCheck valueCheck = new InputValueCheck();
 
 		classes.Resort resortData = new classes.Resort();
-		Room room = new Room();
+		RoomInputController roomInputController = new RoomInputController();
 		List<classes.Room> roomList = new ArrayList<classes.Room>();
 
 		// System.out.println("Please Enter the tour id");
@@ -51,7 +51,7 @@ public class Resort {
 		int count = Integer.parseInt(valueCheck.intCheck());
 		int index = 0;
 		while (index < count) {
-			roomList.add(room.roomDetails(resortId));
+			roomList.add(roomInputController.roomDetails(resortId));
 			index++;
 		}
 		resortData.setRoom(roomList);

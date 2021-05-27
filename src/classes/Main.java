@@ -7,7 +7,9 @@ import java.util.List;
 import java.util.Scanner;
 
 import controller.*;
-import inputcontroller.FunctionalityInputModel;
+import inputcontroller.FunctionalityInputController;
+import inputcontroller.PersonInputController;
+import inputcontroller.TourInputController;
 
 public class Main {
 	public static void main(String[] args) throws ParseException {
@@ -25,8 +27,8 @@ public class Main {
 		List<classes.Person> personList = new ArrayList<classes.Person>();
 		List<classes.Tour> tourList = new ArrayList<classes.Tour>();
 
-		inputcontroller.Tour tour = null;
-		inputcontroller.Person person = null;
+		TourInputController tourInputController = null;
+		PersonInputController personInputController = null;
 
 		PrintEntries printEntries = null;
 		CostFinder costFinder = null;
@@ -36,7 +38,7 @@ public class Main {
 		ToursOnDateRange toursOnDateRange = null;
 		Activities listActivities = null;
 
-		FunctionalityInputModel inputModel = new FunctionalityInputModel();
+		FunctionalityInputController inputModel = new FunctionalityInputController();
 		CheckIsListEmpty isListEmpty = new CheckIsListEmpty();
 
 		PrintDetails printDetails = new PrintDetails();
@@ -50,18 +52,19 @@ public class Main {
 			switch (operation) {
 				case "1": {
 					// ADD PERSON DETAILS
-					if (person == null) {
-						person = new inputcontroller.Person();
+					if (personInputController == null) {
+						personInputController = new PersonInputController();
 					}
-					personList.add(person.personDetails());
+					Person person = personInputController.personDetails();
+					personList.add(person);
 					System.out.println("\n");
 					System.out.println("If you want to perform any operation again please press no from 1 to 11");
 					break;
 				}
 				case "2": {
 					// ADD TOUR ENTRIES
-					if (tour == null) {
-						tour = new inputcontroller.Tour();
+					if (tourInputController == null) {
+						tourInputController = new TourInputController();
 					}
 
 					boolean isPersonListEmpty = isListEmpty.checkIsPersonListEmpty(personList);
@@ -72,8 +75,8 @@ public class Main {
 						System.out.println("If you want to perform any operation again please press no from 1 to 11");
 						break;
 					}
-
-					tourList.add(tour.tourDetails(personList));
+					Tour tour = tourInputController.tourDetails(personList);
+					tourList.add(tour);
 					System.out.println("\n");
 					System.out.println("If you want to perform any operation again please press no from 1 to 11");
 					break;

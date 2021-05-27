@@ -7,7 +7,7 @@ import controller.InputValueCheck;
 import utils.InputValidation;
 import utils.UUIDGenerator;
 
-public class Room {
+public class RoomInputController {
 	Scanner sc = new Scanner(System.in);
 
 	public classes.Room roomDetails(String resortId) throws ParseException {

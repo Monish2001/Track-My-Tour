@@ -7,7 +7,7 @@ import java.util.Scanner;
 import controller.InputValueCheck;
 import utils.*;
 
-public class Person {
+public class PersonInputController {
 	Scanner sc = new Scanner(System.in);
 
 	public classes.Person personDetails() {

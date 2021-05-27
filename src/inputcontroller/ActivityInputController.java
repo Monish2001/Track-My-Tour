@@ -6,15 +6,16 @@ import java.util.Scanner;
 
 import controller.InputValueCheck;
 import utils.*;
+import classes.*;
 
-public class Activity {
+public class ActivityInputController {
 	Scanner sc = new Scanner(System.in);
 
-	public classes.Activity activities(String tourId) throws ParseException {
+	public Activity activities(String tourId) throws ParseException {
 		InputValidation validateString = new InputValidation();
 		InputValueCheck valueCheck = new InputValueCheck();
 
-		classes.Activity activity = new classes.Activity();
+		Activity activity = new Activity();
 
 		activity.setTourid(tourId);
 
@@ -23,8 +24,8 @@ public class Activity {
 		activity.setActivityId(activityId);
 
 		System.out.println("Activity Name:");
-		String validatedString = validateString.inputStringValidation(sc.nextLine());
-		activity.setActivityName(validatedString);
+		String activityName = validateString.inputStringValidation(sc.nextLine());
+		activity.setActivityName(activityName);
 
 		System.out.println("Activity start time in \"yyyy-MM-dd HH:mm:ss format:");
 		Date activityStartTime = valueCheck.dateCheck();

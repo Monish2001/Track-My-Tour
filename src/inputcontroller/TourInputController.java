@@ -6,28 +6,29 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
+import classes.*;
 import controller.InputValueCheck;
 import utils.InputValidation;
 import utils.UUIDGenerator;
 
-public class Tour {
+public class TourInputController {
 	Scanner sc = new Scanner(System.in);
 
-	public classes.Tour tourDetails(List<classes.Person> personList) throws ParseException {
-		classes.Tour tourData = new classes.Tour();
+	public Tour tourDetails(List<classes.Person> personList) throws ParseException {
+		Tour tourData = new Tour();
 		InputValidation validateString = new InputValidation();
 		InputValueCheck valueCheck = new InputValueCheck();
 
-		List<classes.JourneyDetails> journeyList = new ArrayList<classes.JourneyDetails>();
-		List<classes.Resort> resortList = new ArrayList<classes.Resort>();
-		List<classes.Activity> activityList = new ArrayList<classes.Activity>();
-		List<classes.Connection> connectionList = new ArrayList<classes.Connection>();
+		List<JourneyDetails> journeyList = new ArrayList<JourneyDetails>();
+		List<Resort> resortList = new ArrayList<Resort>();
+		List<Activity> activityList = new ArrayList<Activity>();
+		List<Connection> connectionList = new ArrayList<Connection>();
 
-		JourneyDetails journeyDetailsData = new JourneyDetails();
-		Resort resortDetailsData = new Resort();
-		Activity tourActivities = new Activity();
-		Connection connectionsMade = new Connection();
-		Person person = new Person();
+		JourneyDetailsInputController journeyDetailsInputControllerData = new JourneyDetailsInputController();
+		ResortInputController resortInputController = new ResortInputController();
+		ActivityInputController tourActivities = new ActivityInputController();
+		ConnectionInputController connectionsMade = new ConnectionInputController();
+		PersonInputController personInputController = new PersonInputController();
 
 		System.out.println("****************PLEASE ENTER THE TOUR DETAILS****************");
 
@@ -65,7 +66,8 @@ public class Tour {
 		int totalJourneyCount = Integer.parseInt(validateString.intValidator(sc.nextLine()));
 		int journeyAdded = 0;
 		while (journeyAdded < totalJourneyCount) {
-			journeyList.add(journeyDetailsData.journeyDetails(tourId));
+			JourneyDetails journey = journeyDetailsInputControllerData.journeyDetails(tourId);
+			journeyList.add(journey);
 			journeyAdded++;
 		}
 		System.out.println("*****************************************************************");
@@ -75,7 +77,8 @@ public class Tour {
 		int totalResortCount = Integer.parseInt(valueCheck.intCheck());
 		int resortsAdded = 0;
 		while (resortsAdded < totalResortCount) {
-			resortList.add(resortDetailsData.resortDetails(tourId));
+			Resort resort = resortInputController.resortDetails(tourId);
+			resortList.add(resort);
 			resortsAdded++;
 		}
 		System.out.println("*****************************************************************");
@@ -85,7 +88,8 @@ public class Tour {
 		int totalActivitiesCount = Integer.parseInt(valueCheck.intCheck());
 		int activitiesAdded = 0;
 		while (activitiesAdded < totalActivitiesCount) {
-			activityList.add(tourActivities.activities(tourId));
+			Activity activity = tourActivities.activities(tourId);
+			activityList.add(activity);
 			activitiesAdded++;
 		}
 		System.out.println("*****************************************************************");
@@ -95,7 +99,8 @@ public class Tour {
 		int totalPersonCount = Integer.parseInt(valueCheck.intCheck());
 		int personsAdded = 0;
 		while (personsAdded < totalPersonCount) {
-			personList.add(person.personDetails());
+			Person person = personInputController.personDetails();
+			personList.add(person);
 			personsAdded++;
 		}
 		System.out.println("*****************************************************************");
@@ -105,7 +110,8 @@ public class Tour {
 		int totalConnectionsCount = Integer.parseInt(valueCheck.intCheck());
 		int connectionsAdded = 0;
 		while (connectionsAdded < totalConnectionsCount) {
-			connectionList.add(connectionsMade.connections(tourId, personId, personList));
+			Connection connection = connectionsMade.connections(tourId, personId, personList);
+			connectionList.add(connection);
 			connectionsAdded++;
 		}
 		System.out.println("*****************************************************************");

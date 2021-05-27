@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
-public class FunctionalityInputModel {
+public class FunctionalityInputController {
     Scanner sc = new Scanner(System.in);
     PrintDetails printDetails = new PrintDetails();
     InputValidation validateString = new InputValidation();

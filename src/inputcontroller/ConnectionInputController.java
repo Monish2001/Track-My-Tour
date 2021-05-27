@@ -7,13 +7,13 @@ import java.util.Scanner;
 import classes.Person;
 import controller.InputValueCheck;
 import utils.*;
+import classes.Connection;
 
-public class Connection {
+public class ConnectionInputController {
 	Scanner sc = new Scanner(System.in);
 
-	public classes.Connection connections(String tourId, String personId, List<Person> personList)
-			throws ParseException {
-		classes.Connection connection = new classes.Connection();
+	public Connection connections(String tourId, String personId, List<Person> personList) throws ParseException {
+		Connection connection = new Connection();
 		InputValidation validateString = new InputValidation();
 		InputValueCheck valueCheck = new InputValueCheck();
 
@@ -39,8 +39,8 @@ public class Connection {
 
 		System.out.println(
 				"Intermediate friends ID --- Please press enter if none ,else enter comma separated id for more than 1 intermediate friends");
-
-		connection.setIntermediateFriends(valueCheck.intermediateUuidCheck());
+		String intermediateFriends = valueCheck.intermediateUuidCheck();
+		connection.setIntermediateFriends(intermediateFriends);
 
 		System.out.println("**********************************************");
 		return connection;

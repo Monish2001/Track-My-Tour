@@ -7,7 +7,7 @@ import java.util.Scanner;
 import controller.InputValueCheck;
 import utils.*;
 
-public class JourneyDetails {
+public class JourneyDetailsInputController {
 	Scanner sc = new Scanner(System.in);
 
 	public classes.JourneyDetails journeyDetails(String tourId) throws ParseException {
