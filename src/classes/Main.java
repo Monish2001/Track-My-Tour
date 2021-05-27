@@ -24,8 +24,8 @@ public class Main {
 		System.out.println("Before adding tour details please enter the person details to know your ID");
 		System.out.println("*****************************************************************************************");
 
-		List<classes.Person> personList = new ArrayList<classes.Person>();
-		List<classes.Tour> tourList = new ArrayList<classes.Tour>();
+		List<Person> personList = new ArrayList<Person>();
+		List<Tour> tourList = new ArrayList<Tour>();
 
 		TourInputController tourInputController = null;
 		PersonInputController personInputController = null;
@@ -173,10 +173,9 @@ public class Main {
 					}
 
 					String modeOfTransport = inputModel.toursBasedOnTransport();
-					List<classes.Tour> tourBasedOnTransportList = tourTransport.tourBasedOnTransport(tourList,
-							modeOfTransport);
+					List<Tour> tourBasedOnTransportList = tourTransport.tourBasedOnTransport(tourList, modeOfTransport);
 					if (tourBasedOnTransportList.size() != 0) {
-						for (classes.Tour tourEntity : tourBasedOnTransportList) {
+						for (Tour tourEntity : tourBasedOnTransportList) {
 							printDetails.printTourDetails(tourEntity);
 						}
 					}
@@ -250,9 +249,9 @@ public class Main {
 						System.out.println("\n");
 						break;
 					}
-					List<classes.Tour> toursOnDateRangeList = toursOnDateRange.toursBasedOnDateRange(tourList, date);
+					List<Tour> toursOnDateRangeList = toursOnDateRange.toursBasedOnDateRange(tourList, date);
 					if (toursOnDateRangeList.size() != 0) {
-						for (classes.Tour tourEntity : toursOnDateRangeList) {
+						for (Tour tourEntity : toursOnDateRangeList) {
 							printDetails.printTourDetails(tourEntity);
 						}
 					}
@@ -292,7 +291,7 @@ public class Main {
 					break;
 
 				default:
-					System.out.println("Please enter a valid input from 0 to 11");
+					System.out.println("Please enter a valid input from 1 to 11");
 					break;
 			}
 		}
