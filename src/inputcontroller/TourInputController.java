@@ -41,13 +41,16 @@ public class TourInputController {
 		String tourId = id.uuid();
 		tourData.setTourId(tourId);
 
-		System.out.println("Tour Start Date in \"yyyy-MM-dd HH:mm:ss format:");
+		// System.out.println("Tour Start Date in \"yyyy-MM-dd HH:mm:ss format:");
 
-		Date tourStartDate = valueCheck.dateCheck();
+		Date[] dates = valueCheck.dateRangeCheck();
+		Date tourStartDate = dates[0];
+		Date tourEndDate = dates[1];
+		// Date tourStartDate = valueCheck.dateCheck();
 		tourData.setTourStartDate(tourStartDate);
 
-		System.out.println("Tour End Date in \"yyyy-MM-dd HH:mm:ss format:");
-		Date tourEndDate = valueCheck.dateCheck();
+		// System.out.println("Tour End Date in \"yyyy-MM-dd HH:mm:ss format:");
+		// Date tourEndDate = valueCheck.dateCheck();
 		tourData.setTourEndDate(tourEndDate);
 
 		System.out.println("Origin:");

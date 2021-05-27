@@ -28,12 +28,10 @@ public class ResortInputController {
 		String resortId = id.uuid();
 		resortData.setResortId(resortId);
 
-		System.out.println("Resort fromDate in \"yyyy-MM-dd HH:mm:ss format:");
-		Date resortFromDate = valueCheck.dateCheck();
+		Date[] dates = valueCheck.dateRangeCheck();
+		Date resortFromDate = dates[0];
+		Date resortToDate = dates[1];
 		resortData.setFromDate(resortFromDate);
-
-		System.out.println("Resort toDate in \"yyyy-MM-dd HH:mm:ss format:");
-		Date resortToDate = valueCheck.dateCheck();
 		resortData.setToDate(resortToDate);
 
 		System.out.println("Resort Name:");

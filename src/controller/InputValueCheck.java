@@ -187,4 +187,26 @@ public class InputValueCheck {
         }
         return null;
     }
+
+    public Date[] dateRangeCheck() throws ParseException {
+        Boolean inputValue = false;
+        InputValueCheck currentClassObj = new InputValueCheck();
+        while (inputValue.equals(false)) {
+            System.out.println("Please enter the start date in \"yyyy-MM-dd HH:mm:ss format: ");
+            Date startDate = currentClassObj.dateCheck();
+            System.out.println("Please enter the end date in \"yyyy-MM-dd HH:mm:ss format: ");
+            Date endDate = currentClassObj.dateCheck();
+            if (startDate == null || endDate == null) {
+                Date[] dates = { startDate, endDate };
+                return dates;
+            } else if (startDate.compareTo(endDate) <= 0 && endDate.compareTo(startDate) >= 0) {
+                Date[] dates = { startDate, endDate };
+                return dates;
+            } else {
+                System.out.println("Please enter the correct date range");
+                inputValue = false;
+            }
+        }
+        return null;
+    }
 }

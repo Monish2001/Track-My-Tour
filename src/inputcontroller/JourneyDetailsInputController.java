@@ -23,12 +23,10 @@ public class JourneyDetailsInputController {
 		String journeyDetailsId = id.uuid();
 		journeyDetailsData.setJourneyDetailsId(journeyDetailsId);
 
-		System.out.println("Journey starting time in \"yyyy-MM-dd HH:mm:ss format:");
-		Date journeyStartTime = valueCheck.dateCheck();
+		Date[] dates = valueCheck.dateRangeCheck();
+		Date journeyStartTime = dates[0];
+		Date journeyReachedTime = dates[1];
 		journeyDetailsData.setStartTime(journeyStartTime);
-
-		System.out.println("Journey reached time in \"yyyy-MM-dd HH:mm:ss format:");
-		Date journeyReachedTime = valueCheck.dateCheck();
 		journeyDetailsData.setReachedTime(journeyReachedTime);
 
 		System.out.println("Mode of transport: -- Please enter as car or bike");

@@ -27,12 +27,10 @@ public class ActivityInputController {
 		String activityName = validateString.inputStringValidation(sc.nextLine());
 		activity.setActivityName(activityName);
 
-		System.out.println("Activity start time in \"yyyy-MM-dd HH:mm:ss format:");
-		Date activityStartTime = valueCheck.dateCheck();
+		Date[] dates = valueCheck.dateRangeCheck();
+		Date activityStartTime = dates[0];
+		Date activityEndTime = dates[1];
 		activity.setStartTime(activityStartTime);
-
-		System.out.println("Activity end time in \"yyyy-MM-dd HH:mm:ss format:");
-		Date activityEndTime = valueCheck.dateCheck();
 		activity.setEndTime(activityEndTime);
 
 		System.out.println("Duration:-- Please enter how many hours and minutes");
