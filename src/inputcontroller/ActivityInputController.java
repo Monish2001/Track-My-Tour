@@ -14,6 +14,7 @@ public class ActivityInputController {
 	public Activity activities(String tourId) throws ParseException {
 		InputValidation validateString = new InputValidation();
 		InputValueCheck valueCheck = new InputValueCheck();
+		DateOperations durationCalc = new DateOperations();
 
 		Activity activity = new Activity();
 
@@ -27,19 +28,21 @@ public class ActivityInputController {
 		String activityName = validateString.inputStringValidation(sc.nextLine());
 		activity.setActivityName(activityName);
 
-		Date[] dates = valueCheck.dateRangeCheck();
-		Date activityStartTime = dates[0];
-		Date activityEndTime = dates[1];
+		System.out.println("Start time in \"yyyy-MM-dd HH:mm:ss format:");
+		Date activityStartTime = valueCheck.dateCheck();
 		activity.setStartTime(activityStartTime);
-		activity.setEndTime(activityEndTime);
 
 		System.out.println("Duration:-- Please enter how many hours and minutes");
 		System.out.println("Hours: ");
 		Integer hours = Integer.parseInt(valueCheck.intCheck());
 		System.out.println("Minutes: ");
 		Integer minutes = Integer.parseInt(valueCheck.intCheck());
-		Integer totalMinutes = (hours * 60) + minutes;
+		Integer[] totalMins = { hours, minutes };
+		Integer totalMinutes = durationCalc.convertToMins(totalMins);
 		activity.setDuration(totalMinutes);
+
+		Date activityEndDate = durationCalc.addDurationToDate(activityStartTime, totalMinutes);
+		activity.setEndTime(activityEndDate);
 
 		System.out.println("Cost:");
 		activity.setCost(Integer.parseInt(valueCheck.intCheck()));

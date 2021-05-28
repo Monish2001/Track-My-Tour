@@ -38,6 +38,8 @@ public class Main {
 		ToursOnDateRange toursOnDateRange = null;
 		Activities listActivities = null;
 
+		Tour tour = null;
+
 		FunctionalityInputController inputModel = new FunctionalityInputController();
 		CheckIsListEmpty isListEmpty = new CheckIsListEmpty();
 
@@ -75,7 +77,7 @@ public class Main {
 						System.out.println("If you want to perform any operation again please press no from 1 to 11");
 						break;
 					}
-					Tour tour = tourInputController.tourDetails(personList);
+					tour = tourInputController.tourDetails(personList);
 					tourList.add(tour);
 					System.out.println("\n");
 					System.out.println("If you want to perform any operation again please press no from 1 to 11");
@@ -110,7 +112,11 @@ public class Main {
 					}
 
 					String tourId = inputModel.costOfSingleTour(tourList);
-					int totalCostOfTour = costFinder.costOfSingleTour(tourList, tourId);
+					Integer totalCostOfTour = costFinder.costOfSingleTour(tourList, tourId);
+					if (totalCostOfTour == null) {
+						printDetails.printCommonTourListSOP();
+						break;
+					}
 					printDetails.printTotalCostOfTour(totalCostOfTour);
 
 					System.out.println("If you want to perform any operation again please press no from 1 to 11");
@@ -119,8 +125,8 @@ public class Main {
 				}
 				case "5": {
 					// GET COST OF YOUR SINGLE TOUR STAY
-					if (costFinder == null) {
-						costFinder = new CostFinder();
+					if (tour == null) {
+						tour = new Tour();
 					}
 
 					boolean isTourListEmpty = isListEmpty.checkIsTourListEmpty(tourList);
@@ -130,7 +136,11 @@ public class Main {
 					}
 
 					String tourIdForStay = inputModel.costOfTourStay(tourList);
-					int costForStay = costFinder.costOfTourStay(tourList, tourIdForStay);
+					Integer costForStay = costFinder.costOfATourStay(tourList, tourIdForStay);
+					if (costForStay == null) {
+						printDetails.printCommonTourListSOP();
+						break;
+					}
 					printDetails.printCostOfTourStay(costForStay);
 
 					System.out.println("\n");
@@ -197,9 +207,9 @@ public class Main {
 					}
 
 					String tourIdForDirectConnection = inputModel.directConnections(tourList);
-					List<String> directConnectionNameList = connections.directConnections(tourList, personList,
+					List<String> directConnectionNameList = connections.directConnectionsInATour(tourList, personList,
 							tourIdForDirectConnection);
-					if (directConnectionNameList.size() != 0) {
+					if (directConnectionNameList.size() > 1) {
 						printDetails.printDirectConnections(directConnectionNameList);
 					}
 
@@ -222,7 +232,7 @@ public class Main {
 					String tourIdForIndirectConnections = inputModel.inDirectConnections(tourList);
 					List<String> indirectConnectionNameList = connections.indirectConnections(tourList, personList,
 							tourIdForIndirectConnections);
-					if (indirectConnectionNameList.size() != 0) {
+					if (indirectConnectionNameList.size() > 1) {
 						printDetails.printIndirectConnections(indirectConnectionNameList);
 					}
 
@@ -279,7 +289,7 @@ public class Main {
 					List<String> activities = listActivities.ListOfActivities(tourList, tourIdForActivities);
 					if (activities.size() != 0) {
 						printDetails.printActivities(activities);
-						int totalActivityCost = costFinder.costOfActivities(tourList, tourIdForActivities);
+						Integer totalActivityCost = costFinder.costOfActivities(tourList, tourIdForActivities);
 						printDetails.costOfActivities(totalActivityCost);
 					}
 					System.out.println("\n");

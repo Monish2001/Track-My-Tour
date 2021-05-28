@@ -1,7 +1,10 @@
 package classes;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import controller.PersonNameFinder;
 
 public class Tour {
 	String personId;
@@ -103,5 +106,101 @@ public class Tour {
 
 	public void setConnections(List<Connection> connections) {
 		this.connections = connections;
+	}
+
+	public Integer costOfTourStay(Tour tour) {
+		Integer costForTripStay = 0;
+		Resort resortObj = new Resort();
+		List<Resort> resortList = tour.getResort();
+		int resortListSize = resortList.size();
+		if (resortListSize == 0) {
+			System.out.println("There is no resort entries in this tour!!");
+			return costForTripStay;
+		} else {
+			for (int resort = 0; resort < resortListSize; resort++) {
+				costForTripStay += resortObj.totalCostOfStay(resortList.get(resort));
+			}
+		}
+		return costForTripStay;
+	}
+
+	public Integer costOfTourActivities(Tour tour) {
+		Integer totalActivityCost = 0;
+		List<Activity> activitiesList = tour.getActivities();
+		int activitiesListSize = activitiesList.size();
+		if (activitiesListSize == 0) {
+			System.out.println("There is no activities made in this tour!!");
+			return totalActivityCost;
+		} else {
+			for (int activities = 0; activities < tour.getActivities().size(); activities++) {
+				Activity activity = activitiesList.get(activities);
+				totalActivityCost += activity.getCost();
+			}
+		}
+		return totalActivityCost;
+	}
+
+	public Integer totalCostOfTour(Tour tour) {
+		Tour currentClassObj = new Tour();
+		Integer totalCost = 0;
+		totalCost += currentClassObj.costOfTourActivities(tour);
+		totalCost += currentClassObj.costOfTourStay(tour);
+		return totalCost;
+	}
+
+	PersonNameFinder personNameFinder = new PersonNameFinder();
+
+	public List<String> directConnectionOfTour(Tour tour, List<Person> personList) {
+		List<String> connectionNameList = new ArrayList<String>();
+		if (tour.getConnections().size() == 0) {
+			System.out.println("No connections made in this tour!!");
+			return connectionNameList;
+		} else {
+			String personId = tour.getConnections().get(0).getPersonId();
+			String personName = personNameFinder.getPersonName(personId, personList);
+			connectionNameList.add(personName);
+
+			for (int connection = 0; connection < tour.getConnections().size(); connection++) {
+				Connection connectionVar = tour.getConnections().get(connection);
+
+				if (connectionVar.getIntermediateFriends().equals("0")) {
+					String connectedWithPersonId = connectionVar.getConnectedToPersonId();
+					String connectedPersonName = personNameFinder.getPersonName(connectedWithPersonId, personList);
+					connectionNameList.add(connectedPersonName);
+				}
+			}
+		}
+		if (connectionNameList.size() == 1) {
+			System.out.println("No direct connections made in this tour!!");
+		}
+		return connectionNameList;
+	}
+
+	public List<String> indirectConnectionsOfTour(Tour tour, List<Person> personList) {
+		List<String> connectionNameList = new ArrayList<String>();
+		if (tour.getConnections().size() == 0) {
+			System.out.println("No friends of friends in this tour!!");
+			return connectionNameList;
+		} else {
+			String personId = tour.getConnections().get(0).getPersonId();
+			String personName = personNameFinder.getPersonName(personId, personList);
+			connectionNameList.add(personName);
+
+			for (int connection = 0; connection < tour.getConnections().size(); connection++) {
+				Connection connectionVar = tour.getConnections().get(connection);
+
+				if (!connectionVar.getIntermediateFriends().equals("0")) {
+					String connectedWithPersonId = connectionVar.getConnectedToPersonId();
+					String connectedPersonName = personNameFinder.getPersonName(connectedWithPersonId, personList);
+					connectionNameList.add(connectedPersonName);
+				}
+
+			}
+
+		}
+		if (connectionNameList.size() == 1) {
+			System.out.println("No direct connections made in this tour!!");
+		}
+		return connectionNameList;
 	}
 }

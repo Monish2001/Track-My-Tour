@@ -5,28 +5,19 @@ import java.util.List;
 import classes.*;
 
 public class CostFinder {
+    Tour tourObj = new Tour();
 
-    public int costOfSingleTour(List<Tour> tourList, String tourId) {
-        int totalCost = 0;
+    public Integer costOfSingleTour(List<Tour> tourList, String tourId) {
+        Integer totalCost = 0;
+        if (tourList.size() == 0) {
+            // System.out.println("There is no tour entries yet");
+            return null;
+        }
+
         for (int tourVariable = 0; tourVariable < tourList.size(); tourVariable++) {
-            if (tourList.size() == 0) {
-                System.out.println("There is no tour entries yet");
-                break;
-            }
-
-            Tour tour = tourList.get(tourVariable);
-            if (tourId.equals(tour.getTourId())) {
-                for (int resort = 0; resort < tour.getResort().size(); resort++) {
-                    Resort resortEntity = tour.getResort().get(resort);
-                    for (int room = 0; room < resortEntity.getRoom().size(); room++) {
-                        Room roomEntity = resortEntity.getRoom().get(room);
-                        totalCost += roomEntity.getTotalCost();
-                    }
-                }
-                for (int activities = 0; activities < tour.getActivities().size(); activities++) {
-                    Activity activity = tour.getActivities().get(activities);
-                    totalCost += activity.getCost();
-                }
+            Tour tourDetails = tourList.get(tourVariable);
+            if (tourId.equals(tourDetails.getTourId())) {
+                totalCost += tourObj.totalCostOfTour(tourDetails);
                 break;
             }
         }
@@ -34,44 +25,33 @@ public class CostFinder {
     }
 
     /* DISPLAYING THE TOTAL COST OF SINGLE TOUR STAY */
-    public int costOfTourStay(List<Tour> tourList, String tourId) {
+    public Integer costOfATourStay(List<Tour> tourList, String tourId) {
+        Integer costForTripStay = 0;
+        if (tourList.size() == 0) {
+            return null;
+        }
 
-        int costForTripStay = 0;
         for (int tourVariable = 0; tourVariable < tourList.size(); tourVariable++) {
-            if (tourList.size() == 0) {
-                System.out.println("There is no tour entries yet");
-                break;
-            }
-
-            Tour tour = tourList.get(tourVariable);
-            if (tourId.equals(tour.getTourId())) {
-                for (int resort = 0; resort < tour.getResort().size(); resort++) {
-                    Resort resortEntity = tour.getResort().get(resort);
-                    for (int room = 0; room < resortEntity.getRoom().size(); room++) {
-                        Room roomEntity = resortEntity.getRoom().get(room);
-                        costForTripStay += roomEntity.getTotalCost();
-                    }
-                }
+            Tour tourDetails = tourList.get(tourVariable);
+            if (tourId.equals(tourDetails.getTourId())) {
+                costForTripStay += tourObj.costOfTourStay(tourDetails);
                 break;
             }
         }
         return costForTripStay;
     }
 
-    public int costOfActivities(List<Tour> tourList, String tourId) {
-        int totalActivityCost = 0;
-        for (int tourVariable = 0; tourVariable < tourList.size(); tourVariable++) {
-            if (tourList.size() == 0) {
-                System.out.println("There is no tour entries yet");
-                break;
-            }
+    public Integer costOfActivities(List<Tour> tourList, String tourId) {
+        Integer totalActivityCost = 0;
+        if (tourList.size() == 0) {
+            // System.out.println("There is no tour entries yet");
+            return null;
+        }
 
-            Tour tour = tourList.get(tourVariable);
-            if (tourId.equals(tour.getTourId())) {
-                for (int activities = 0; activities < tour.getActivities().size(); activities++) {
-                    Activity activity = tour.getActivities().get(activities);
-                    totalActivityCost += activity.getCost();
-                }
+        for (int tourVariable = 0; tourVariable < tourList.size(); tourVariable++) {
+            Tour tourDetails = tourList.get(tourVariable);
+            if (tourId.equals(tourDetails.getTourId())) {
+                totalActivityCost += tourObj.costOfTourActivities(tourDetails);
                 break;
             }
         }

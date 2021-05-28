@@ -6,15 +6,15 @@ import classes.*;
 
 public class PrintDetails {
 
-    public void printTotalCostOfTour(int totalCostOfTour) {
+    public void printTotalCostOfTour(Integer totalCostOfTour) {
         System.out.println("Total cost of a single tour: " + totalCostOfTour);
     }
 
-    public void printCostOfTourStay(int costForStay) {
+    public void printCostOfTourStay(Integer costForStay) {
         System.out.println("Total cost of tour stay in hotel is: " + costForStay);
     }
 
-    public void costOfActivities(int totalActivityCost) {
+    public void costOfActivities(Integer totalActivityCost) {
         System.out.println("Total activity cost in this trip is: " + totalActivityCost);
     }
 

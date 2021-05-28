@@ -11,6 +11,11 @@ public class BasedOnTransport {
     public List<Tour> tourBasedOnTransport(List<Tour> tourList, String modeOfTransport) {
         List<Tour> tourBasedOnTransportList = new ArrayList<Tour>();
 
+        if (tourList.size() == 0) {
+            System.out.println("There is no tour entries yet");
+            return tourBasedOnTransportList;
+        }
+
         int tourBasedOnTransportCount = 0;
         for (int tourVariable = 0; tourVariable < tourList.size(); tourVariable++) {
             Tour tour = tourList.get(tourVariable);

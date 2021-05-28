@@ -17,12 +17,14 @@ public class ToursOnDateRange {
         Date endDateObj = date[1];
         List<Tour> toursOnDateRangeList = new ArrayList<Tour>();
 
+        if (tourList.size() <= 0) {
+            System.out.println("No journey detail entry is found!!");
+            return toursOnDateRangeList;
+        }
+
         int tourCount = 0;
         for (int tourVariable = 0; tourVariable < tourList.size(); tourVariable++) {
-            if (tourList.size() <= 0) {
-                System.out.println("No journey detail entry is found!!");
-                break;
-            }
+
             Tour tour = tourList.get(tourVariable);
             Date tourStartDate = tour.getTourStartDate();
             Date tourEndDate = tour.getTourEndDate();

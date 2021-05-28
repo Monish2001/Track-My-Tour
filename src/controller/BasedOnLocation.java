@@ -11,6 +11,10 @@ public class BasedOnLocation {
     public List<Tour> toursBasedOnLocation(List<Tour> tourList, String typeOfLocation) {
         int tourCountOnLocation = 0;
         List<Tour> tourBasedOnLocationList = new ArrayList<Tour>();
+        if (tourList.size() == 0) {
+            System.out.println("There is no tour entries yet");
+            return tourBasedOnLocationList;
+        }
 
         for (int tourVariable = 0; tourVariable < tourList.size(); tourVariable++) {
             Tour tour = tourList.get(tourVariable);

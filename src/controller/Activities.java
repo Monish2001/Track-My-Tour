@@ -10,12 +10,12 @@ public class Activities {
     public List<String> ListOfActivities(List<Tour> tourList, String tourId) {
         List<String> tourActivities = new ArrayList<String>();
         int touridMatchCount = 0;
-        for (int tourVariable = 0; tourVariable < tourList.size(); tourVariable++) {
-            if (tourList.size() == 0) {
-                System.out.println("There is no tour entries yet");
-                break;
-            }
+        if (tourList.size() == 0) {
+            System.out.println("There is no tour entries yet");
+            return tourActivities;
+        }
 
+        for (int tourVariable = 0; tourVariable < tourList.size(); tourVariable++) {
             Tour tourDetails = tourList.get(tourVariable);
             if (tourId.equals(tourDetails.getTourId())) {
                 touridMatchCount = 1;

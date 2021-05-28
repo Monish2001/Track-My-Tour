@@ -67,4 +67,18 @@ public class Resort {
 	public void setRoom(List<Room> room) {
 		this.room = room;
 	}
+
+	public Integer totalCostOfStay(Resort resortEntity) {
+		Integer costForStay = 0;
+		for (int room = 0; room < resortEntity.getRoom().size(); room++) {
+			Room roomEntity = resortEntity.getRoom().get(room);
+			costForStay += roomEntity.getTotalCost();
+		}
+		return costForStay;
+	}
+
+	public Integer totalCostOfRoom(Room room) {
+		Integer totalCost = room.getCostPerDay() * room.getNoOfNights();
+		return totalCost;
+	}
 }

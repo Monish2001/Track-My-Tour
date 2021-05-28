@@ -13,6 +13,7 @@ public class JourneyDetailsInputController {
 	public classes.JourneyDetails journeyDetails(String tourId) throws ParseException {
 		InputValidation validateString = new InputValidation();
 		InputValueCheck valueCheck = new InputValueCheck();
+		DateDifference durationCalc = new DateDifference();
 
 		classes.JourneyDetails journeyDetailsData = new classes.JourneyDetails();
 
@@ -39,16 +40,8 @@ public class JourneyDetailsInputController {
 		System.out.println("Weather:");
 		journeyDetailsData.setWeather(validateString.inputStringValidation(sc.nextLine()));
 
-		System.out.println("Duration:-- Please enter how many hours and minutes");
-
-		System.out.println("Hours: ");
-		Integer hours = Integer.parseInt(valueCheck.intCheck());
-
-		System.out.println("Minutes: ");
-		Integer minutes = Integer.parseInt(valueCheck.intCheck());
-
-		Integer totalMinutes = (hours * 60) + minutes;
-		journeyDetailsData.setDuration(totalMinutes);
+		String diffString = durationCalc.findDifferenceInDates(journeyStartTime, journeyReachedTime);
+		journeyDetailsData.setDuration(diffString);
 
 		System.out.println("Journey Type: -- Please enter as onward or backward");
 		String typeOfJourney = valueCheck.journeyChecker();

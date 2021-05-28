@@ -6,8 +6,11 @@ import java.util.Date;
 
 public class DateFormatter {
 	public Date dateFormatter(String dateVal) throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat();
+		sdf.applyPattern("yyyy-MM-dd HH:mm:ss");
+		sdf.setLenient(false);
 		try {
-			java.util.Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(dateVal);
+			Date date = sdf.parse(dateVal);
 			return date;
 		} catch (ParseException e) {
 			// e.printStackTrace();

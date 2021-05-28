@@ -9,7 +9,7 @@ public class JourneyDetails {
 	private String modeOfTransport;
 	private String driveMode;
 	private String weather;
-	private Integer duration;
+	private String duration;
 	private String journeyType;
 	private String tourId;
 
@@ -62,11 +62,11 @@ public class JourneyDetails {
 		this.weather = weather;
 	}
 
-	public Integer getDuration() {
+	public String getDuration() {
 		return duration;
 	}
 
-	public void setDuration(Integer duration) {
+	public void setDuration(String duration) {
 		this.duration = duration;
 	}
 

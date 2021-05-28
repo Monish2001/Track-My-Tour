@@ -2,6 +2,7 @@ package inputcontroller;
 
 import java.text.ParseException;
 import java.util.Scanner;
+import classes.*;
 
 import controller.InputValueCheck;
 import utils.InputValidation;
@@ -9,6 +10,7 @@ import utils.UUIDGenerator;
 
 public class RoomInputController {
 	Scanner sc = new Scanner(System.in);
+	Resort resortObj = new Resort();
 
 	public classes.Room roomDetails(String resortId) throws ParseException {
 		classes.Room roomData = new classes.Room();
@@ -34,7 +36,7 @@ public class RoomInputController {
 		System.out.println("Room No:");
 		roomData.setRoomNo(validateString.inputStringValidation(sc.nextLine()));
 
-		Integer totalCost = roomData.getCostPerDay() * roomData.getNoOfNights();
+		Integer totalCost = resortObj.totalCostOfRoom(roomData);
 		roomData.setTotalCost(totalCost);
 
 		System.out.println("*****************************************************************");
