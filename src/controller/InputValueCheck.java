@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 import classes.Person;
 import utils.DateFormatter;
+import utils.DateOperations;
 import utils.InputValidation;
 
 public class InputValueCheck {
@@ -14,23 +15,21 @@ public class InputValueCheck {
     Scanner sc = new Scanner(System.in);
     DateFormatter dateObj = new DateFormatter();
     ConstantValueCheck constantValCheck = new ConstantValueCheck();
+    DateOperations durationCalc = new DateOperations();
 
     public Date dateCheck() throws ParseException {
 
-        boolean isDateOk = true;
-        while (isDateOk == true) {
+        boolean isDateOk = false;
+        while (isDateOk == false) {
             String dateCheckStr = validateString.trimString(sc.nextLine());
             Date finalDateVariable;
-            if (dateCheckStr.equals("Null")) {
-                return null;
-            }
             finalDateVariable = dateObj.dateFormatter(dateCheckStr);
             if (finalDateVariable == null) {
-                isDateOk = true;
+                isDateOk = false;
                 System.out.println("Invalid input format!! Please try again");
                 System.out.println("Please enter time format in \"yyyy-MM-dd HH:mm:ss:");
             } else {
-                isDateOk = false;
+                isDateOk = true;
                 return finalDateVariable;
             }
         }
@@ -39,18 +38,50 @@ public class InputValueCheck {
 
     public String intCheck() {
 
-        boolean isIntCheckOk = true;
-        while (isIntCheckOk == true) {
+        boolean isIntCheckOk = false;
+        while (isIntCheckOk == false) {
             String returnStr = validateString.intValidator(sc.nextLine());
             if (returnStr.equals("0")) {
                 return "0";
             }
             if (returnStr.equals("invalid input")) {
-                isIntCheckOk = true;
+                isIntCheckOk = false;
                 System.out.println("Invalid input !! Please enter input in numbers");
 
             } else {
-                isIntCheckOk = false;
+                isIntCheckOk = true;
+                return returnStr;
+            }
+        }
+        return null;
+    }
+
+    public String requiredIntFieldCheck() {
+
+        boolean isRequiredIntFieldCheckIsOk = false;
+        InputValueCheck currentClassObj = new InputValueCheck();
+        while (isRequiredIntFieldCheckIsOk == false) {
+            String intValue = currentClassObj.intCheck();
+            if (intValue.equals("0")) {
+                isRequiredIntFieldCheckIsOk = false;
+                System.out.println("Input field cannot be empty!!");
+            } else {
+                isRequiredIntFieldCheckIsOk = true;
+                return intValue;
+            }
+        }
+        return null;
+    }
+
+    public String requiredStringFieldCheck() {
+        boolean isRequiredStringFieldCheckIsOk = false;
+        while (isRequiredStringFieldCheckIsOk == false) {
+            String returnStr = validateString.inputStringValidation(sc.nextLine());
+            if (returnStr.equals("Null")) {
+                isRequiredStringFieldCheckIsOk = false;
+                System.out.println("Input field cannot be empty!!");
+            } else {
+                isRequiredStringFieldCheckIsOk = true;
                 return returnStr;
             }
         }
@@ -138,6 +169,60 @@ public class InputValueCheck {
         return null;
     }
 
+    public Object[] activityDateInputCheck(Date[] tourFromToDates) throws ParseException {
+        Boolean isActivityInputIsOk = false;
+        InputValueCheck currentClassObj = new InputValueCheck();
+
+        while (isActivityInputIsOk == false) {
+            System.out.println("Start time in \"yyyy-MM-dd HH:mm:ss format:");
+            Date activityStartTime = currentClassObj.dateCheck();
+
+            System.out.println("Duration:-- Please enter how many hours and minutes");
+            System.out.println("Hours: ");
+            Integer hours = Integer.parseInt(currentClassObj.intCheck());
+            System.out.println("Minutes: ");
+            Integer minutes = Integer.parseInt(currentClassObj.intCheck());
+            Integer[] totalMins = { hours, minutes };
+            Integer totalMinutes = durationCalc.convertToMins(totalMins);
+
+            Date activityEndTime = durationCalc.addDurationToDate(activityStartTime, totalMinutes);
+
+            Date[] activityDates = { activityStartTime, activityEndTime };
+
+            boolean dateRangeCheckVal = currentClassObj.activityDateRangeCheck(tourFromToDates, activityDates);
+
+            if (dateRangeCheckVal == true) {
+                Object[] returnValue = new Object[] { activityStartTime, activityEndTime, totalMinutes };
+                isActivityInputIsOk = true;
+                return returnValue;
+            } else {
+                isActivityInputIsOk = false;
+            }
+        }
+        return null;
+    }
+
+    public boolean activityDateRangeCheck(Date[] tourFromToDates, Date[] activityDates) {
+        Date tourFromDate = tourFromToDates[0];
+        Date tourToDate = tourFromToDates[1];
+
+        Date activityStartDate = activityDates[0];
+        Date activityEndDate = activityDates[1];
+
+        if (activityStartDate.compareTo(activityEndDate) <= 0 && activityEndDate.compareTo(activityStartDate) >= 0) {
+            if (activityStartDate.compareTo(tourFromDate) >= 0 && activityEndDate.compareTo(tourToDate) <= 0) {
+                return true;
+            } else {
+                System.out.println("Date range is not within the tour date range!!");
+                return false;
+            }
+        } else {
+            System.out.println("Please enter correct date range");
+            return false;
+        }
+
+    }
+
     public String modeOfTransportChecker() {
         Boolean valueEntered = false;
         while (valueEntered.equals(false)) {
@@ -204,6 +289,31 @@ public class InputValueCheck {
                 return dates;
             } else {
                 System.out.println("Please enter the correct date range");
+                inputValue = false;
+            }
+        }
+        return null;
+    }
+
+    public Date[] tourDateRangeCheck(Date[] tourFromToDates) throws ParseException {
+        Boolean inputValue = false;
+        InputValueCheck currentClassObj = new InputValueCheck();
+
+        Date tourFromDate = tourFromToDates[0];
+        Date tourToDate = tourFromToDates[1];
+
+        while (inputValue.equals(false)) {
+            Date[] dateRange = currentClassObj.dateRangeCheck();
+            Date startDate = dateRange[0];
+            Date endDate = dateRange[1];
+            if (startDate == null || endDate == null) {
+                Date[] dates = { startDate, endDate };
+                return dates;
+            } else if (startDate.compareTo(tourFromDate) >= 0 && endDate.compareTo(tourToDate) <= 0) {
+                Date[] dates = { startDate, endDate };
+                return dates;
+            } else {
+                System.out.println("Date range is not within the tour date range!!");
                 inputValue = false;
             }
         }

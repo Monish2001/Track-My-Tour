@@ -13,7 +13,7 @@ import utils.*;
 public class ResortInputController {
 	Scanner sc = new Scanner(System.in);
 
-	public classes.Resort resortDetails(String tourId) throws ParseException {
+	public classes.Resort resortDetails(String tourId, Date[] tourFromToDates) throws ParseException {
 		InputValidation validateString = new InputValidation();
 		InputValueCheck valueCheck = new InputValueCheck();
 
@@ -28,14 +28,14 @@ public class ResortInputController {
 		String resortId = id.uuid();
 		resortData.setResortId(resortId);
 
-		Date[] dates = valueCheck.dateRangeCheck();
+		Date[] dates = valueCheck.tourDateRangeCheck(tourFromToDates);
 		Date resortFromDate = dates[0];
 		Date resortToDate = dates[1];
 		resortData.setFromDate(resortFromDate);
 		resortData.setToDate(resortToDate);
 
 		System.out.println("Resort Name:");
-		resortData.setResortName(validateString.inputStringValidation(sc.nextLine()));
+		resortData.setResortName(valueCheck.requiredStringFieldCheck());
 
 		System.out.println("Location:");
 		resortData.setResortLocation(validateString.inputStringValidation(sc.nextLine()));

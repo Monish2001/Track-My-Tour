@@ -25,13 +25,13 @@ public class RoomInputController {
 		roomData.setRoomId(roomId);
 
 		System.out.println("Room Type:");
-		roomData.setRoomType(validateString.inputStringValidation(sc.nextLine()));
+		roomData.setRoomType(valueCheck.requiredStringFieldCheck());
 
 		System.out.println("Cost Per Day:");
-		roomData.setCostPerDay(Integer.parseInt(valueCheck.intCheck()));
+		roomData.setCostPerDay(Integer.parseInt(valueCheck.requiredIntFieldCheck()));
 
 		System.out.println("No of Nights");
-		roomData.setNoOfNights(Integer.parseInt(valueCheck.intCheck()));
+		roomData.setNoOfNights(Integer.parseInt(valueCheck.requiredIntFieldCheck()));
 
 		System.out.println("Room No:");
 		roomData.setRoomNo(validateString.inputStringValidation(sc.nextLine()));

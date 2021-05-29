@@ -24,7 +24,7 @@ public class PersonInputController {
 		personData.setPersonId(personId);
 
 		System.out.println("Name:");
-		personData.setName(validateString.inputStringValidation(sc.nextLine()));
+		personData.setName(valueCheck.requiredStringFieldCheck());
 
 		System.out.println("Age:");
 		personData.setAge(Integer.parseInt(valueCheck.intCheck()));

@@ -10,7 +10,7 @@ import utils.*;
 public class JourneyDetailsInputController {
 	Scanner sc = new Scanner(System.in);
 
-	public classes.JourneyDetails journeyDetails(String tourId) throws ParseException {
+	public classes.JourneyDetails journeyDetails(String tourId, Date[] tourFromToDates) throws ParseException {
 		InputValidation validateString = new InputValidation();
 		InputValueCheck valueCheck = new InputValueCheck();
 		DateDifference durationCalc = new DateDifference();
@@ -24,7 +24,7 @@ public class JourneyDetailsInputController {
 		String journeyDetailsId = id.uuid();
 		journeyDetailsData.setJourneyDetailsId(journeyDetailsId);
 
-		Date[] dates = valueCheck.dateRangeCheck();
+		Date[] dates = valueCheck.tourDateRangeCheck(tourFromToDates);
 		Date journeyStartTime = dates[0];
 		Date journeyReachedTime = dates[1];
 		journeyDetailsData.setStartTime(journeyStartTime);
@@ -34,7 +34,7 @@ public class JourneyDetailsInputController {
 		String modeOfTransport = valueCheck.modeOfTransportChecker();
 		journeyDetailsData.setModeOfTransport(modeOfTransport);
 
-		System.out.println("Drive Mode:");
+		System.out.println("Drive Mode: (Difficulty level)");
 		journeyDetailsData.setDriveMode(validateString.inputStringValidation(sc.nextLine()));
 
 		System.out.println("Weather:");

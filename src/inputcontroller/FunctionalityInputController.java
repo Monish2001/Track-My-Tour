@@ -50,14 +50,14 @@ public class FunctionalityInputController {
     public String toursBasedOnLocation() {
         System.out.println("Trips based on type of location");
         System.out.println("Please enter the type of location");
-        String typeOfLocation = validateString.inputStringValidation(sc.nextLine());
+        String typeOfLocation = valueCheck.requiredStringFieldCheck();
         return typeOfLocation;
     }
 
     public String toursBasedOnTransport() {
         System.out.println("List trips based on transport");
         System.out.println("Please enter the type of transport");
-        String modeOfTransport = validateString.inputStringValidation(sc.nextLine());
+        String modeOfTransport = valueCheck.requiredStringFieldCheck();
         return modeOfTransport;
     }
 

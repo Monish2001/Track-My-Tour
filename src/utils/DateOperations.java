@@ -7,7 +7,7 @@ public class DateOperations {
     public Integer convertToMins(Integer[] dateStr) {
         Integer hours = dateStr[0];
         Integer mins = dateStr[1];
-        Integer durationInMin = hours * 60 + mins;
+        Integer durationInMin = (hours * 60) + mins;
         return durationInMin;
     }
 
