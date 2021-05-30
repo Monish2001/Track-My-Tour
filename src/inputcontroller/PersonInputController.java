@@ -13,15 +13,19 @@ public class PersonInputController {
 	public classes.Person personDetails() {
 		InputValidation validateString = new InputValidation();
 		InputValueCheck valueCheck = new InputValueCheck();
+		CodeGenerator codeGenerator = new CodeGenerator();
+		UUIDGenerator id = new UUIDGenerator();
 
 		classes.Person personData = new classes.Person();
 		List<String> phoneNumber = new ArrayList<String>();
 
 		System.out.println("******PLEASE ENTER THE PERSON DETAILS**********");
 
-		UUIDGenerator id = new UUIDGenerator();
 		String personId = id.uuid();
 		personData.setPersonId(personId);
+
+		String personCode = codeGenerator.getCode();
+		personData.setPersonCode(personCode);
 
 		System.out.println("Name:");
 		personData.setName(valueCheck.requiredStringFieldCheck());
@@ -46,7 +50,7 @@ public class PersonInputController {
 
 		personData.setPhoneNum(phoneNumber);
 
-		System.out.println("For your information Person id is: " + personId);
+		System.out.println("For your information Person id is: " + personCode);
 		return personData;
 	}
 }

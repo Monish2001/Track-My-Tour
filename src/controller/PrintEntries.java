@@ -7,7 +7,7 @@ import classes.*;
 public class PrintEntries {
     PrintDetails printDetails = new PrintDetails();
 
-    public void printTourEntries(List<Tour> tourList) {
+    public void printTourEntries(List<Tour> tourList, List<Person> personList) {
         if (tourList.size() == 0) {
             System.out.println("There is no tour entries. Please add some tour entry!!");
         } else {
@@ -40,7 +40,7 @@ public class PrintEntries {
 
                 for (int connection = 0; connection < tour.getConnections().size(); connection++) {
                     Connection connectionEntity = tour.getConnections().get(connection);
-                    printDetails.printConnectionDetails(connectionEntity);
+                    printDetails.printConnectionDetails(connectionEntity, personList);
                 }
             }
         }

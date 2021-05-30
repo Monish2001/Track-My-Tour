@@ -11,17 +11,22 @@ import classes.*;
 public class ActivityInputController {
 	Scanner sc = new Scanner(System.in);
 
-	public Activity activities(String tourId, Date[] tourFromToDates) throws ParseException {
+	public Activity activities(String tourId, String tourCode, Date[] tourFromToDates) throws ParseException {
 		InputValidation validateString = new InputValidation();
 		InputValueCheck valueCheck = new InputValueCheck();
+		CodeGenerator codeGenerator = new CodeGenerator();
+		UUIDGenerator id = new UUIDGenerator();
 
 		Activity activity = new Activity();
 
 		activity.setTourid(tourId);
+		activity.setTourCode(tourCode);
 
-		UUIDGenerator id = new UUIDGenerator();
 		String activityId = id.uuid();
 		activity.setActivityId(activityId);
+
+		String activityCode = codeGenerator.getCode();
+		activity.setActivityCode(activityCode);
 
 		System.out.println("Activity Name:");
 		String activityName = valueCheck.requiredStringFieldCheck();

@@ -12,20 +12,26 @@ import classes.Connection;
 public class ConnectionInputController {
 	Scanner sc = new Scanner(System.in);
 
-	public Connection connections(String tourId, String personId, List<Person> personList) throws ParseException {
+	public Connection connections(String tourId, String tourCode, String personId, List<Person> personList)
+			throws ParseException {
 		Connection connection = new Connection();
 		InputValidation validateString = new InputValidation();
 		InputValueCheck valueCheck = new InputValueCheck();
+		CodeGenerator codeGenerator = new CodeGenerator();
+		UUIDGenerator id = new UUIDGenerator();
 
 		// System.out.println("Please Enter the tour id");
 		connection.setTourId(tourId);
+		connection.setTourCode(tourCode);
 
-		UUIDGenerator id = new UUIDGenerator();
 		String connectionId = id.uuid();
 		connection.setConnectionId(connectionId);
 
 		// System.out.println("Person id:");
 		connection.setPersonId(personId);
+
+		String connectionCode = codeGenerator.getCode();
+		connection.setConnectionCode(connectionCode);
 
 		System.out.println("Connected to person id:");
 		// connection.setConnectedToPersonId(valueCheck.uuidCheck());

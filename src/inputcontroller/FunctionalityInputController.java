@@ -23,7 +23,9 @@ public class FunctionalityInputController {
 
         printDetails.printTourId(tourList);
         System.out.println("Please enter the tour id:");
-        String tourId = valueCheck.uuidCheck();
+        String tourCode = valueCheck.codeCheck();
+        String tourId = valueCheck.getTourId(tourList, tourCode);
+        // String tourId = valueCheck.uuidCheck();
         return tourId;
     }
 
@@ -33,7 +35,9 @@ public class FunctionalityInputController {
         System.out.println("Refer the tour id listed here");
         printDetails.printTourId(tourList);
         System.out.println("Please enter the tour id:");
-        String tourId = valueCheck.uuidCheck();
+        String tourCode = valueCheck.codeCheck();
+        String tourId = valueCheck.getTourId(tourList, tourCode);
+        // String tourId = valueCheck.uuidCheck();
         return tourId;
     }
 
@@ -43,7 +47,9 @@ public class FunctionalityInputController {
         System.out.println("Refer the tour id listed here");
         printDetails.printTourId(tourList);
         System.out.println("Please enter the tour id:");
-        String tourId = valueCheck.uuidCheck();
+        String tourCode = valueCheck.codeCheck();
+        String tourId = valueCheck.getTourId(tourList, tourCode);
+        // String tourId = valueCheck.uuidCheck();
         return tourId;
     }
 
@@ -67,7 +73,9 @@ public class FunctionalityInputController {
         System.out.println("Refer the tour id listed here");
         printDetails.printTourId(tourList);
         System.out.println("Please enter the tour id:");
-        String tourIdForDirectFriends = valueCheck.uuidCheck();
+        // String tourIdForDirectFriends = valueCheck.uuidCheck();
+        String tourCode = valueCheck.codeCheck();
+        String tourIdForDirectFriends = valueCheck.getTourId(tourList, tourCode);
         return tourIdForDirectFriends;
     }
 
@@ -77,8 +85,10 @@ public class FunctionalityInputController {
         System.out.println("Refer the tour id listed here");
         printDetails.printTourId(tourList);
         System.out.println("Please enter the tour id:");
-        String tourIdForIndirectConnections = valueCheck.uuidCheck();
-        return tourIdForIndirectConnections;
+        // String tourIdForIndirectConnections = valueCheck.uuidCheck();
+        String tourCode = valueCheck.codeCheck();
+        String tourIdForIndirectFriends = valueCheck.getTourId(tourList, tourCode);
+        return tourIdForIndirectFriends;
     }
 
     public Date[] toursOnDateRange() throws ParseException {

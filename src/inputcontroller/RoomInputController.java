@@ -5,6 +5,7 @@ import java.util.Scanner;
 import classes.*;
 
 import controller.InputValueCheck;
+import utils.CodeGenerator;
 import utils.InputValidation;
 import utils.UUIDGenerator;
 
@@ -12,17 +13,22 @@ public class RoomInputController {
 	Scanner sc = new Scanner(System.in);
 	Resort resortObj = new Resort();
 
-	public classes.Room roomDetails(String resortId) throws ParseException {
+	public classes.Room roomDetails(String resortId, String resortCode) throws ParseException {
 		classes.Room roomData = new classes.Room();
 		InputValidation validateString = new InputValidation();
 		InputValueCheck valueCheck = new InputValueCheck();
+		CodeGenerator codeGenerator = new CodeGenerator();
+		UUIDGenerator id = new UUIDGenerator();
 
 		// System.out.println("Please Enter the resort id");
 		roomData.setResortId(resortId);
+		roomData.setResortCode(resortCode);
 
-		UUIDGenerator id = new UUIDGenerator();
 		String roomId = id.uuid();
 		roomData.setRoomId(roomId);
+
+		String roomCode = codeGenerator.getCode();
+		roomData.setRoomCode(roomCode);
 
 		System.out.println("Room Type:");
 		roomData.setRoomType(valueCheck.requiredStringFieldCheck());

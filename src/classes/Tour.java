@@ -9,6 +9,7 @@ import controller.PersonNameFinder;
 public class Tour {
 	String personId;
 	String tourId;
+	String tourCode;
 	String origin;
 	String destination;
 	Date tourStartDate;
@@ -34,6 +35,14 @@ public class Tour {
 
 	public void setTourId(String tourId) {
 		this.tourId = tourId;
+	}
+
+	public String getTourCode() {
+		return this.tourCode;
+	}
+
+	public void setTourCode(String tourCode) {
+		this.tourCode = tourCode;
 	}
 
 	public String getOrigin() {

@@ -10,19 +10,25 @@ import utils.*;
 public class JourneyDetailsInputController {
 	Scanner sc = new Scanner(System.in);
 
-	public classes.JourneyDetails journeyDetails(String tourId, Date[] tourFromToDates) throws ParseException {
+	public classes.JourneyDetails journeyDetails(String tourId, String tourCode, Date[] tourFromToDates)
+			throws ParseException {
 		InputValidation validateString = new InputValidation();
 		InputValueCheck valueCheck = new InputValueCheck();
 		DateDifference durationCalc = new DateDifference();
+		UUIDGenerator id = new UUIDGenerator();
+		CodeGenerator codeGenerator = new CodeGenerator();
 
 		classes.JourneyDetails journeyDetailsData = new classes.JourneyDetails();
 
 		// System.out.println("Please Enter the tour id");
 		journeyDetailsData.setTourId(tourId);
+		journeyDetailsData.setTourCode(tourCode);
 
-		UUIDGenerator id = new UUIDGenerator();
 		String journeyDetailsId = id.uuid();
 		journeyDetailsData.setJourneyDetailsId(journeyDetailsId);
+
+		String journeyDetailsCode = codeGenerator.getCode();
+		journeyDetailsData.setJourneyDetailsCode(journeyDetailsCode);
 
 		Date[] dates = valueCheck.tourDateRangeCheck(tourFromToDates);
 		Date journeyStartTime = dates[0];

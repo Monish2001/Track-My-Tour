@@ -13,9 +13,11 @@ import utils.*;
 public class ResortInputController {
 	Scanner sc = new Scanner(System.in);
 
-	public classes.Resort resortDetails(String tourId, Date[] tourFromToDates) throws ParseException {
+	public classes.Resort resortDetails(String tourId, String tourCode, Date[] tourFromToDates) throws ParseException {
 		InputValidation validateString = new InputValidation();
 		InputValueCheck valueCheck = new InputValueCheck();
+		UUIDGenerator id = new UUIDGenerator();
+		CodeGenerator codeGenerator = new CodeGenerator();
 
 		classes.Resort resortData = new classes.Resort();
 		RoomInputController roomInputController = new RoomInputController();
@@ -23,10 +25,13 @@ public class ResortInputController {
 
 		// System.out.println("Please Enter the tour id");
 		resortData.setTourid(tourId);
+		resortData.setTourCode(tourCode);
 
-		UUIDGenerator id = new UUIDGenerator();
 		String resortId = id.uuid();
 		resortData.setResortId(resortId);
+
+		String resortCode = codeGenerator.getCode();
+		resortData.setResortCode(resortCode);
 
 		Date[] dates = valueCheck.tourDateRangeCheck(tourFromToDates);
 		Date resortFromDate = dates[0];
@@ -40,16 +45,16 @@ public class ResortInputController {
 		System.out.println("Location:");
 		resortData.setResortLocation(validateString.inputStringValidation(sc.nextLine()));
 
-		System.out.println("\n");
-		System.out.println("Your resort id is: " + resortData.getResortId());
-		System.out.println("\n");
+		// System.out.println("\n");
+		// System.out.println("Your resort id is: " + resortData.getResortId());
+		// System.out.println("\n");
 
 		System.out.println("*****************PLEASE ENTER ROOM DETAILS***************");
 		System.out.println("How many rooms do you need to add");
 		int count = Integer.parseInt(valueCheck.intCheck());
 		int index = 0;
 		while (index < count) {
-			roomList.add(roomInputController.roomDetails(resortId));
+			roomList.add(roomInputController.roomDetails(resortId, resortCode));
 			index++;
 		}
 		resortData.setRoom(roomList);

@@ -2,7 +2,9 @@ package classes;
 
 public class Room {
 	private String roomId;
+	private String roomCode;
 	private String resortId;
+	private String resortCode;
 	private String roomType;
 	private Integer costPerDay;
 	private Integer totalCost;
@@ -17,12 +19,28 @@ public class Room {
 		this.roomId = roomId;
 	}
 
+	public String getRoomCode() {
+		return this.roomCode;
+	}
+
+	public void setRoomCode(String roomCode) {
+		this.roomCode = roomCode;
+	}
+
 	public String getResortId() {
 		return resortId;
 	}
 
 	public void setResortId(String resortId) {
 		this.resortId = resortId;
+	}
+
+	public String getResortCode() {
+		return this.resortCode;
+	}
+
+	public void setResortCode(String resortCode) {
+		this.resortCode = resortCode;
 	}
 
 	public String getRoomType() {

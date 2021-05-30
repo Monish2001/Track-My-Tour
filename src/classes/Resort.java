@@ -5,7 +5,9 @@ import java.util.List;
 
 public class Resort {
 	private String tourid;
+	private String tourCode;
 	private String resortId;
+	private String resortCode;
 	private Date fromDate;
 	private Date toDate;
 	private String resortName;
@@ -20,12 +22,28 @@ public class Resort {
 		this.tourid = tourid;
 	}
 
+	public String getTourCode() {
+		return this.tourCode;
+	}
+
+	public void setTourCode(String tourCode) {
+		this.tourCode = tourCode;
+	}
+
 	public String getResortId() {
 		return resortId;
 	}
 
 	public void setResortId(String resortId) {
 		this.resortId = resortId;
+	}
+
+	public String getResortCode() {
+		return this.resortCode;
+	}
+
+	public void setResortCode(String resortCode) {
+		this.resortCode = resortCode;
 	}
 
 	public Date getFromDate() {

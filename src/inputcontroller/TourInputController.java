@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 import classes.*;
 import controller.InputValueCheck;
+import utils.CodeGenerator;
 import utils.InputValidation;
 import utils.UUIDGenerator;
 
@@ -18,6 +19,8 @@ public class TourInputController {
 		Tour tourData = new Tour();
 		InputValidation validateString = new InputValidation();
 		InputValueCheck valueCheck = new InputValueCheck();
+		UUIDGenerator id = new UUIDGenerator();
+		CodeGenerator codeGenerator = new CodeGenerator();
 
 		List<JourneyDetails> journeyList = new ArrayList<JourneyDetails>();
 		List<Resort> resortList = new ArrayList<Resort>();
@@ -37,9 +40,11 @@ public class TourInputController {
 		String personId = valueCheck.doesPersonExists(personList);
 		tourData.setPersonId(personId);
 
-		UUIDGenerator id = new UUIDGenerator();
 		String tourId = id.uuid();
 		tourData.setTourId(tourId);
+
+		String tourCode = codeGenerator.getCode();
+		tourData.setTourCode(tourCode);
 
 		// System.out.println("Tour Start Date in \"yyyy-MM-dd HH:mm:ss format:");
 
@@ -63,14 +68,14 @@ public class TourInputController {
 		System.out.println("Type of location: ");
 		tourData.setTypeOfLocation(valueCheck.requiredStringFieldCheck());
 
-		System.out.println("For your information TOUR ID is: " + tourId);
+		System.out.println("For your information TOUR ID is: " + tourCode);
 
 		System.out.println("****************PLEASE ENTER THE JOURNEY DETAILS****************");
 		System.out.println("How many journey details do you need to add");
 		int totalJourneyCount = Integer.parseInt(validateString.intValidator(sc.nextLine()));
 		int journeyAdded = 0;
 		while (journeyAdded < totalJourneyCount) {
-			JourneyDetails journey = journeyDetailsInputControllerData.journeyDetails(tourId, tourDates);
+			JourneyDetails journey = journeyDetailsInputControllerData.journeyDetails(tourId, tourCode, tourDates);
 			journeyList.add(journey);
 			journeyAdded++;
 		}
@@ -81,7 +86,7 @@ public class TourInputController {
 		int totalResortCount = Integer.parseInt(valueCheck.intCheck());
 		int resortsAdded = 0;
 		while (resortsAdded < totalResortCount) {
-			Resort resort = resortInputController.resortDetails(tourId, tourDates);
+			Resort resort = resortInputController.resortDetails(tourId, tourCode, tourDates);
 			resortList.add(resort);
 			resortsAdded++;
 		}
@@ -92,7 +97,7 @@ public class TourInputController {
 		int totalActivitiesCount = Integer.parseInt(valueCheck.intCheck());
 		int activitiesAdded = 0;
 		while (activitiesAdded < totalActivitiesCount) {
-			Activity activity = tourActivities.activities(tourId, tourDates);
+			Activity activity = tourActivities.activities(tourId, tourCode, tourDates);
 			activityList.add(activity);
 			activitiesAdded++;
 		}
@@ -114,7 +119,7 @@ public class TourInputController {
 		int totalConnectionsCount = Integer.parseInt(valueCheck.intCheck());
 		int connectionsAdded = 0;
 		while (connectionsAdded < totalConnectionsCount) {
-			Connection connection = connectionsMade.connections(tourId, personId, personList);
+			Connection connection = connectionsMade.connections(tourId, tourCode, personId, personList);
 			connectionList.add(connection);
 			connectionsAdded++;
 		}

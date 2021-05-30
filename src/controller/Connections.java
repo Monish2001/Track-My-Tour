@@ -50,7 +50,7 @@ public class Connections {
             Tour tourDetails = tourList.get(tourVariable);
             if (tourIdForIndirectConnections.equals(tourDetails.getTourId())) {
                 touridMatchCount = 1;
-                List<String> indirectConnections = tour.directConnectionOfTour(tourDetails, personList);
+                List<String> indirectConnections = tour.indirectConnectionsOfTour(tourDetails, personList);
                 return indirectConnections;
             }
         }

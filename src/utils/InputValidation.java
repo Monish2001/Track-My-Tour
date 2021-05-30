@@ -35,6 +35,18 @@ public class InputValidation {
         }
     }
 
+    public String codeValidator(String inputString) {
+        InputValidation validatorObj = new InputValidation();
+        String validatedString = validatorObj.trimString(inputString);
+        if (validatedString.isEmpty() || validatedString.equals("Null")) {
+            return "Null";
+        } else if (validatedString.length() == 10) {
+            return validatedString;
+        } else {
+            return "invalid input";
+        }
+    }
+
     public String intValidator(String inputString) {
         InputValidation validatorObj = new InputValidation();
         String validatedString = validatorObj.trimString(inputString);

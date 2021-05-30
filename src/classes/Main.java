@@ -95,7 +95,7 @@ public class Main {
 						break;
 					}
 
-					printEntries.printTourEntries(tourList);
+					printEntries.printTourEntries(tourList, personList);
 					System.out.println("If you want to perform any operation again please press no from 1 to 11");
 					break;
 				}

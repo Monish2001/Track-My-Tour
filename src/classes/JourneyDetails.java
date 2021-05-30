@@ -4,6 +4,7 @@ import java.util.Date;;
 
 public class JourneyDetails {
 	private String journeyDetailsId;
+	private String journeyDetailsCode;
 	private Date startTime;
 	private Date reachedTime;
 	private String modeOfTransport;
@@ -12,6 +13,7 @@ public class JourneyDetails {
 	private String duration;
 	private String journeyType;
 	private String tourId;
+	private String tourCode;
 
 	public String getJourneyDetailsId() {
 		return journeyDetailsId;
@@ -19,6 +21,14 @@ public class JourneyDetails {
 
 	public void setJourneyDetailsId(String journeyDetailsId) {
 		this.journeyDetailsId = journeyDetailsId;
+	}
+
+	public String getJourneyDetailsCode() {
+		return this.journeyDetailsCode;
+	}
+
+	public void setJourneyDetailsCode(String journeyDetailsCode) {
+		this.journeyDetailsCode = journeyDetailsCode;
 	}
 
 	public Date getStartTime() {
@@ -84,6 +94,14 @@ public class JourneyDetails {
 
 	public void setTourId(String tourId) {
 		this.tourId = tourId;
+	}
+
+	public String getTourCode() {
+		return this.tourCode;
+	}
+
+	public void setTourCode(String tourCode) {
+		this.tourCode = tourCode;
 	}
 
 }

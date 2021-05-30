@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import classes.Person;
+import classes.Tour;
 import utils.DateFormatter;
 import utils.DateOperations;
 import utils.InputValidation;
@@ -102,6 +103,21 @@ public class InputValueCheck {
             }
         }
         // return returnStr;
+        return null;
+    }
+
+    public String codeCheck() {
+        boolean isCodeOk = false;
+        while (isCodeOk == false) {
+            String returnStr = validateString.codeValidator(sc.nextLine());
+            if (returnStr.equals("invalid input") || returnStr.equals("Null")) {
+                isCodeOk = false;
+                System.out.println("Invalid input!! Please enter the correct uuid");
+            } else {
+                isCodeOk = true;
+                return returnStr;
+            }
+        }
         return null;
     }
 
@@ -246,15 +262,21 @@ public class InputValueCheck {
         Boolean inputValue = false;
         while (inputValue.equals(false)) {
 
-            String personId = presentClassobj.uuidCheck();
-            for (int person = 0; person < personList.size(); person++) {
-                Person personEntity = personList.get(person);
-                if (personEntity.getPersonId().equals(personId)) {
-                    return personId;
-                }
+            String code = presentClassobj.codeCheck();
+            String personId = presentClassobj.getPersonId(personList, code);
+            if (personId != null) {
+                return personId;
             }
-            System.out.println("Person does not exists!! Please enter correct person id");
-            inputValue = false;
+            // for (int person = 0; person < personList.size(); person++) {
+            // Person personEntity = personList.get(person);
+            // if (personEntity.getPersonId().equals(personId)) {
+            // return personId;
+            // }
+            // }
+            else {
+                System.out.println("Person does not exists!! Please enter correct person id");
+                inputValue = false;
+            }
         }
         return null;
     }
@@ -315,6 +337,29 @@ public class InputValueCheck {
             } else {
                 System.out.println("Date range is not within the tour date range!!");
                 inputValue = false;
+            }
+        }
+        return null;
+    }
+
+    public String getTourId(List<Tour> tourList, String code) {
+        for (int tourVariable = 0; tourVariable < tourList.size(); tourVariable++) {
+
+            Tour tour = tourList.get(tourVariable);
+            if (tour.getTourCode().equals(code)) {
+                String tourId = tour.getTourId();
+                return tourId;
+            }
+        }
+        return null;
+    }
+
+    public String getPersonId(List<Person> personList, String code) {
+        for (int personVariable = 0; personVariable < personList.size(); personVariable++) {
+            Person person = personList.get(personVariable);
+            if (person.getPersonCode().equals(code)) {
+                String personId = person.getPersonId();
+                return personId;
             }
         }
         return null;
