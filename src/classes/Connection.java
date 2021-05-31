@@ -9,6 +9,7 @@ public class Connection {
 	private String tourCode;
 	private String behaviour;
 	private String intermediateFriends;
+	private String intermediateFriendsCode;
 	private String notes;
 
 	public String getConnectionId() {
@@ -73,6 +74,14 @@ public class Connection {
 
 	public void setIntermediateFriends(String intermediateFriends) {
 		this.intermediateFriends = intermediateFriends;
+	}
+
+	public String getIntermediateFriendsCode() {
+		return this.intermediateFriendsCode;
+	}
+
+	public void setIntermediateFriendsCode(String intermediateFriendsCode) {
+		this.intermediateFriendsCode = intermediateFriendsCode;
 	}
 
 	public String getNotes() {

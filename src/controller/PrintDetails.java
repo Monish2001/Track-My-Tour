@@ -71,10 +71,20 @@ public class PrintDetails {
         }
     }
 
+    public void printPersonDetails(List<Person> personList) {
+        System.out.println("**********************PLEASE REFER FOR PERSON ID*************************");
+        for (Person person : personList) {
+            System.out.println("*******************************************************");
+            System.out.println("Person Id: " + person.getPersonCode());
+            System.out.println("Person name: " + person.getName());
+            System.out.println("*******************************************************");
+        }
+    }
+
     public void printTourDetails(Tour tour) {
         System.out.println("**********************TOUR DETAILS*************************");
         System.out.println(CommonStrings.TOUR_ID + ": " + tour.getTourCode());
-        System.out.println(CommonStrings.PERSON_ID + ": " + tour.getPersonId());
+        System.out.println(CommonStrings.PERSON_ID + ": " + tour.getPersonCode());
         System.out.println(CommonStrings.TOUR_ORIGIN + ": " + tour.getOrigin());
         System.out.println(CommonStrings.TOUR_DESTINATION + ": " + tour.getDestination());
         System.out.println(CommonStrings.TOUR_START_DATE + ": " + tour.getTourStartDate());
@@ -101,7 +111,7 @@ public class PrintDetails {
 
     public void printResortDetails(Resort resort) {
         System.out.println("**********************RESORT DETAILS*************************");
-        System.out.println("Resort ID: " + resort.getResortId());
+        System.out.println("Resort ID: " + resort.getResortCode());
         System.out.println(CommonStrings.TOUR_ID + ": " + resort.getTourCode());
         System.out.println("Resort From Date: " + resort.getFromDate());
         System.out.println("Resort To Date: " + resort.getToDate());
@@ -111,7 +121,7 @@ public class PrintDetails {
     }
 
     public void printRoomDetails(Room room) {
-        System.out.println("Room ID: " + room.getRoomId());
+        System.out.println("Room ID: " + room.getRoomCode());
         System.out.println("Resort ID: " + room.getResortCode());
         System.out.println("Room Type: " + room.getRoomType());
         System.out.println("Room Cost Per Day: " + room.getCostPerDay());
@@ -142,7 +152,7 @@ public class PrintDetails {
                 + personNameFinder.getPersonName(connection.getConnectedToPersonId(), personList));
         System.out.println(CommonStrings.TOUR_ID + ": " + connection.getTourCode());
         System.out.println("Behaviour: " + connection.getBehaviour());
-        System.out.println("Intermediate Friends ID: " + connection.getIntermediateFriends());
+        System.out.println("Intermediate Friends ID: " + connection.getIntermediateFriendsCode());
         System.out.println("Notes: " + connection.getNotes());
         System.out.println("\n");
     }

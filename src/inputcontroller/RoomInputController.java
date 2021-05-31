@@ -43,7 +43,7 @@ public class RoomInputController {
 		System.out.println("Room No:");
 		roomData.setRoomNo(validateString.inputStringValidation(sc.nextLine()));
 
-		Integer totalCost = resortObj.totalCostOfRoom(roomData);
+		Integer totalCost = resortObj.costOfRoom(roomData);
 		roomData.setTotalCost(totalCost);
 
 		System.out.println("*****************************************************************");

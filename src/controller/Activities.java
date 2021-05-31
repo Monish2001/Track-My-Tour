@@ -6,8 +6,9 @@ import java.util.List;
 import classes.*;
 
 public class Activities {
+    Tour tourObj = new Tour();
 
-    public List<String> ListOfActivities(List<Tour> tourList, String tourId) {
+    public List<String> listOfActivities(List<Tour> tourList, String tourId) {
         List<String> tourActivities = new ArrayList<String>();
         int touridMatchCount = 0;
         if (tourList.size() == 0) {
@@ -19,16 +20,7 @@ public class Activities {
             Tour tourDetails = tourList.get(tourVariable);
             if (tourId.equals(tourDetails.getTourId())) {
                 touridMatchCount = 1;
-                if (tourDetails.getActivities().size() == 0) {
-                    System.out.println("No activities in the given tour!!");
-                    break;
-                } else {
-                    for (int actitvity = 0; actitvity < tourDetails.getActivities().size(); actitvity++) {
-                        Activity activities = tourDetails.getActivities().get(actitvity);
-                        tourActivities.add(activities.getActivityName());
-                    }
-                    break;
-                }
+                tourActivities = tourObj.listOfActivitiesOfTour(tourDetails);
             }
         }
         if (touridMatchCount <= 0) {

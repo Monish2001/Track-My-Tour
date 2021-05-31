@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import controller.*;
+import inputcontroller.ConnectionInputController;
 import inputcontroller.FunctionalityInputController;
 import inputcontroller.PersonInputController;
 import inputcontroller.TourInputController;
@@ -19,16 +20,18 @@ public class Main {
 				.println("******************************TRACK MY TOUR***********************************************");
 		System.out.println("****************************OPERATIONS PERFORMED*****************************************");
 		System.out.println(
-				"1.Add Person details \n 2.Add a trip entry\n 3.List the trip entries\n 4.Total cost of single trip\n 5.Cost for trip stay in hotel\n 6.List trips based on type of location\n 7.List trips based on transport\n 8.List direct friend in a trip\n 9.List friends of friends in a trip\n 10.List the trip with given date range\n 11.List the activities and total activities cost in a trip");
+				"1.Add Person details \n 2.Add a trip entry\n 3.List the trip entries\n 4.Total cost of single trip\n 5.Cost for trip stay in hotel\n 6.List trips based on type of location\n 7.List trips based on transport\n 8.List direct friend in a trip\n 9.List friends of friends in a trip\n 10.List the trip with given date range\n 11.List the activities and total activities cost in a trip\n 12.Make connections outside the tour\n");
 		System.out.println("If you want to close then please type as 'exit'");
 		System.out.println("Before adding tour details please enter the person details to know your ID");
 		System.out.println("*****************************************************************************************");
 
 		List<Person> personList = new ArrayList<Person>();
 		List<Tour> tourList = new ArrayList<Tour>();
+		List<Connection> connectionList = new ArrayList<Connection>();
 
 		TourInputController tourInputController = null;
 		PersonInputController personInputController = null;
+		ConnectionInputController connectionInputController = null;
 
 		PrintEntries printEntries = null;
 		CostFinder costFinder = null;
@@ -60,7 +63,7 @@ public class Main {
 					Person person = personInputController.personDetails();
 					personList.add(person);
 					System.out.println("\n");
-					System.out.println("If you want to perform any operation again please press no from 1 to 11");
+					System.out.println("If you want to perform any operation again please press no from 1 to 12");
 					break;
 				}
 				case "2": {
@@ -74,13 +77,13 @@ public class Main {
 						System.out.println(
 								"Please enter the person details first to get the respective person id and enter the tour details!!");
 						System.out.println("\n");
-						System.out.println("If you want to perform any operation again please press no from 1 to 11");
+						System.out.println("If you want to perform any operation again please press no from 1 to 12");
 						break;
 					}
-					tour = tourInputController.tourDetails(personList);
+					tour = tourInputController.tourDetails(personList, connectionList);
 					tourList.add(tour);
 					System.out.println("\n");
-					System.out.println("If you want to perform any operation again please press no from 1 to 11");
+					System.out.println("If you want to perform any operation again please press no from 1 to 12");
 					break;
 				}
 				case "3": {
@@ -96,7 +99,7 @@ public class Main {
 					}
 
 					printEntries.printTourEntries(tourList, personList);
-					System.out.println("If you want to perform any operation again please press no from 1 to 11");
+					System.out.println("If you want to perform any operation again please press no from 1 to 12");
 					break;
 				}
 				case "4": {
@@ -119,7 +122,7 @@ public class Main {
 					}
 					printDetails.printTotalCostOfTour(totalCostOfTour);
 
-					System.out.println("If you want to perform any operation again please press no from 1 to 11");
+					System.out.println("If you want to perform any operation again please press no from 1 to 12");
 					System.out.println("\n");
 					break;
 				}
@@ -144,7 +147,7 @@ public class Main {
 					printDetails.printCostOfTourStay(costForStay);
 
 					System.out.println("\n");
-					System.out.println("If you want to perform any operation again please press no from 1 to 11");
+					System.out.println("If you want to perform any operation again please press no from 1 to 12");
 					System.out.println("\n");
 					break;
 				}
@@ -167,7 +170,7 @@ public class Main {
 					}
 
 					System.out.println("\n");
-					System.out.println("If you want to perform any operation again please press no from 1 to 11");
+					System.out.println("If you want to perform any operation again please press no from 1 to 12");
 					break;
 				}
 				case "7": {
@@ -191,7 +194,7 @@ public class Main {
 					}
 
 					System.out.println("\n");
-					System.out.println("If you want to perform any operation again please press no from 1 to 11");
+					System.out.println("If you want to perform any operation again please press no from 1 to 12");
 					break;
 				}
 				case "8": {
@@ -214,7 +217,7 @@ public class Main {
 					}
 
 					System.out.println("\n");
-					System.out.println("If you want to perform any operation again please press no from 1 to 11");
+					System.out.println("If you want to perform any operation again please press no from 1 to 12");
 					break;
 				}
 				case "9": {
@@ -237,7 +240,7 @@ public class Main {
 					}
 
 					System.out.println("\n");
-					System.out.println("If you want to perform any operation again please press no from 1 to 11");
+					System.out.println("If you want to perform any operation again please press no from 1 to 12");
 					break;
 				}
 				case "10": {
@@ -255,7 +258,7 @@ public class Main {
 					Date[] date = inputModel.toursOnDateRange();
 					if (date[0] == null || date[1] == null) {
 						System.out.println("Invalid input!!");
-						System.out.println("If you want to perform any operation again please press no from 1 to 11");
+						System.out.println("If you want to perform any operation again please press no from 1 to 12");
 						System.out.println("\n");
 						break;
 					}
@@ -266,7 +269,7 @@ public class Main {
 						}
 					}
 
-					System.out.println("If you want to perform any operation again please press no from 1 to 11");
+					System.out.println("If you want to perform any operation again please press no from 1 to 12");
 					System.out.println("\n");
 					break;
 				}
@@ -286,22 +289,36 @@ public class Main {
 					}
 
 					String tourIdForActivities = inputModel.activities(tourList);
-					List<String> activities = listActivities.ListOfActivities(tourList, tourIdForActivities);
+					List<String> activities = listActivities.listOfActivities(tourList, tourIdForActivities);
 					if (activities.size() != 0) {
 						printDetails.printActivities(activities);
 						Integer totalActivityCost = costFinder.costOfActivities(tourList, tourIdForActivities);
 						printDetails.costOfActivities(totalActivityCost);
 					}
 					System.out.println("\n");
-					System.out.println("If you want to perform any operation again please press no from 1 to 11");
+					System.out.println("If you want to perform any operation again please press no from 1 to 12");
 					break;
 				}
+
+				case "12":
+					System.out.println("Make connections outside the tour!!");
+					if (connectionInputController == null) {
+						connectionInputController = new ConnectionInputController();
+					}
+
+					Connection connection = connectionInputController.connections(null, null, null, personList,
+							connectionList);
+					connectionList.add(connection);
+					System.out.println("\n");
+					System.out.println("If you want to perform any operation again please press no from 1 to 12");
+					break;
+
 				case "exit":
 					condition = 0;
 					break;
 
 				default:
-					System.out.println("Please enter a valid input from 1 to 11");
+					System.out.println("Please enter a valid input from 1 to 12");
 					break;
 			}
 		}

@@ -1,10 +1,12 @@
 package controller;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
+import classes.Connection;
 import classes.Person;
 import classes.Tour;
 import utils.DateFormatter;
@@ -121,50 +123,142 @@ public class InputValueCheck {
         return null;
     }
 
-    public String intermediateUuidCheck() {
+    public List<String> intermediateUuidCheck(List<Person> personList, String ownerId, String connectedToPersonId,
+            List<Connection> allConnectionsList) {
 
         boolean isIntermediateUuidOk = true;
+        List<String> returnCodeAndId = new ArrayList<String>();
+        InputValueCheck currentClassObj = new InputValueCheck();
         while (isIntermediateUuidOk == true) {
             String inputVal = sc.nextLine();
             if (inputVal.isEmpty() || inputVal.equals("0")) {
-                return "0";
+                returnCodeAndId.add("0");
+                return returnCodeAndId;
             }
-            String[] arrOfuuidStr = inputVal.split(",", 0);
-            int lengthOfArrUuid = arrOfuuidStr.length;
-            int correctUuidCount = 0;
-
-            for (String uuid : arrOfuuidStr) {
-                String trimmedUuid = uuid.trim();
-                String returnValue = validateString.uuidValidator(trimmedUuid);
-                if (!trimmedUuid.equals(returnValue)) {
+            String[] codeArr = inputVal.split(",", 0);
+            List<String> arrOfUuidStr = new ArrayList<String>();
+            arrOfUuidStr.add(ownerId);
+            for (String codeVariable : codeArr) {
+                String code = validateString.codeValidator(codeVariable);
+                if (code == "invalid input") {
+                    System.out.println("Invalid id!!");
                     isIntermediateUuidOk = true;
-                    System.out.println("Invalid uuid!! Please reenter the uuid");
+                    break;
                 } else {
-                    correctUuidCount++;
+                    String personId = currentClassObj.getPersonId(personList, code);
+                    arrOfUuidStr.add(personId);
                 }
             }
-            if (correctUuidCount == lengthOfArrUuid) {
-                return inputVal;
+            arrOfUuidStr.add(connectedToPersonId);
+
+            int correctUuidCount = 0;
+
+            if (arrOfUuidStr.size() == codeArr.length + 2) {
+                for (int uuid = 1; uuid < arrOfUuidStr.size() - 1; uuid++) {
+                    String person1 = arrOfUuidStr.get(uuid - 1);
+                    String person2 = arrOfUuidStr.get(uuid);
+                    String person3 = arrOfUuidStr.get(uuid + 1);
+                    boolean hasConnectionMade = currentClassObj.isConnectionMade(person1, person2, person3,
+                            allConnectionsList);
+                    if (hasConnectionMade == true) {
+                        correctUuidCount++;
+                    } else {
+                        isIntermediateUuidOk = true;
+                        System.out.println("Please make sure the connections are in correct order!!");
+                        break;
+                    }
+                }
+            }
+
+            if (correctUuidCount == codeArr.length) {
+                arrOfUuidStr.remove(0);
+                arrOfUuidStr.remove(arrOfUuidStr.size() - 1);
+                String returnStr = "";
+                for (String returnUuid : arrOfUuidStr) {
+                    returnStr = returnStr + returnUuid + ",";
+                }
+                returnCodeAndId.add(inputVal);
+                returnCodeAndId.add(returnStr);
+                // String[] returnCodeAndId = { inputVal, returnStr };
+                return returnCodeAndId;
             }
         }
-        return "0";
+        return returnCodeAndId;
     }
 
-    public String commonChecker(String inputString) {
-        if (inputString.equals("Null")) {
-            return "Null";
+    public boolean isConnectionMade(String person1Id, String person2Id, String person3Id,
+            List<Connection> allConnectionsList) {
+        InputValueCheck currentClassObj = new InputValueCheck();
+        boolean connection1 = currentClassObj.isConnectionAvailable(person1Id, person2Id, allConnectionsList);
+        boolean connection2 = currentClassObj.isConnectionAvailable(person2Id, person3Id, allConnectionsList);
+        if (connection1 == true && connection2 == true) {
+            return true;
+        } else {
+            return false;
         }
-        boolean isUuidOk = true;
-        while (isUuidOk == true) {
-            if (inputString.equals("invalid input")) {
-                isUuidOk = true;
-                System.out.println("Invalid input!! Please enter the correct uuid");
-            } else {
-                isUuidOk = false;
-                return inputString;
+    }
+
+    public boolean isConnectionAvailable(String personId, String connectedToPersonId,
+            List<Connection> allConnectionsList) {
+        for (Connection connections : allConnectionsList) {
+            if (personId.equals(connections.getPersonId())
+                    && connectedToPersonId.equals(connections.getConnectedToPersonId())) {
+                return true;
+            } else if (personId.equals(connections.getConnectedToPersonId())
+                    && connectedToPersonId.equals(connections.getPersonId())) {
+                return true;
+            } else if (personId.equals(connections.getPersonId())) {
+                String[] intermediateConnections = connections.getIntermediateFriends().split(",", 0);
+                for (String intermediateFriends : intermediateConnections) {
+                    if (connectedToPersonId.equals(intermediateFriends)) {
+                        return true;
+                    }
+                }
+            } else if (connectedToPersonId.equals(connections.getConnectedToPersonId())) {
+                String[] intermediateConnections = connections.getIntermediateFriends().split(",", 0);
+                for (String intermediateFriends : intermediateConnections) {
+                    if (personId.equals(intermediateFriends)) {
+                        return true;
+                    }
+                }
             }
         }
-        return inputString;
+        return false;
+    }
+
+    public List<String> doesPersonExists(List<Person> personList) {
+        InputValueCheck presentClassobj = new InputValueCheck();
+        Boolean inputValue = false;
+        List<String> personCodeAndId = new ArrayList<String>();
+        while (inputValue.equals(false)) {
+
+            String code = presentClassobj.codeCheck();
+            String personId = presentClassobj.getPersonId(personList, code);
+            if (personId != null) {
+                personCodeAndId.add(code);
+                personCodeAndId.add(personId);
+                return personCodeAndId;
+            } else {
+                System.out.println("Person does not exists!! Please enter correct person id");
+                inputValue = false;
+            }
+        }
+        return null;
+    }
+
+    public String isConnectionOk(String ownerId, List<Person> personList) {
+        Boolean inputValue = false;
+        InputValueCheck currentClassObj = new InputValueCheck();
+        while (inputValue.equals(false)) {
+            List<String> connectedPersonCodeAndId = currentClassObj.doesPersonExists(personList);
+            String connectedPersonId = connectedPersonCodeAndId.get(1);
+            if (!connectedPersonId.equals(ownerId)) {
+                return connectedPersonId;
+            }
+            System.out.println("Cannot connect to yourself");
+            inputValue = false;
+        }
+        return null;
     }
 
     public String journeyChecker() {
@@ -257,44 +351,6 @@ public class InputValueCheck {
         return null;
     }
 
-    public String doesPersonExists(List<Person> personList) {
-        InputValueCheck presentClassobj = new InputValueCheck();
-        Boolean inputValue = false;
-        while (inputValue.equals(false)) {
-
-            String code = presentClassobj.codeCheck();
-            String personId = presentClassobj.getPersonId(personList, code);
-            if (personId != null) {
-                return personId;
-            }
-            // for (int person = 0; person < personList.size(); person++) {
-            // Person personEntity = personList.get(person);
-            // if (personEntity.getPersonId().equals(personId)) {
-            // return personId;
-            // }
-            // }
-            else {
-                System.out.println("Person does not exists!! Please enter correct person id");
-                inputValue = false;
-            }
-        }
-        return null;
-    }
-
-    public String isConnectionOk(String ownerId, List<Person> personList) {
-        Boolean inputValue = false;
-        InputValueCheck currentClassObj = new InputValueCheck();
-        while (inputValue.equals(false)) {
-            String connectedPersonId = currentClassObj.doesPersonExists(personList);
-            if (!connectedPersonId.equals(ownerId)) {
-                return connectedPersonId;
-            }
-            System.out.println("Cannot connect to yourself");
-            inputValue = false;
-        }
-        return null;
-    }
-
     public Date[] dateRangeCheck() throws ParseException {
         Boolean inputValue = false;
         InputValueCheck currentClassObj = new InputValueCheck();
@@ -306,7 +362,7 @@ public class InputValueCheck {
             if (startDate == null || endDate == null) {
                 Date[] dates = { startDate, endDate };
                 return dates;
-            } else if (startDate.compareTo(endDate) <= 0 && endDate.compareTo(startDate) >= 0) {
+            } else if (startDate.compareTo(endDate) < 0 && endDate.compareTo(startDate) > 0) {
                 Date[] dates = { startDate, endDate };
                 return dates;
             } else {

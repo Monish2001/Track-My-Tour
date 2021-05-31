@@ -15,7 +15,8 @@ import utils.UUIDGenerator;
 public class TourInputController {
 	Scanner sc = new Scanner(System.in);
 
-	public Tour tourDetails(List<classes.Person> personList) throws ParseException {
+	public Tour tourDetails(List<classes.Person> personList, List<Connection> allConnectionsList)
+			throws ParseException {
 		Tour tourData = new Tour();
 		InputValidation validateString = new InputValidation();
 		InputValueCheck valueCheck = new InputValueCheck();
@@ -31,14 +32,17 @@ public class TourInputController {
 		ResortInputController resortInputController = new ResortInputController();
 		ActivityInputController tourActivities = new ActivityInputController();
 		ConnectionInputController connectionsMade = new ConnectionInputController();
-		PersonInputController personInputController = new PersonInputController();
+		// PersonInputController personInputController = new PersonInputController();
 
 		System.out.println("****************PLEASE ENTER THE TOUR DETAILS****************");
 
 		System.out.println("Please Enter the person id");
 		// String personId = valueCheck.uuidCheck();
-		String personId = valueCheck.doesPersonExists(personList);
+		List<String> personCodeAndId = valueCheck.doesPersonExists(personList);
+		String personCode = personCodeAndId.get(0);
+		String personId = personCodeAndId.get(1);
 		tourData.setPersonId(personId);
+		tourData.setPersonCode(personCode);
 
 		String tourId = id.uuid();
 		tourData.setTourId(tourId);
@@ -103,24 +107,15 @@ public class TourInputController {
 		}
 		System.out.println("*****************************************************************");
 
-		System.out.println("BEFORE ADDING CONNECTIONS PLEASE ENTER THE PERSON DETAILS TO WHOM YOU HAVE CONNECTED");
-		System.out.println("How many person details do you need to add");
-		int totalPersonCount = Integer.parseInt(valueCheck.intCheck());
-		int personsAdded = 0;
-		while (personsAdded < totalPersonCount) {
-			Person person = personInputController.personDetails();
-			personList.add(person);
-			personsAdded++;
-		}
-		System.out.println("*****************************************************************");
-
 		System.out.println("****************PLEASE ENTER CONNECTIONS MADE IN A TOUR****************");
 		System.out.println("How many connections do you need to add");
 		int totalConnectionsCount = Integer.parseInt(valueCheck.intCheck());
 		int connectionsAdded = 0;
 		while (connectionsAdded < totalConnectionsCount) {
-			Connection connection = connectionsMade.connections(tourId, tourCode, personId, personList);
+			Connection connection = connectionsMade.connections(tourId, tourCode, personId, personList,
+					allConnectionsList);
 			connectionList.add(connection);
+			allConnectionsList.add(connection);
 			connectionsAdded++;
 		}
 		System.out.println("*****************************************************************");

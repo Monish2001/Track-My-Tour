@@ -95,7 +95,7 @@ public class Resort {
 		return costForStay;
 	}
 
-	public Integer totalCostOfRoom(Room room) {
+	public Integer costOfRoom(Room room) {
 		Integer totalCost = room.getCostPerDay() * room.getNoOfNights();
 		return totalCost;
 	}

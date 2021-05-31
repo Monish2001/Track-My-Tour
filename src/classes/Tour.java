@@ -8,6 +8,7 @@ import controller.PersonNameFinder;
 
 public class Tour {
 	String personId;
+	String personCode;
 	String tourId;
 	String tourCode;
 	String origin;
@@ -27,6 +28,14 @@ public class Tour {
 
 	public void setPersonId(String personId) {
 		this.personId = personId;
+	}
+
+	public String getPersonCode() {
+		return this.personCode;
+	}
+
+	public void setPersonCode(String personCode) {
+		this.personCode = personCode;
 	}
 
 	public String getTourId() {
@@ -117,6 +126,8 @@ public class Tour {
 		this.connections = connections;
 	}
 
+	PersonNameFinder personNameFinder = new PersonNameFinder();
+
 	public Integer costOfTourStay(Tour tour) {
 		Integer costForTripStay = 0;
 		Resort resortObj = new Resort();
@@ -156,8 +167,6 @@ public class Tour {
 		totalCost += currentClassObj.costOfTourStay(tour);
 		return totalCost;
 	}
-
-	PersonNameFinder personNameFinder = new PersonNameFinder();
 
 	public List<String> directConnectionOfTour(Tour tour, List<Person> personList) {
 		List<String> connectionNameList = new ArrayList<String>();
@@ -203,13 +212,25 @@ public class Tour {
 					String connectedPersonName = personNameFinder.getPersonName(connectedWithPersonId, personList);
 					connectionNameList.add(connectedPersonName);
 				}
-
 			}
-
 		}
 		if (connectionNameList.size() == 1) {
 			System.out.println("No direct connections made in this tour!!");
 		}
 		return connectionNameList;
+	}
+
+	public List<String> listOfActivitiesOfTour(Tour tour) {
+		List<String> tourActivities = new ArrayList<String>();
+		if (tour.getActivities().size() == 0) {
+			System.out.println("No activities in the given tour!!");
+			return tourActivities;
+		} else {
+			for (int actitvity = 0; actitvity < tour.getActivities().size(); actitvity++) {
+				Activity activities = tour.getActivities().get(actitvity);
+				tourActivities.add(activities.getActivityName());
+			}
+		}
+		return tourActivities;
 	}
 }
