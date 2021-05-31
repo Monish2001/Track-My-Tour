@@ -137,11 +137,7 @@ public class PrintDetails {
         PersonNameFinder personNameFinder = new PersonNameFinder();
         System.out.println("**********************CONNECTIONS*************************");
         System.out.println("Connection ID: " + connection.getConnectionCode());
-        // System.out.println(CommonStrings.PERSON_ID + ": " +
-        // connection.getPersonId());
         System.out.println("Person name: " + personNameFinder.getPersonName(connection.getPersonId(), personList));
-        // System.out.println("Connected to Person ID: " +
-        // connection.getConnectedToPersonId());
         System.out.println("Connected to person name: "
                 + personNameFinder.getPersonName(connection.getConnectedToPersonId(), personList));
         System.out.println(CommonStrings.TOUR_ID + ": " + connection.getTourCode());

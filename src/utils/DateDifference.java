@@ -23,4 +23,10 @@ public class DateDifference {
 
         return differenceString;
     }
+
+    public Integer findDifferenceInDays(Date startDate, Date endDate) {
+        long differenceInTime = endDate.getTime() - startDate.getTime();
+        Integer differenceInDays = (int) (differenceInTime / (1000 * 60 * 60 * 24));
+        return differenceInDays;
+    }
 }

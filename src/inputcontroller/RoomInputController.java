@@ -13,7 +13,7 @@ public class RoomInputController {
 	Scanner sc = new Scanner(System.in);
 	Resort resortObj = new Resort();
 
-	public classes.Room roomDetails(String resortId, String resortCode) throws ParseException {
+	public classes.Room roomDetails(String resortId, String resortCode, Integer resortDuration) throws ParseException {
 		classes.Room roomData = new classes.Room();
 		InputValidation validateString = new InputValidation();
 		InputValueCheck valueCheck = new InputValueCheck();
@@ -37,7 +37,8 @@ public class RoomInputController {
 		roomData.setCostPerDay(Integer.parseInt(valueCheck.requiredIntFieldCheck()));
 
 		System.out.println("No of Nights");
-		roomData.setNoOfNights(Integer.parseInt(valueCheck.requiredIntFieldCheck()));
+		Integer noOfNights = valueCheck.checkNoOfNights(resortDuration);
+		roomData.setNoOfNights(noOfNights);
 
 		System.out.println("Room No:");
 		roomData.setRoomNo(validateString.inputStringValidation(sc.nextLine()));

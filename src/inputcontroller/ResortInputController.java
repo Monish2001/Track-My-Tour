@@ -18,6 +18,7 @@ public class ResortInputController {
 		InputValueCheck valueCheck = new InputValueCheck();
 		UUIDGenerator id = new UUIDGenerator();
 		CodeGenerator codeGenerator = new CodeGenerator();
+		DateDifference dateDifference = new DateDifference();
 
 		classes.Resort resortData = new classes.Resort();
 		RoomInputController roomInputController = new RoomInputController();
@@ -45,16 +46,14 @@ public class ResortInputController {
 		System.out.println("Location:");
 		resortData.setResortLocation(validateString.inputStringValidation(sc.nextLine()));
 
-		// System.out.println("\n");
-		// System.out.println("Your resort id is: " + resortData.getResortId());
-		// System.out.println("\n");
+		Integer resortDuration = dateDifference.findDifferenceInDays(resortFromDate, resortToDate);
 
 		System.out.println("*****************PLEASE ENTER ROOM DETAILS***************");
 		System.out.println("How many rooms do you need to add");
 		int count = Integer.parseInt(valueCheck.intCheck());
 		int index = 0;
 		while (index < count) {
-			roomList.add(roomInputController.roomDetails(resortId, resortCode));
+			roomList.add(roomInputController.roomDetails(resortId, resortCode, resortDuration));
 			index++;
 		}
 		resortData.setRoom(roomList);

@@ -364,4 +364,20 @@ public class InputValueCheck {
         }
         return null;
     }
+
+    public Integer checkNoOfNights(Integer resortDuration) {
+        InputValueCheck currentClassObj = new InputValueCheck();
+        boolean isNoOfNightsOk = false;
+        while (isNoOfNightsOk == false) {
+            Integer noOfNights = Integer.parseInt(currentClassObj.requiredIntFieldCheck());
+            if (noOfNights <= resortDuration) {
+                isNoOfNightsOk = true;
+                return noOfNights;
+            } else {
+                System.out.println("No of nights cannot exceed the duration of resort!!");
+                isNoOfNightsOk = false;
+            }
+        }
+        return null;
+    }
 }
