@@ -14,20 +14,4 @@ public class CodeGenerator {
         return last + "";
     }
 
-    public static void main(String[] args) {
-        // CodeGenerator obj = new CodeGenerator();
-        // CodeGenerator obj1 = new CodeGenerator();
-        // System.out.println(obj.getCode());
-        // System.out.println(obj1.getCode());
-        // String id = CodeGenerator.getID();
-        // System.out.println(id);
-        // System.out.println(CodeGenerator.getID());
-        // System.out.println(CodeGenerator.getID());
-        // System.out.println(CodeGenerator.getID());
-        // System.out.println(CodeGenerator.getID());
-        // System.out.println(CodeGenerator.getID());
-        // System.out.println(CodeGenerator.getID());
-        // System.out.println(CodeGenerator.getID());
-        // System.out.println(CodeGenerator.getID());
-    }
 }
