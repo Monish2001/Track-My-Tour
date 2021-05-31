@@ -146,11 +146,11 @@ public class PrintDetails {
     public void printConnectionDetails(Connection connection, List<Person> personList) {
         PersonNameFinder personNameFinder = new PersonNameFinder();
         System.out.println("**********************CONNECTIONS*************************");
-        System.out.println("Connection ID: " + connection.getConnectionCode());
+        // System.out.println("Connection ID: " + connection.getConnectionCode());
         System.out.println("Person name: " + personNameFinder.getPersonName(connection.getPersonId(), personList));
         System.out.println("Connected to person name: "
                 + personNameFinder.getPersonName(connection.getConnectedToPersonId(), personList));
-        System.out.println(CommonStrings.TOUR_ID + ": " + connection.getTourCode());
+        // System.out.println(CommonStrings.TOUR_ID + ": " + connection.getTourCode());
         System.out.println("Behaviour: " + connection.getBehaviour());
         System.out.println("Intermediate Friends ID: " + connection.getIntermediateFriendsCode());
         System.out.println("Notes: " + connection.getNotes());
